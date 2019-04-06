@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.annu;
+package com.example.annu.OCR;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -37,11 +37,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.annu.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
-import com.example.annu.camera.GraphicOverlay;
-import com.example.annu.camera.CameraSource;
-import com.example.annu.camera.CameraSourcePreview;
+import com.example.annu.OCR.camera.GraphicOverlay;
+import com.example.annu.OCR.camera.CameraSource;
+import com.example.annu.OCR.camera.CameraSourcePreview;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
 

@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.annu;
+package com.example.annu.OCR;
 
 import android.util.Log;
 import android.util.SparseArray;
 
 //import com.google.android.gms.samples.vision.ocrreader.ui.camera.GraphicOverlay;
-import com.example.annu.camera.GraphicOverlay;
+import com.example.annu.OCR.camera.GraphicOverlay;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.text.TextBlock;
 

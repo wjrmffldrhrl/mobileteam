@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.annu;
+package com.example.annu.OCR;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -21,7 +21,7 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 
 //import com.google.android.gms.samples.vision.ocrreader.ui.camera.GraphicOverlay;
-import com.example.annu.camera.GraphicOverlay;
+import com.example.annu.OCR.camera.GraphicOverlay;
 import com.google.android.gms.vision.text.Text;
 import com.google.android.gms.vision.text.TextBlock;
 

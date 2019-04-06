@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.annu.EyeDetected.EyeDetected;
+import com.example.annu.OCR.OcrCaptureActivity;
+
 public class MainActivity extends AppCompatActivity {
     Button bt1,bt2;
     @Override
@@ -25,5 +28,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        bt2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), EyeDetected.class);//인텐트 지정
+                startActivity(intent);//액티비티 출력
+            }
+        });
     }
 }
