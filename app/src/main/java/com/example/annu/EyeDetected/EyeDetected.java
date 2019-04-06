@@ -1,18 +1,13 @@
 package com.example.annu.EyeDetected;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.annu.R;
@@ -30,7 +25,6 @@ public class EyeDetected extends AppCompatActivity {
 
     EditText textView;
     ImageView img;
-    //For looking logs
     ArrayAdapter adapter;
     ArrayList<String> list = new ArrayList<>();
 
@@ -56,8 +50,6 @@ public class EyeDetected extends AppCompatActivity {
         }
     }
 
-
-    //This class will use google vision api to detect eyes
     private class EyesTracker extends Tracker<Face> {
 
         private final float THRESHOLD = 0.75f; // 눈을 뜬 정도 0.75 기준치 1~0
@@ -68,43 +60,23 @@ public class EyeDetected extends AppCompatActivity {
 
         @Override
         public void onUpdate(Detector.Detections<Face> detections, Face face) {//눈 감지 메서드
-            if (face.getIsLeftEyeOpenProbability() > THRESHOLD || face.getIsRightEyeOpenProbability() > THRESHOLD) {// 눈이 감지가 됐을때 (기준치 THRESHOLD
-
-                //Log.i(TAG, "onUpdate: Eyes Detected"); 로그 남기기
-                // showStatus("Eyes Detected and open, so video continues");
+            if (face.getIsLeftEyeOpenProbability() > THRESHOLD || face.getIsRightEyeOpenProbability() > THRESHOLD)// 눈이 감지가 됐을때 (기준치 THRESHOLD
                 img.setImageResource(R.drawable.light_on);
-            }
-            else {//눈이 감지 안될때
 
+            else //눈이 감지 안될때
                 img.setImageResource(R.drawable.light_off);
-                // showStatus("Eyes Detected and closed, so video paused");
-            }
+
+
         }
 
-/** 얼굴이 아직 감지가 안될때
- @Override
- public void onMissing(Detector.Detections<Face> detections) {
- super.onMissing(detections);
- showStatus("Face Not Detected yet!");
- }
- */
-/*추적하던 소스가 사라짐을 알리는 메서드
-        @Override
-        public void onDone() {
-            super.onDone();
-        }
-        */
 
     }
 
 
 
     private class FaceTrackerFactory implements MultiProcessor.Factory<Face> {
-
         private FaceTrackerFactory() {
-
         }
-
         @Override
         public Tracker<Face> create(Face face) {
             return new EyesTracker();
@@ -127,13 +99,7 @@ public class EyeDetected extends AppCompatActivity {
 
         try {
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
+
                 return;
             }
             cameraSource.start();
