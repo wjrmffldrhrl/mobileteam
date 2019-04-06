@@ -6,19 +6,19 @@
     android:layout_height="match_parent"
     android:keepScreenOn="true">
 
-    <com.google.android.gms.samples.vision.ocrreader.ui.camera.CameraSourcePreview
+    <com.example.annu.camera.CameraSourcePreview
         android:id="@+id/preview"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_centerHorizontal="true">
 
-        <com.google.android.gms.samples.vision.ocrreader.ui.camera.GraphicOverlay
+        <com.example.annu.camera.GraphicOverlay
             android:id="@+id/graphicOverlay"
             android:layout_width="300dp"
             android:layout_height="300dp"
             android:layout_centerHorizontal="true" />
 
-    </com.google.android.gms.samples.vision.ocrreader.ui.camera.CameraSourcePreview>
+    </com.example.annu.camera.CameraSourcePreview>
 
     <Button
         android:id="@+id/bt1"

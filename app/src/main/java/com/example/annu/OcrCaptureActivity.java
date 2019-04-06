@@ -130,6 +130,8 @@ public final class OcrCaptureActivity extends AppCompatActivity {
                 };
         tts = new TextToSpeech(this.getApplicationContext(), listener);
         //여기까지 tts를 활용하여 말하는 엔진을 사용
+
+
     }
 
 
