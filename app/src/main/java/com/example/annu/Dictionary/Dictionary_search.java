@@ -48,7 +48,7 @@ public class Dictionary_search extends AppCompatActivity {
         text_word = (TextView) findViewById(R.id.text_word);
         text_mean= (TextView) findViewById(R.id.text_mean);
 
-        Intent ocr_result = getIntent();
+        Intent ocr_result = getIntent();//OCR에서 넘어왔을때 데이터 받기
         String data = ocr_result.getStringExtra("OCR");
         search.setText(data);
 
@@ -81,6 +81,7 @@ public class Dictionary_search extends AppCompatActivity {
 
         myHelper = new myDBHelper(this); //데이터 베이스 생성
 
+        //검색어로 검색
         imgbtn_search.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -105,17 +106,17 @@ public class Dictionary_search extends AppCompatActivity {
                     while (cursor.moveToNext()) {//커서를 계속 진행시킨다.
 
                         if (search_word.equals(cursor.getString(0))) {//검색어와 일치하면
-                            dic_word += cursor.getString(0) + "\r\n";
+                            dic_word += cursor.getString(0);
                             break;//반복 종료
                         }
 
                     }
 
-                    if (cursor.isAfterLast()) {
+                    if (cursor.isAfterLast()) {//데이터 베이스를 모두 봐도 찾는 단어가 없을때
                         dic_word += "";
                         dic_mean += "단어를 찾지못했습니다.";
                     } else
-                        dic_mean += cursor.getString(1) + "\r\n";
+                        dic_mean += cursor.getString(1) + "\r\n";//찾는 단어가 있으면 그 단어 뜻 넣기
 
 
                     text_word.setText(dic_word);//찾은 단어로 입력

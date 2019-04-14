@@ -25,14 +25,14 @@ public class Dictionary extends AppCompatActivity {
 
         bt_camera.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) {//ocr 기능 사용
                 Intent intent = new Intent(getApplicationContext(), OcrCaptureActivity.class);//인텐트 지정
                 startActivity(intent);//액티비티 출력
             }
         });
         bt_search.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) {//검색기능 사용
                 Intent intent = new Intent(getApplicationContext(), Dictionary_search.class);//인텐트 지정
                 startActivity(intent);//액티비티 출력
             }
