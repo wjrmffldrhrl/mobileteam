@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.example.annu.OCR.OcrCaptureActivity;
 import com.example.annu.R;
 
 public class Dictionary extends AppCompatActivity {
@@ -22,6 +23,13 @@ public class Dictionary extends AppCompatActivity {
         bt_search = (ImageButton) findViewById(R.id.dictionary_bt2);
         bt_history = (ImageButton) findViewById(R.id.dictionary_bt3);
 
+        bt_camera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), OcrCaptureActivity.class);//인텐트 지정
+                startActivity(intent);//액티비티 출력
+            }
+        });
         bt_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

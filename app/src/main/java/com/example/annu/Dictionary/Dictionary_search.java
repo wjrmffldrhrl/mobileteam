@@ -1,5 +1,6 @@
 package com.example.annu.Dictionary;
 
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.database.SQLException;
 import android.support.v7.app.AppCompatActivity;
@@ -37,6 +38,8 @@ public class Dictionary_search extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dictionary_search_layout);
 
+
+
         search = (EditText) findViewById(R.id.edt_search);
 
         imgbtn_search = (ImageButton) findViewById(R.id.imgbtn_search);
@@ -44,6 +47,10 @@ public class Dictionary_search extends AppCompatActivity {
 
         text_word = (TextView) findViewById(R.id.text_word);
         text_mean= (TextView) findViewById(R.id.text_mean);
+
+        Intent ocr_result = getIntent();
+        String data = ocr_result.getStringExtra("OCR");
+        search.setText(data);
 
 /////////////////////////파일 database로 옮겨주기/////////////////////////////////////
 
