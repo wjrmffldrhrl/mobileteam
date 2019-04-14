@@ -33,6 +33,8 @@
 
         <activity android:name=".OCR.OcrCaptureActivity"/>
         <activity android:name=".EyeDetected.EyeDetected"/>
+        <activity android:name=".Dictionary.Dictionary_search"/>
+        <activity android:name=".Dictionary.Dictionary"/>
     </application>
 
 </manifest>
