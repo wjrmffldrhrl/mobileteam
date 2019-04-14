@@ -21,7 +21,7 @@
     </com.example.annu.OCR.camera.CameraSourcePreview>
 
     <Button
-        android:id="@+id/bt1"
+        android:id="@+id/ocr_bt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/preview"

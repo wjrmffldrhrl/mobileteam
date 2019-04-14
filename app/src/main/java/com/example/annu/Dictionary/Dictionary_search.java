@@ -1,5 +1,6 @@
 package com.example.annu.Dictionary;
 
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.database.SQLException;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.annu.R;
@@ -23,21 +26,31 @@ import java.io.InputStream;
 public class Dictionary_search extends AppCompatActivity {
 
     myDBHelper myHelper;
-    EditText search, edtNameResult, edtNumberResult;
-    Button btnSelect1,btncls;
+    EditText search;
+    Button btn_cls;
+    ImageButton imgbtn_search;
+    TextView text_word, text_mean;
     SQLiteDatabase sqlDB;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.dictionary_sarch_layout);
+        setContentView(R.layout.dictionary_search_layout);
 
-        search = (EditText) findViewById(R.id.search);
-        edtNameResult = (EditText) findViewById(R.id.edtNameResult);
-        edtNumberResult = (EditText) findViewById(R.id.edtNumberResult);
-        btnSelect1 = (Button) findViewById(R.id.btnSelect1);
-        btncls = (Button) findViewById(R.id.btncls);
+
+
+        search = (EditText) findViewById(R.id.edt_search);
+
+        imgbtn_search = (ImageButton) findViewById(R.id.imgbtn_search);
+        btn_cls = (Button) findViewById(R.id.btn_cls);
+
+        text_word = (TextView) findViewById(R.id.text_word);
+        text_mean= (TextView) findViewById(R.id.text_mean);
+
+        Intent ocr_result = getIntent();//OCR에서 넘어왔을때 데이터 받기
+        String data = ocr_result.getStringExtra("OCR");
+        search.setText(data);
 
 /////////////////////////파일 database로 옮겨주기/////////////////////////////////////
 
@@ -68,7 +81,8 @@ public class Dictionary_search extends AppCompatActivity {
 
         myHelper = new myDBHelper(this); //데이터 베이스 생성
 
-        btnSelect1.setOnClickListener(new View.OnClickListener() {
+        //검색어로 검색
+        imgbtn_search.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
                 String search_word = search.getText().toString();//검색어를 저장
@@ -79,35 +93,34 @@ public class Dictionary_search extends AppCompatActivity {
                 sqlDB = myHelper.getReadableDatabase();
                 Cursor cursor;
 
-                if(search_word.getBytes().length <= 0||search_word.charAt(0)<'a' || search_word.charAt(0)> 'z'){//범위 밖의 단어
-                    Toast.makeText(getApplicationContext(),"영단어만 넣어주세요",Toast.LENGTH_SHORT).show();
+                if (search_word.getBytes().length <= 0 || search_word.charAt(0) < 'a' || search_word.charAt(0) > 'z') {//범위 밖의 단어
+                    Toast.makeText(getApplicationContext(), "영단어만 넣어주세요", Toast.LENGTH_SHORT).show();
                     search.setText("");//edittext 초기화
-                }
-                else {
+                } else {
                     cursor = sqlDB.rawQuery("SELECT * FROM " + search_word.charAt(0) + "_word", null);
                     //검색어의 첫번째 문자를 가지고 해당 테이블의 커서를 움직인다.
 
-                    String dic_word = "단어" + "\r\n" + "--------" + "\r\n";
-                    String dic_mean = "뜻" + "\r\n" + "--------" + "\r\n";
+                    String dic_word ="";
+                    String dic_mean ="\r\n" + "----------------------------------------" + "\r\n";
 
                     while (cursor.moveToNext()) {//커서를 계속 진행시킨다.
 
                         if (search_word.equals(cursor.getString(0))) {//검색어와 일치하면
-                            dic_word += cursor.getString(0) + "\r\n";
+                            dic_word += cursor.getString(0);
                             break;//반복 종료
                         }
 
                     }
 
-                    if (cursor.isAfterLast()) {
-                        dic_word += "단어를 찾지";
-                        dic_mean += "못했습니다.";
+                    if (cursor.isAfterLast()) {//데이터 베이스를 모두 봐도 찾는 단어가 없을때
+                        dic_word += "";
+                        dic_mean += "단어를 찾지못했습니다.";
                     } else
-                        dic_mean += cursor.getString(1) + "\r\n";
+                        dic_mean += cursor.getString(1) + "\r\n";//찾는 단어가 있으면 그 단어 뜻 넣기
 
 
-                    edtNameResult.setText(dic_word);//찾은 단어로 입력
-                    edtNumberResult.setText(dic_mean);
+                    text_word.setText(dic_word);//찾은 단어로 입력
+                    text_mean.setText(dic_mean);
 
 
                     cursor.close();
@@ -116,7 +129,7 @@ public class Dictionary_search extends AppCompatActivity {
             }
         });
 
-        btncls.setOnClickListener(new View.OnClickListener() {
+        btn_cls.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 search.setText("");
