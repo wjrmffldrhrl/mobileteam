@@ -26,6 +26,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.annu.Dictionary.Dictionary_search;
 import com.example.annu.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -59,7 +60,7 @@ public final class OcrCaptureActivity extends AppCompatActivity {
     private GestureDetector gestureDetector;
 
     private TextToSpeech tts;
-    private Button bt1;
+    private Button bt_result;
 
 
     @Override
@@ -69,7 +70,7 @@ public final class OcrCaptureActivity extends AppCompatActivity {
 
         preview = (CameraSourcePreview) findViewById(R.id.preview);
         graphicOverlay = (GraphicOverlay<OcrGraphic>) findViewById(R.id.graphicOverlay);
-        bt1 = (Button) findViewById(R.id.bt1);
+        bt_result = (Button) findViewById(R.id.ocr_bt);
 
 
         boolean autoFocus = true;
@@ -106,7 +107,14 @@ public final class OcrCaptureActivity extends AppCompatActivity {
                 };
         tts = new TextToSpeech(this.getApplicationContext(), listener);
         //여기까지 tts를 활용하여 말하는 엔진을 사용
-
+        bt_result.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Dictionary_search.class);//인텐트 지정
+                intent.putExtra("OCR",bt_result.getText().toString());//전달할 데이터
+                startActivityForResult(intent,1);//액티비티 출력
+            }
+        });
 
     }
 
@@ -277,7 +285,7 @@ public final class OcrCaptureActivity extends AppCompatActivity {
                 Log.d(TAG, "text data is being spoken! " + text.getValue());
                 tts.speak(text.getValue(), TextToSpeech.QUEUE_ADD, null, "DEFAULT");
                 //선택한 단어 음성출력
-                bt1.setText(text.getValue());
+                bt_result.setText(text.getValue());
             } else {
                 Log.d(TAG, "text data is null");
             }

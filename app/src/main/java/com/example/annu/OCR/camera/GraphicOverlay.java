@@ -144,7 +144,7 @@ public class GraphicOverlay<T extends GraphicOverlay.Graphic> extends View {
         postInvalidate();
     }
 
-   
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
