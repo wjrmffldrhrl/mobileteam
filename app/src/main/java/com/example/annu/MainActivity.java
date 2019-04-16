@@ -11,7 +11,11 @@ import com.example.annu.EyeDetected.EyeDetected;
 import com.example.annu.OCR.OcrCaptureActivity;
 
 public class MainActivity extends AppCompatActivity {
+
+
+
     Button bt1,bt2,bt3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,5 +47,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);//액티비티 출력
             }
         });
+
     }
 }
