@@ -10,7 +10,7 @@
         android:scaleType="fitXY"
         android:src="@drawable/name2" />
 
-    <ImageButton
+    <ImageView
         android:layout_width="145dp"
         android:layout_height="150dp"
         android:layout_alignParentTop="true"
@@ -20,13 +20,13 @@
         android:scaleType="fitXY"
         android:src="@drawable/study" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/face1"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="215dp"
+        android:layout_marginBottom="278dp"
         android:background="#ffffff"
         android:scaleType="fitXY"
         android:src="@drawable/face" />
@@ -36,12 +36,12 @@
         android:layout_height="50dp"
         android:layout_alignStart="@+id/face1"
         android:layout_alignBottom="@+id/face1"
-        android:layout_marginStart="85dp"
-        android:layout_marginBottom="-2dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="-98dp"
         android:checked="false" />
 
     <ImageButton
-        android:id="@+id/note1"
+        android:id="@+id/study_bt_note"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_alignParentStart="true"
@@ -53,9 +53,10 @@
         android:src="@drawable/note" />
 
     <ImageButton
+        android:id="@+id/study_bt_dictionary"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_alignTop="@+id/note1"
+        android:layout_alignTop="@+id/study_bt_note"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="85dp"
@@ -69,7 +70,7 @@
         android:layout_alignStart="@+id/face1"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="-5dp"
-        android:layout_marginBottom="175dp"
+        android:layout_marginBottom="238dp"
         android:text="얼굴인식"
         android:textColor="#000000"
         android:textSize="20dp" />
