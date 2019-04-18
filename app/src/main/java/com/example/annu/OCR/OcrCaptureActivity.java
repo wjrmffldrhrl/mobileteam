@@ -59,7 +59,7 @@ public final class OcrCaptureActivity extends AppCompatActivity {
     private ScaleGestureDetector scaleGestureDetector;
     private GestureDetector gestureDetector;
 
-    private TextToSpeech tts;
+   // private TextToSpeech tts;
     private Button bt_result;
 
 
@@ -91,7 +91,7 @@ public final class OcrCaptureActivity extends AppCompatActivity {
                 .show();//하단 메세지
 
 
-
+        /* 사전으로 기능 이전
         //단어를 말 해주는 TextToSpeech 설정
         TextToSpeech.OnInitListener listener =
                 new TextToSpeech.OnInitListener() {
@@ -107,6 +107,7 @@ public final class OcrCaptureActivity extends AppCompatActivity {
                 };
         tts = new TextToSpeech(this.getApplicationContext(), listener);
         //여기까지 tts를 활용하여 말하는 엔진을 사용
+        */
         bt_result.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -283,7 +284,7 @@ public final class OcrCaptureActivity extends AppCompatActivity {
             text = graphic.getTextBlock();//누른 위치에 있는 단어
             if (text != null && text.getValue() != null) {
                 Log.d(TAG, "text data is being spoken! " + text.getValue());
-                tts.speak(text.getValue(), TextToSpeech.QUEUE_ADD, null, "DEFAULT");
+                //tts.speak(text.getValue(), TextToSpeech.QUEUE_ADD, null, "DEFAULT");
                 //선택한 단어 음성출력
                 bt_result.setText(text.getValue());
             } else {
