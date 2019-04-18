@@ -16,22 +16,16 @@
         android:layout_height="170dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="130dp"
-        android:layout_marginEnd="100dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="182dp"
+        android:layout_marginEnd="117dp"
         android:scaleType="fitXY"
         android:src="@drawable/bee" />
 
-    <Switch
-        android:id="@+id/switch1"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="210dp"
-        android:checked="false" />
+
 
     <ImageButton
-        android:id="@+id/drive1"
+        android:id="@+id/main_bt_drive"
         android:layout_width="110dp"
         android:layout_height="110dp"
         android:layout_alignParentStart="true"
@@ -43,10 +37,10 @@
         android:src="@drawable/drive" />
 
     <ImageButton
-        android:id="@+id/study1"
+        android:id="@+id/main_bt_study"
         android:layout_width="110dp"
         android:layout_height="110dp"
-        android:layout_alignTop="@+id/drive1"
+        android:layout_alignTop="@+id/main_bt_drive"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="50dp"
