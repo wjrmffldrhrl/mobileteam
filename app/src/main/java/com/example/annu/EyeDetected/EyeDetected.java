@@ -121,13 +121,7 @@ public class EyeDetected extends AppCompatActivity {
         if (cameraSource != null) {
             try {
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
+
                     return;
                 }
                 cameraSource.start();
@@ -162,15 +156,6 @@ public class EyeDetected extends AppCompatActivity {
             cameraSource.release();
         }
     }
-/*
-    public void showStatus(final String message) {//textview를 바꿔줌
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                textView.setText(message);
-            }
-        });
-    }
-*/
+
 
 }
