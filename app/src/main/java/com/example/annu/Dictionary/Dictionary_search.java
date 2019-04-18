@@ -3,12 +3,14 @@ package com.example.annu.Dictionary;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.database.SQLException;
+import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,9 +24,14 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Locale;
+
+import static java.lang.Character.isLowerCase;
+import static java.lang.Character.toLowerCase;
 
 public class Dictionary_search extends AppCompatActivity {
 
+    private TextToSpeech tts;
     myDBHelper myHelper;
     EditText search;
     Button btn_cls;
@@ -32,6 +39,7 @@ public class Dictionary_search extends AppCompatActivity {
     TextView text_word, text_mean;
     SQLiteDatabase sqlDB;
 
+    char fisrt_word;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,7 +58,7 @@ public class Dictionary_search extends AppCompatActivity {
 
         Intent ocr_result = getIntent();//OCR에서 넘어왔을때 데이터 받기
         String data = ocr_result.getStringExtra("OCR");
-        search.setText(data);
+        search.setText(data);//받아온 데이터를 edittext에 넣는다
 
 /////////////////////////파일 database로 옮겨주기/////////////////////////////////////
 
@@ -77,8 +85,22 @@ public class Dictionary_search extends AppCompatActivity {
         }
 
 //////////////////////////////////////////////////////////////////////////////////////////
+//단어 말해주기 설정
+        TextToSpeech.OnInitListener listener =
+                new TextToSpeech.OnInitListener() {
+                    @Override
+                    public void onInit(final int status) {
+                        if (status == TextToSpeech.SUCCESS) {
+                            Log.d("OnInitListener", "Text to speech engine started successfully.");
+                            tts.setLanguage(Locale.US);
+                        } else {
+                            Log.d("OnInitListener", "Error starting the text to speech engine.");
+                        }
+                    }
+                };
+        tts = new TextToSpeech(this.getApplicationContext(), listener);
 
-
+///////////////////////////////////////////////////////////////////////////////////////
         myHelper = new myDBHelper(this); //데이터 베이스 생성
 
         //검색어로 검색
@@ -86,6 +108,8 @@ public class Dictionary_search extends AppCompatActivity {
             public void onClick(View v) {
 
                 String search_word = search.getText().toString();//검색어를 저장
+                fisrt_word = search_word.charAt(0); // 단어의 첫번째 알파벳을 알아낸다
+                                                    // 이후 검색할 단어 테이블을 결정해줌
                 myHelper.openDataBase();
                 myHelper.close();
 
@@ -93,11 +117,16 @@ public class Dictionary_search extends AppCompatActivity {
                 sqlDB = myHelper.getReadableDatabase();
                 Cursor cursor;
 
-                if (search_word.getBytes().length <= 0 || search_word.charAt(0) < 'a' || search_word.charAt(0) > 'z') {//범위 밖의 단어
+                if(!isLowerCase(fisrt_word))//첫 알파벳이 소문자가 아니면
+                    fisrt_word = toLowerCase(fisrt_word);//소문자로 바꿔줌
+
+
+
+                if (search_word.getBytes().length <= 0 || fisrt_word < 'a' ||fisrt_word > 'z') {//범위 밖의 단어
                     Toast.makeText(getApplicationContext(), "영단어만 넣어주세요", Toast.LENGTH_SHORT).show();
                     search.setText("");//edittext 초기화
                 } else {
-                    cursor = sqlDB.rawQuery("SELECT * FROM " + search_word.charAt(0) + "_word", null);
+                    cursor = sqlDB.rawQuery("SELECT * FROM " + fisrt_word + "_word", null);
                     //검색어의 첫번째 문자를 가지고 해당 테이블의 커서를 움직인다.
 
                     String dic_word ="";
@@ -105,7 +134,8 @@ public class Dictionary_search extends AppCompatActivity {
 
                     while (cursor.moveToNext()) {//커서를 계속 진행시킨다.
 
-                        if (search_word.equals(cursor.getString(0))) {//검색어와 일치하면
+                        if (search_word.equalsIgnoreCase(cursor.getString(0))) {//검색어와 일치하면
+                            //대소문자 구분하지 않게 변경
                             dic_word += cursor.getString(0);
                             break;//반복 종료
                         }
@@ -115,9 +145,10 @@ public class Dictionary_search extends AppCompatActivity {
                     if (cursor.isAfterLast()) {//데이터 베이스를 모두 봐도 찾는 단어가 없을때
                         dic_word += "";
                         dic_mean += "단어를 찾지못했습니다.";
-                    } else
+                    } else {
                         dic_mean += cursor.getString(1) + "\r\n";//찾는 단어가 있으면 그 단어 뜻 넣기
-
+                        tts.speak(dic_word, TextToSpeech.QUEUE_ADD, null, "DEFAULT");// 찾은 단어 발음 들려주기
+                    }
 
                     text_word.setText(dic_word);//찾은 단어로 입력
                     text_mean.setText(dic_mean);
