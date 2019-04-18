@@ -16,7 +16,7 @@ import java.io.FileOutputStream;
 public class MainActivity extends AppCompatActivity {
     EditText mMemoEdit = null;
     TextFileManager mTextFileManager = new TextFileManager(this);
-//test
+//ttttt
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
