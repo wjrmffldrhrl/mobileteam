@@ -6,7 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class TextFileManager {
-    private static final String FILE_NAME="Memo.txt";
+    private static final String FILE_NAME=".txt";
 
     Context mContext = null;
 
@@ -14,14 +14,14 @@ public class TextFileManager {
         mContext=context;
     }
 
-    public void save(String strData) {
+    public void save(String strData,String title) {
         if (strData == null || strData.equals("")) {
             return;
         }
         FileOutputStream fosMemo = null;
 
         try {
-            fosMemo = mContext.openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
+            fosMemo = mContext.openFileOutput(title+FILE_NAME, Context.MODE_PRIVATE);
             fosMemo.write(strData.getBytes());
             fosMemo.close();
         } catch (Exception e) {
@@ -29,9 +29,9 @@ public class TextFileManager {
         }
     }
 
-    public  String load() {
+    public  String load(String title) {
         try {
-            FileInputStream fisMemo = mContext.openFileInput(FILE_NAME);
+            FileInputStream fisMemo = mContext.openFileInput(title+FILE_NAME);
             byte[] memoData = new byte[fisMemo.available()];
 
             while (fisMemo.read(memoData) != -1) {
@@ -42,7 +42,7 @@ public class TextFileManager {
         return "";
     }
 
-    public void delete() {
-        mContext.deleteFile(FILE_NAME);
+    public void delete(String title) {
+        mContext.deleteFile(title+FILE_NAME);
     }
 }

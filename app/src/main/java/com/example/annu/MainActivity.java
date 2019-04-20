@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_select);
+
     study = (ImageButton) findViewById(R.id.main_bt_study);
     drive = (ImageButton) findViewById(R.id.main_bt_drive);
 

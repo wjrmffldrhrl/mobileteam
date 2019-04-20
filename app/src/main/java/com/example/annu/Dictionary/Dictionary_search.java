@@ -115,7 +115,7 @@ public class Dictionary_search extends AppCompatActivity {
 
                 sqlDB = myHelper.getReadableDatabase();
                 Cursor cursor;
-                
+
                 if(search_word.getBytes().length > 0)
                    fisrt_word = search_word.charAt(0); // 단어의 첫번째 알파벳을 알아낸다
                 // 이후 검색할 단어 테이블을 결정해줌

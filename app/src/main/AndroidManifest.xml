@@ -4,6 +4,7 @@
     android:installLocation="auto" >
 
     <uses-feature android:name="android.hardware.camera" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -30,6 +31,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Note.NoteList"/>
         <activity android:name=".Note.Note"/>
         <activity android:name=".Study"/>
         <activity android:name=".OCR.OcrCaptureActivity"/>
