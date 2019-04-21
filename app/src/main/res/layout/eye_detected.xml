@@ -10,6 +10,16 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:src="@drawable/light_off" />
+    <Button
+        android:id="@+id/eye_bt_start"
+        android:text="test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/eye_bt_stop"
+        android:text="stop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <EditText
         android:id="@+id/textView"
@@ -17,5 +27,6 @@
         android:layout_height="match_parent"
         android:text="face not found"
         android:textSize="20sp" />
+
 
 </LinearLayout>
