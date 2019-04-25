@@ -2,11 +2,22 @@ package com.example.annu.EyeDetected;
 
 import android.Manifest;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.media.SoundPool;
+import android.net.Uri;
 import android.os.IBinder;
+import android.os.Vibrator;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import com.example.annu.R;
 import com.google.android.gms.vision.CameraSource;
@@ -19,9 +30,42 @@ import com.google.android.gms.vision.face.FaceDetector;
 import java.io.IOException;
 
 public class EyeService extends Service {
+    int count = 0;
+    private Vibrator vibrator;
+    MediaPlayer alarm;
+    //SoundPool alarm;
+   // int alarm_id;
+
+
+    Timer my_timer = new Timer();
+    TimerTask my_task = new TimerTask() {
+        @Override
+        public void run() {
+
+            if (count < 3) {
+                Log.e("timer count", "count :" + count);
+               // alarm.stop(alarm_id);
+
+                count++;
+
+                if(alarm.isPlaying() == true)
+                    alarm.stop();
+
+            } else {
+
+
+                vibrator.vibrate(1000); // 1초간 진동
+                alarm.start();
+               // alarm.play(alarm_id, 1, 1, 0, 0, 1);
+                Log.e("time out", "time out");
+                // my_timer.cancel();
+
+
+            }
+        }
+    };
     CameraSource cameraSource;
 
-    int close=0 ;
     public EyeService() {
     }
 
@@ -29,10 +73,17 @@ public class EyeService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (cameraSource!=null) {
+        if (cameraSource != null) {
             cameraSource.release();
         }
+
+        my_timer.cancel();
+       // alarm.stop(alarm_id);
+        alarm.stop();
+        alarm.release();
+
     }
+
     @Override
     public IBinder onBind(Intent intent) {
         // TODO: Return the communication channel to the service.
@@ -40,18 +91,19 @@ public class EyeService extends Service {
     }
 
     @Override
-    public void onCreate(){
+    public void onCreate() {
         super.onCreate();
+       // alarm_id = alarm.load(getApplicationContext(), R.raw.beep, 1);
     }
 
 
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId){
-
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        alarm = MediaPlayer.create(this,R.raw.beep);
         createCameraSource();//카메라 소스를 생성하며 아이트레킹 시작
-
-
-        return super.onStartCommand(intent,flags,startId);
+        my_timer.schedule(my_task, 1000, 2000);
+        return super.onStartCommand(intent, flags, startId);
 
 
     }
@@ -65,28 +117,27 @@ public class EyeService extends Service {
 
         }
 
-        @Override
-        public void onDone() {
-            Log.e("lost eye","lost eye onDone");
-        }
 
         @Override
-        public void onMissing(Detector.Detections<Face> detections) { // r감지가 안될때 계속 돌지 않고 멈춘다
-            Log.e("lost eye","lost eye");
+        public void onMissing(Detector.Detections<Face> detections) { // 감지가 안될때 계속 돌지 않고 멈춘다
+
+            Log.e("lost eye", "lost eye");
+            //my_timer.schedule(my_task,5000);
+
         }
+
         @Override
         public void onUpdate(Detector.Detections<Face> detections, Face face) {//눈 감지 메서드
             if (face.getIsLeftEyeOpenProbability() > THRESHOLD || face.getIsRightEyeOpenProbability() > THRESHOLD)// 눈이 감지가 됐을때 기준치 THRESHOLD
             {
-                Log.e("eye open","eye open");
-            }
-            else if(face.getIsLeftEyeOpenProbability() < THRESHOLD || face.getIsRightEyeOpenProbability() < THRESHOLD){
-                Log.e("eye close","eye close"+close);
-                close++;
-            }
-            else //눈이 감지 안될때
+                Log.e("eye open", "eye open");
+                count = 0;
+            } else if (face.getIsLeftEyeOpenProbability() < THRESHOLD || face.getIsRightEyeOpenProbability() < THRESHOLD) {
+                Log.e("eye close", "eye close");
+
+            } else //눈이 감지 안될때
             {
-                Log.e("no eye","no eye");
+                Log.e("no eye", "no eye");
 
             }
 
@@ -97,10 +148,10 @@ public class EyeService extends Service {
     }
 
 
-
     public class FaceTrackerFactory implements MultiProcessor.Factory<Face> {
         private FaceTrackerFactory() {
         }
+
         @Override
         public Tracker<Face> create(Face face) {
             return new EyesTracker();
@@ -127,17 +178,10 @@ public class EyeService extends Service {
                 return;
             }
             cameraSource.start();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-
-
-
-
-    // 어플이 재시작 될때 필요한 메서드들
 
 
 }
