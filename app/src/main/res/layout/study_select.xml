@@ -20,8 +20,8 @@
         android:scaleType="fitXY"
         android:src="@drawable/study" />
 
-    <ImageView
-        android:id="@+id/face1"
+    <ImageButton
+        android:id="@+id/study_bt_face"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
@@ -34,8 +34,8 @@
     <Switch
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_alignStart="@+id/face1"
-        android:layout_alignBottom="@+id/face1"
+        android:layout_alignStart="@+id/study_bt_face"
+        android:layout_alignBottom="@+id/study_bt_face"
         android:layout_marginStart="5dp"
         android:layout_marginBottom="-98dp"
         android:checked="false" />
@@ -67,7 +67,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/face1"
+        android:layout_alignStart="@+id/study_bt_face"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="-5dp"
         android:layout_marginBottom="238dp"
