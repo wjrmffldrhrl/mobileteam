@@ -7,28 +7,15 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.annu.R;
-import com.google.android.gms.vision.CameraSource;
-import com.google.android.gms.vision.Detector;
-import com.google.android.gms.vision.MultiProcessor;
-import com.google.android.gms.vision.Tracker;
-import com.google.android.gms.vision.face.Face;
-import com.google.android.gms.vision.face.FaceDetector;
-
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class EyeDetected extends AppCompatActivity {
 
-    EditText textView;
     ImageView img;
-    ArrayList<String> list = new ArrayList<>();
     Button start,stop;
     Intent intent;
 
@@ -39,7 +26,6 @@ public class EyeDetected extends AppCompatActivity {
 
         start = (Button) findViewById(R.id.eye_bt_start);
         stop = (Button) findViewById(R.id.eye_bt_stop);
-        textView = findViewById(R.id.textView);
         img = (ImageView) findViewById(R.id.img);
         intent = new Intent(this,EyeService.class);
 
