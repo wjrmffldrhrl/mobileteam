@@ -41,6 +41,7 @@
         <activity android:name=".Note.NoteList" />
         <activity android:name=".Note.Note" />
         <activity android:name=".Study" />
+        <activity android:name=".Drive"/>
         <activity android:name=".OCR.OcrCaptureActivity" />
         <activity android:name=".EyeDetected.EyeDetected" />
         <activity android:name=".Dictionary.Dictionary_search" />

@@ -37,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
     drive.setOnClickListener(new View.OnClickListener() {// 운전 메뉴 선택
         @Override
         public void onClick(View v) {
-
+            Intent intent = new Intent(getApplicationContext(), Drive.class);//인텐트 지정
+            startActivity(intent);//액티비티 출력
         }
     });
 
