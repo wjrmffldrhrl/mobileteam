@@ -64,6 +64,7 @@ public class Note extends AppCompatActivity {
                 mTextFileManager.delete(title.getText().toString());//저장한 메모 삭제
                 mMemoEdit.setText("");
                 Toast.makeText(getApplicationContext(), "삭제", Toast.LENGTH_SHORT).show();
+                finish();//엑티비티 종료
 
             }
         });
