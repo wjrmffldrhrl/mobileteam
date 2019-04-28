@@ -21,53 +21,72 @@ import java.util.List;
 
 public class NoteList extends AppCompatActivity {
     String path = "/data/data/com.example.annu/files";//파일이 저장된 경로
-    Button newmemo;
+    Button newmemo, reset;
+    ListView list;
+    File[] files;
+    final List<String> filesNameList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.note_list);
-        ListView list = (ListView) findViewById(R.id.note_list);//파일 목록이 저장될 리스트
+        list = (ListView) findViewById(R.id.note_list);//파일 목록이 저장될 리스트
         newmemo = (Button) findViewById(R.id.note_bt_new);
+        reset = (Button) findViewById(R.id.note_bt_reset);
 
-        File[] files = (new File(path).listFiles());//
+        files = (new File(path).listFiles());//
 
-        final List<String> filesNameList = new ArrayList<>();
 
-        for(int i = 0;i<files.length;i++)//생성된 리스트에 경로 내에 있는 파일 목록을 불러온다
+        for (int i = 0; i < files.length; i++)//생성된 리스트에 경로 내에 있는 파일 목록을 불러온다
             filesNameList.add(files[i].getName());
 
 
-        newmemo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Note.class);//인텐트 지정
-                intent.putExtra("filename","");//전달할 데이터
-                startActivityForResult(intent,2);//액티비티 출력
-            }
-        });
-
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1,filesNameList);
+                android.R.layout.simple_list_item_1, filesNameList);//파일 목록
         list.setAdapter(adapter);//리스너뷰에 목록 넣기
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(),filesNameList.get(position),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), filesNameList.get(position), Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(getApplicationContext(), Note.class);//인텐트 지정
-                intent.putExtra("filename",filesNameList.get(position));//전달할 데이터
-                startActivityForResult(intent,2);//액티비티 출력
+                intent.putExtra("filename", filesNameList.get(position));//전달할 데이터
+                startActivityForResult(intent, 2);//액티비티 출력
             }
         });
 
-        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {//파일 이름을 누르면 해당 파일 편집집
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(),filesNameList.get(position),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), filesNameList.get(position), Toast.LENGTH_SHORT).show();
                 return false;
+            }
+        });
+
+        newmemo.setOnClickListener(new View.OnClickListener() {//새로운 메모장 만들기
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Note.class);//인텐트 지정
+                intent.putExtra("filename", "");//전달할 데이터
+                startActivityForResult(intent, 2);//액티비티 출력
+            }
+        });
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                filesNameList.clear();
+                files = (new File(path).listFiles());
+
+                for (int i = 0; i < files.length; i++)//생성된 리스트에 경로 내에 있는 파일 목록을 불러온다
+                    filesNameList.add(files[i].getName());
+
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),
+                        android.R.layout.simple_list_item_1, filesNameList);//파일 목록
+
+                list.setAdapter(adapter);
             }
         });
     }

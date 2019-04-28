@@ -70,7 +70,8 @@ public class Dictionary_search extends AppCompatActivity {
         if (outfile.length() <= 0) {//파일이 없으면 생성
             AssetManager assetManager = getResources().getAssets();
             try {
-                InputStream is = assetManager.open("dictionary.db", AssetManager.ACCESS_BUFFER);
+                InputStream is = assetManager.open("dictionary.db"
+                        ,AssetManager.ACCESS_BUFFER);
                 long filesize = is.available();
                 byte[] tempdata = new byte[(int) filesize];
                 is.read(tempdata);

@@ -2,27 +2,28 @@ package com.example.annu.EyeDetected;
 
 import android.Manifest;
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.media.SoundPool;
-import android.net.Uri;
+import android.os.Build;
 import android.os.IBinder;
 import android.os.Vibrator;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.widget.RemoteViews;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.example.annu.MainActivity;
 import com.example.annu.R;
 import com.example.annu.Study;
 import com.google.android.gms.vision.CameraSource;
@@ -34,17 +35,16 @@ import com.google.android.gms.vision.face.FaceDetector;
 
 import java.io.IOException;
 
-import static android.media.AudioManager.STREAM_SYSTEM;
-import static java.sql.Types.NULL;
-
 public class EyeService extends Service {
     int count = 0;//공용으로 사용하는 count 변수 눈이 인식되면 초기화 된다
     private Vibrator vibrator;
     MediaPlayer alarm;//경고음 출력 변수
-    AudioManager volume;
-    //SoundPool alarm;
-    // int alarm_id;
 
+    AudioManager volume;
+    int basic_volume;
+
+    NotificationManager mNotificationManager;
+    NotificationCompat.Builder mBuilder;
 
     Timer my_timer = new Timer();
     TimerTask my_task = new TimerTask() {
@@ -59,7 +59,7 @@ public class EyeService extends Service {
 
                 if (alarm.isPlaying() == true)
                     alarm.stop();//경고음 정지
-
+                volume.setStreamVolume(AudioManager.STREAM_MUSIC, basic_volume, AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE);//기존 음량으로 변경
             } else {
 
                 volume.setStreamVolume(AudioManager.STREAM_MUSIC,
@@ -91,6 +91,8 @@ public class EyeService extends Service {
         alarm.stop();
         alarm.release();
 
+        mNotificationManager.cancel(3452);
+
     }
 
     @Override
@@ -110,33 +112,48 @@ public class EyeService extends Service {
 
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         alarm = MediaPlayer.create(this, R.raw.beep);
-        volume= (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        volume = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+
+        basic_volume = volume.getStreamVolume(AudioManager.STREAM_MUSIC);//음량을 최대로 하기 전 기존 음량을 가져온다
 
 
+/////////////////////////////상단바////////////////////////
 
-        /**
-         * 상단바에 나오게 하는 안내문구 출력이 되질 않는다
 
-        Intent mMainIntent = new Intent(this, Study.class);
-        PendingIntent mPendingIntent = PendingIntent.getActivity(this, 1, mMainIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        NotificationManager notificationManager
+                = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
-        NotificationCompat.Builder mBuilder =
-                new NotificationCompat.Builder(this)
-                        .setSmallIcon(android.R.drawable.btn_star)
-                        .setDefaults(Notification.DEFAULT_ALL)
-                        .setContentTitle("안너큰")
-                        .setContentIntent(mPendingIntent)
-                        .setTicker("test")
-                        .setContentText("졸음 방지가 실행되고 있습니다");
-        NotificationManager mNotifyMgr =
-                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        mNotifyMgr.notify(001,mBuilder.build());
-        */
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {//NotificationCompat 버젼문제로 인한 버젼검사
+            NotificationChannel mChannel = new NotificationChannel("channel", "Name",
+                    NotificationManager.IMPORTANCE_LOW);
+            notificationManager.createNotificationChannel(mChannel);
+
+            mBuilder = new NotificationCompat.Builder(this, "channel")
+                    .setSmallIcon(R.drawable.bee)
+                    .setContentTitle("안너큰")
+                    .setContentText("졸음 방지 작동중")
+                    .setOngoing(true);
+        }
+        else{
+            mBuilder = new NotificationCompat.Builder(this)
+                    .setSmallIcon(R.drawable.bee)
+                    .setContentTitle("안너큰")
+                    .setContentText("졸음 방지 작동중")
+                    .setOngoing(true);
+        }
+
+        mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        mNotificationManager.notify(3452, mBuilder.build());//알림창 실행
+
+        ////////////////////////////////////////////////////////////////////////////
+
         createCameraSource();//카메라 소스를 생성하며 아이트레킹 시작
-        my_timer.schedule(my_task, 1000, 2000); // 타이머 실행
+        my_timer.schedule(my_task, 1, 2000); // 타이머 실행
 
+        return super.
 
-        return super.onStartCommand(intent, flags, startId);
+                onStartCommand(intent, flags, startId);
 
 
     }
@@ -185,6 +202,7 @@ public class EyeService extends Service {
         public Tracker<Face> create(Face face) {
             return new EyesTracker();
         }
+
     }
 
     public void createCameraSource() {
