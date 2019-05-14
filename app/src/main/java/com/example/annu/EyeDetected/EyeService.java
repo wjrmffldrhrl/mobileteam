@@ -1,6 +1,7 @@
 package com.example.annu.EyeDetected;
 
 import android.Manifest;
+import android.app.ActivityManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -133,8 +134,7 @@ public class EyeService extends Service {
                     .setContentTitle("안너큰")
                     .setContentText("졸음 방지 작동중")
                     .setOngoing(true);
-        }
-        else{
+        } else {
             mBuilder = new NotificationCompat.Builder(this)
                     .setSmallIcon(R.drawable.bee)
                     .setContentTitle("안너큰")
@@ -232,6 +232,9 @@ public class EyeService extends Service {
 
 
 }
+
+
+
 
 
 
