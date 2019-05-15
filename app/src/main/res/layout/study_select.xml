@@ -15,10 +15,23 @@
         android:layout_height="150dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="118dp"
         android:background="#ffffff"
         android:scaleType="fitXY"
         android:src="@drawable/study" />
+
+    <Chronometer
+        android:id="@+id/chronometer1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="320dp"
+        android:format=" 공부한 시간 %s "
+        android:gravity="center"
+        android:scaleType="fitXY"
+        android:textSize="40dp" />
 
     <ImageButton
         android:id="@+id/study_bt_face"
