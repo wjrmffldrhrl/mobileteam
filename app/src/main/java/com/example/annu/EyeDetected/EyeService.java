@@ -1,6 +1,7 @@
 package com.example.annu.EyeDetected;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -16,9 +17,11 @@ import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.IBinder;
 import android.os.Vibrator;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.view.View;
 import android.widget.RemoteViews;
 
 import java.util.Timer;
@@ -35,6 +38,8 @@ import com.google.android.gms.vision.face.Face;
 import com.google.android.gms.vision.face.FaceDetector;
 
 import java.io.IOException;
+
+import static android.support.constraint.Constraints.TAG;
 
 public class EyeService extends Service {
     int count = 0;//공용으로 사용하는 count 변수 눈이 인식되면 초기화 된다
@@ -220,10 +225,9 @@ public class EyeService extends Service {
                 .build();
 
         try {
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
                 return;
-            }
+
             cameraSource.start();
         } catch (IOException e) {
             e.printStackTrace();

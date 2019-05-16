@@ -91,23 +91,7 @@ public final class OcrCaptureActivity extends AppCompatActivity {
                 .show();//하단 메세지
 
 
-        /* 사전으로 기능 이전
-        //단어를 말 해주는 TextToSpeech 설정
-        TextToSpeech.OnInitListener listener =
-                new TextToSpeech.OnInitListener() {
-                    @Override
-                    public void onInit(final int status) {
-                        if (status == TextToSpeech.SUCCESS) {
-                            Log.d("OnInitListener", "Text to speech engine started successfully.");
-                            tts.setLanguage(Locale.US);
-                        } else {
-                            Log.d("OnInitListener", "Error starting the text to speech engine.");
-                        }
-                    }
-                };
-        tts = new TextToSpeech(this.getApplicationContext(), listener);
-        //여기까지 tts를 활용하여 말하는 엔진을 사용
-        */
+
         bt_result.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
