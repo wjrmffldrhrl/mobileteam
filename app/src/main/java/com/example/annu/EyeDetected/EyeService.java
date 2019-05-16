@@ -18,6 +18,7 @@ import android.util.Log;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.example.annu.Light;
 import com.example.annu.MainActivity;
 import com.example.annu.R;
 import com.google.android.gms.vision.CameraSource;
@@ -36,6 +37,19 @@ public class EyeService extends Service {
 
     AudioManager volume;
     int basic_volume;
+    /**
+     * if(volume.getRingerMode()==AudioManager.RINGER_MODE_VIBRATE){//진동일때
+     * notification.defaults = Notification.DEFAULT_VIBRATE;
+     * }else if(volume.getRingerMode()==AudioManager.RINGER_MODE_SILENT){//무음일때
+     * notification.defaults = Notification.DEFAULT_VIBRATE;
+     * }else if (volume.getRingerMode()==AudioManager.RINGER_MODE_NORMAL){//벨소리
+     * notification.defaults = Notification.DEFAULT_SOUND;
+     * }else{
+     * notification.defaults = Notification.DEFAULT_VIBRATE;//기타
+     *
+     * }
+     */
+
     NotificationManager mNotificationManager;
     NotificationCompat.Builder mBuilder;
 
@@ -53,15 +67,26 @@ public class EyeService extends Service {
                 if (alarm.isPlaying() == true)
                     alarm.stop();//경고음 정지
                 volume.setStreamVolume(AudioManager.STREAM_MUSIC, basic_volume, AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE);//기존 음량으로 변경
-            } else {
+            }
+            else {//시간 초과
 
-                volume.setStreamVolume(AudioManager.STREAM_MUSIC,
-                        volume.getStreamMaxVolume(AudioManager.STREAM_MUSIC), AudioManager.FLAG_PLAY_SOUND);//음량을 최대로 변경
-                vibrator.vibrate(1000); // 1초간 진동
-                alarm.start();//경고음 시작
-                // alarm.play(alarm_id, 1, 1, 0, 0, 1);
+                if(volume.getRingerMode()==AudioManager.RINGER_MODE_SILENT){//무음일때
+                     //서비스에서 다른 엑티비티를 불러온다. (밝은 화면 제어에 사용 가능함)
+                     Intent intent = new Intent(EyeService.this, Light.class);
+                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                     startActivity(intent);
+
+                }
+                else if(volume.getRingerMode()==AudioManager.RINGER_MODE_VIBRATE) {//진동일때
+                    vibrator.vibrate(1000); // 1초간 진동
+                }
+                else if(volume.getRingerMode()==AudioManager.RINGER_MODE_NORMAL) {//벨소리 On일때
+                    volume.setStreamVolume(AudioManager.STREAM_MUSIC,
+                            volume.getStreamMaxVolume(AudioManager.STREAM_MUSIC), AudioManager.FLAG_PLAY_SOUND);//음량을 최대로 변경
+                    alarm.start();//경고음 시작
+                    vibrator.vibrate(1000); // 1초간 진동
+                }
                 Log.e("time out", "time out");
-                // my_timer.cancel();
 
 
             }
@@ -165,13 +190,6 @@ public class EyeService extends Service {
 
             Log.e("lost eye", "lost eye");
 
-
-            /** 서비스에서 다른 엑티비티를 불러온다. (밝은 화면 제어에 사용 가능함)
-            Intent intent = new Intent(EyeService.this, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);*/
-
-            //my_timer.schedule(my_task,5000);
 
         }
 
