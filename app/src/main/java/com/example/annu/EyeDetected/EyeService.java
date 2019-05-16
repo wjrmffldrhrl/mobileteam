@@ -1,35 +1,25 @@
 package com.example.annu.EyeDetected;
 
 import android.Manifest;
-import android.app.Activity;
-import android.app.ActivityManager;
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.Service;
-import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.os.Build;
 import android.os.IBinder;
 import android.os.Vibrator;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-import android.view.View;
-import android.widget.RemoteViews;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 import com.example.annu.MainActivity;
 import com.example.annu.R;
-import com.example.annu.Study;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.MultiProcessor;
@@ -39,8 +29,6 @@ import com.google.android.gms.vision.face.FaceDetector;
 
 import java.io.IOException;
 
-import static android.support.constraint.Constraints.TAG;
-
 public class EyeService extends Service {
     int count = 0;//공용으로 사용하는 count 변수 눈이 인식되면 초기화 된다
     private Vibrator vibrator;
@@ -48,7 +36,6 @@ public class EyeService extends Service {
 
     AudioManager volume;
     int basic_volume;
-
     NotificationManager mNotificationManager;
     NotificationCompat.Builder mBuilder;
 
@@ -177,6 +164,13 @@ public class EyeService extends Service {
         public void onMissing(Detector.Detections<Face> detections) { // 감지가 안될때 계속 돌지 않고 멈춘다
 
             Log.e("lost eye", "lost eye");
+
+
+            /** 서비스에서 다른 엑티비티를 불러온다. (밝은 화면 제어에 사용 가능함)
+            Intent intent = new Intent(EyeService.this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);*/
+
             //my_timer.schedule(my_task,5000);
 
         }
