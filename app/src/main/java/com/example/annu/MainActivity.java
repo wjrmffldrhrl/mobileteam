@@ -12,12 +12,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Switch;
 
 import com.example.annu.Dictionary.Dictionary;
 import com.example.annu.EyeDetected.EyeService;
 import com.example.annu.Note.NoteList;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     Switch face;
     Intent intent;//서비스 인텐트
 
+    private AdView mAdView;//광고
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +38,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(loding_intent);
         setContentView(R.layout.study_select);
 
-
+        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");//광고 설정정
+       mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         note = (ImageButton) findViewById(R.id.study_bt_note);
         dictionary = (ImageButton) findViewById(R.id.study_bt_dictionary);

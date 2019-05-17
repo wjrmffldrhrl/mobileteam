@@ -77,8 +77,6 @@ public class EyeService extends Service {
                     alarm.stop();//경고음 정지
                 volume.setStreamVolume(AudioManager.STREAM_MUSIC, basic_volume, AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE);//기존 음량으로 변경
 
-
-
                     Log.e("earphone : ", ""+earphoneON);
 
             } else {//시간 초과
