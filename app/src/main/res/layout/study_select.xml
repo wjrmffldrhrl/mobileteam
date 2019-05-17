@@ -10,7 +10,19 @@
         android:scaleType="fitXY"
         android:src="@drawable/name2" />
 
+    <ImageButton
+        android:id="@+id/setting"
+        android:src="@drawable/bee"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:scaleType="fitXY"
+        android:background="#ffffff"
+        android:layout_marginTop="70dp"/>
+
     <ImageView
+
         android:layout_width="145dp"
         android:layout_height="150dp"
         android:layout_alignParentTop="true"

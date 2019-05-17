@@ -3,11 +3,17 @@
     package="com.example.annu"
     android:installLocation="auto">
 
-    <uses-feature android:name="android.hardware.camera" />
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.FLASHLIGHT"/>
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+
+    <uses-feature android:name="android.hardware.camera2.full"/>
+    <uses-feature android:name="android.hardware.camera.flash"/>
+    <uses-feature android:name="android.hardware.camera" />
 
 
     <application
@@ -46,6 +52,7 @@
         <activity android:name=".Dictionary.Dictionary_search" />
         <activity android:name=".Dictionary.Dictionary" />
         <activity android:name=".Light"/>
+        <activity android:name=".Option"/>
     </application>
 
 </manifest>

@@ -6,13 +6,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Switch;
 
 import com.example.annu.Dictionary.Dictionary;
@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int RC_HANDLE_CAMERA_PERM = 2;
 
-    ImageButton note, dictionary;
+    ImageButton note, dictionary,setting;
     Switch face;
     Intent intent;//서비스 인텐트
 
@@ -34,11 +34,13 @@ public class MainActivity extends AppCompatActivity {
         startActivity(loding_intent);
         setContentView(R.layout.study_select);
 
+
+
         note = (ImageButton) findViewById(R.id.study_bt_note);
         dictionary = (ImageButton) findViewById(R.id.study_bt_dictionary);
         face = (Switch) findViewById(R.id.study_switch_face);
         intent = new Intent(this, EyeService.class);
-
+        setting = (ImageButton) findViewById(R.id.setting);
 
         note.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +57,16 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);//액티비티 출력
             }
         });
+
+
+        setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Option.class);//인텐트 지정
+                startActivity(intent);//액티비티 출력
+            }
+        });
+
 
         final Context context = getApplicationContext();
         face.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {//스위치로 설정
