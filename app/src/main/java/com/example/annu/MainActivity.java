@@ -1,4 +1,5 @@
 package com.example.annu;
+
 import android.Manifest;
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -10,9 +11,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.ImageButton;
-import android.widget.Switch;
+import android.widget.Toast;
 
 import com.example.annu.Dictionary.Dictionary;
 import com.example.annu.EyeDetected.EyeService;
@@ -25,8 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int RC_HANDLE_CAMERA_PERM = 2;
 
-    ImageButton note, dictionary,setting;
-    Switch face;
+    ImageButton note, dictionary, setting, face;
     Intent intent;//서비스 인텐트
 
     private AdView mAdView;//광고
@@ -39,13 +38,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.study_select);
 
         MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");//광고 설정정
-       mAdView = findViewById(R.id.adView);
+        mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
         note = (ImageButton) findViewById(R.id.study_bt_note);
         dictionary = (ImageButton) findViewById(R.id.study_bt_dictionary);
-        face = (Switch) findViewById(R.id.study_switch_face);
+        face = (ImageButton) findViewById(R.id.study_bt_face);
         intent = new Intent(this, EyeService.class);
         setting = (ImageButton) findViewById(R.id.setting);
 
@@ -76,32 +75,36 @@ public class MainActivity extends AppCompatActivity {
 
 
         final Context context = getApplicationContext();
-        face.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {//스위치로 설정
+        face.setOnClickListener(new View.OnClickListener() {//서비스 시작 버튼
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            public void onClick(View v) {
 
 
-                if (isServiceRunning() == false) {//어플이 실행중이 아닐때(중복 실행되는 경우 방지)
-                    if (isChecked == true)//스위치를 키면
-                        startService(intent);//서비스 실행
+                if (isServiceRunning() == false) {//버튼을 눌렀을때 서비스가 동작중이 아니면
+                    face.setImageResource(R.drawable.face_on);
+                    startService(intent);//서비스 실행
+                    Toast.makeText(getApplicationContext(),"졸음 방지 ON", Toast.LENGTH_SHORT).show();
                 }
-                if (isChecked == false)
-                    stopService(intent);
+                else{//동작중이면
+                    stopService(intent);//서비스 종료
+                    face.setImageResource(R.drawable.face_off);
+                    Toast.makeText(getApplicationContext(),"졸음 방지 OFF",Toast.LENGTH_SHORT).show();
+                }
 
-                int rc = ActivityCompat.checkSelfPermission(context, Manifest.permission.CAMERA);
+                int rc = ActivityCompat.checkSelfPermission(context, Manifest.permission.CAMERA);//권한설정
 
                 if (rc == PackageManager.PERMISSION_GRANTED) {// 권한 체크
                     Log.e("permission", "ok");
                 } else {
                     stopService(intent); //권한 설정이 안됐을때 실행된 서비스를 종료시킨다.
-                    face.setChecked(false);//on된 스위치를 off함
+                    face.setImageResource(R.drawable.face_off);//on된 스위치를 off함
                     requestCameraPermission();
                 }
             }
         });
 
         if (isServiceRunning() == true) {//서비스가 실행중이면
-            face.setChecked(true);//스위치를 ON 상태로 바꾼다
+            face.setImageResource(R.drawable.face_on);//스위치를 ON 상태로 바꾼다
         }
     }
 

@@ -1,12 +1,16 @@
 package com.example.annu.Dictionary;
 
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
+import com.example.annu.EyeDetected.EyeService;
 import com.example.annu.OCR.OcrCaptureActivity;
 import com.example.annu.R;
 
@@ -26,8 +30,13 @@ public class Dictionary extends AppCompatActivity {
         bt_camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {//ocr 기능 사용
-                Intent intent = new Intent(getApplicationContext(), OcrCaptureActivity.class);//인텐트 지정
-                startActivity(intent);//액티비티 출력
+
+                if (isServiceRunning() == true)
+                    Toast.makeText(getApplicationContext(), "졸음방지 동작중에는\n문자인식 기능을 사용할 수 없습니다.", Toast.LENGTH_SHORT).show();
+                else {
+                    Intent intent = new Intent(getApplicationContext(), OcrCaptureActivity.class);//인텐트 지정
+                    startActivity(intent);//액티비티 출력
+                }
             }
         });
         bt_search.setOnClickListener(new View.OnClickListener() {
@@ -38,5 +47,13 @@ public class Dictionary extends AppCompatActivity {
             }
         });
 
+    }
+
+    public boolean isServiceRunning() {//서비스가 작동중인지 알아보는 메서드
+        ActivityManager manager = (ActivityManager) this.getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (EyeService.class.getName().equals(service.service.getClassName())) return true;
+        }
+        return false;
     }
 }
