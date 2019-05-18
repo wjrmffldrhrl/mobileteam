@@ -1,20 +1,25 @@
-package com.example.annu;
+package com.example.annu.EyeDetected;
 
 
 import android.content.Context;
 import android.content.Intent;
 
+import android.graphics.Color;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.annotation.ColorInt;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
-import com.example.annu.EyeDetected.EyeService;
+import com.example.annu.R;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -29,18 +34,34 @@ public class Light extends AppCompatActivity {
     private String mCameraId;
 
     Button get_up;
+    LinearLayout color;
+
+    final Handler handler = new Handler(){//색상 변경 핸들러
+        public void handleMessage(Message msg){
+            if(!flashon)
+            color.setBackgroundColor(Color.rgb(255,255,0));
+            else
+                color.setBackgroundColor(Color.rgb(255,255,255));
+        }
+    };
 
     Timer my_timer = new Timer();//플래시 반복 실행을 위한 타이머
     TimerTask my_task = new TimerTask() {
         @Override
         public void run() {
+
+            Message msg = handler.obtainMessage();//화면 색상 변경을 위한 메세지
+            handler.sendMessage(msg);
+
             mCameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);//카메라 프래시 제어어
             try {
                 mCameraId = mCameraManager.getCameraIdList()[0];
             } catch (CameraAccessException e) {
                 e.printStackTrace();
             }
+
             if (!flashon) {
+                color.setBackgroundColor(Color.rgb(255,255,0));
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {//버젼이 낮을시 실행 x
                     try {
                         mCameraManager.setTorchMode(mCameraId, true);
@@ -52,6 +73,7 @@ public class Light extends AppCompatActivity {
                     }
                 }
             } else {
+                color.setBackgroundColor(Color.rgb(255,255,255));
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     try {
                         mCameraManager.setTorchMode(mCameraId, false);
@@ -74,11 +96,13 @@ public class Light extends AppCompatActivity {
         setContentView(R.layout.light);
 
         get_up = (Button) findViewById(R.id.light_bt_getup);
+        color = (LinearLayout) findViewById(R.id.light_layout_color);
+
         params = getWindow().getAttributes();
         intent = new Intent(this, EyeService.class);
         stopService(intent);//진행중인 서비스 정지
 
-        my_timer.schedule(my_task, 1000, 1000); // 타이머 실행
+        my_timer.schedule(my_task, 1000, 500); // 타이머 실행
 
         get_up.setOnClickListener(new View.OnClickListener() {
             @Override

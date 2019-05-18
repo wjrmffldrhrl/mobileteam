@@ -11,7 +11,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.media.AudioDeviceInfo;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Build;
@@ -24,7 +23,6 @@ import android.util.Log;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.example.annu.Light;
 import com.example.annu.R;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
