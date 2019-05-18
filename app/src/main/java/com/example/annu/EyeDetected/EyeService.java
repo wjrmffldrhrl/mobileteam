@@ -4,6 +4,8 @@ import android.Manifest;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.Service;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -38,11 +40,12 @@ public class EyeService extends Service {
     private Vibrator vibrator;
     MediaPlayer alarm;//경고음 출력 변수
 
+    private BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();//이어폰 체크
     private static IntentFilter mIntentFilter;
     private static BroadcastReceiver mBroadcastReciver;
-    private boolean earphoneON = false;
-    private static final String BLUETOOTH_HEADSET_ACTION = "android.bluetooth.headset.action.STATE_CHANGED";
-    private static final String BLUETOOTH_HEADSET_STATE = "android.bluetooth.headset.extra.STATE";
+
+    private boolean earphoneON = false;// 블루투스 연결 체크
+
 
     AudioManager volume;
     int basic_volume;
@@ -135,11 +138,15 @@ public class EyeService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-
         Log.e("service onCreate", "Start");
 
+        if(bluetoothAdapter == null){
+
+        }
+
         mIntentFilter = new IntentFilter(Intent.ACTION_HEADSET_PLUG);//이어폰 확인
-        mIntentFilter.addAction(BLUETOOTH_HEADSET_ACTION);
+        mIntentFilter.addAction(BluetoothDevice.ACTION_ACL_CONNECTED);//블루투스 확인 필터
+        mIntentFilter.addAction(BluetoothDevice.ACTION_ACL_DISCONNECTED);
 
 
         mBroadcastReciver = new BroadcastReceiver() {// 이어폰 상태 받아오는 브로드캐스트 리시버
@@ -148,13 +155,14 @@ public class EyeService extends Service {
                 Log.e("onReceive","start");
                 final String action = intent.getAction();
                 int headsetstate = 0;
-                if (action.equals(Intent.ACTION_HEADSET_PLUG))
+
+                if (action.equals(Intent.ACTION_HEADSET_PLUG))//이어폰이 연결되면
                     headsetstate = intent.getExtras().getInt("state");
-                else if (action.equals(BLUETOOTH_HEADSET_ACTION))
-                    headsetstate = intent.getExtras().getInt(BLUETOOTH_HEADSET_STATE);
+                else if(BluetoothDevice.ACTION_ACL_CONNECTED.equals(action))//블루투스가 연결되면
+                    headsetstate = 1;
 
                 Log.e("headset state : ", "" + headsetstate);
-                if (headsetstate > 0)
+                if (headsetstate > 0)//이어폰이나 블루투스 둘중 하나라도 연결되면 earphoneON 이 true가 된다.
                     earphoneON = true;
                 else
                     earphoneON = false;
@@ -163,7 +171,7 @@ public class EyeService extends Service {
             }
         };
 
-        registerReceiver(mBroadcastReciver, mIntentFilter);
+        registerReceiver(mBroadcastReciver, mIntentFilter);//브로드캐스트 리시버 등록
 
     }
 
