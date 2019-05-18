@@ -23,6 +23,8 @@
 
     <Button
         android:id="@+id/ocr_bt"
+        android:text="인식된 글자를 누르고 버튼을 누르세요"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/preview"

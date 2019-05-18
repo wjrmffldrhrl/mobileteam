@@ -55,6 +55,7 @@
         <activity android:name=".OCR.OcrCaptureActivity" />
         <activity android:name=".Dictionary.Dictionary_search" />
         <activity android:name=".Dictionary.Dictionary" />
+        <activity android:name=".Dictionary.Dictionary_history"/>
         <activity android:name=".EyeDetected.Light"/>
         <activity android:name=".Option"/>
     </application>

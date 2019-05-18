@@ -1,6 +1,8 @@
 package com.example.annu.Dictionary;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.database.SQLException;
 import android.speech.tts.TextToSpeech;
@@ -38,7 +40,8 @@ public class Dictionary_search extends AppCompatActivity {
     ImageButton imgbtn_search;
     TextView text_word, text_mean;
     SQLiteDatabase sqlDB;
-
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
     char fisrt_word;
 
     @Override
@@ -46,7 +49,8 @@ public class Dictionary_search extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dictionary_search_layout);
 
-
+        pref = getSharedPreferences("history", Activity.MODE_PRIVATE);//검색 기록을 남기기 위한 변수
+        editor = pref.edit();
 
         search = (EditText) findViewById(R.id.edt_search);
 
@@ -57,9 +61,13 @@ public class Dictionary_search extends AppCompatActivity {
         text_mean= (TextView) findViewById(R.id.text_mean);
 
         Intent ocr_result = getIntent();//OCR에서 넘어왔을때 데이터 받기
-        String data = ocr_result.getStringExtra("OCR");
-        search.setText(data);//받아온 데이터를 edittext에 넣는다
+        String data_OCR = ocr_result.getStringExtra("OCR");
 
+        Intent history_result = getIntent();
+        String  data_history = history_result.getStringExtra("history_to_search");
+
+        search.setText(data_OCR);//받아온 데이터를 edittext에 넣는다
+        search.setText(data_history);
 /////////////////////////파일 database로 옮겨주기/////////////////////////////////////
 
         File folder = new File("/data/data/com.example.annu/databases");
@@ -149,7 +157,10 @@ public class Dictionary_search extends AppCompatActivity {
                     if (cursor.isAfterLast()) {//데이터 베이스를 모두 봐도 찾는 단어가 없을때
                         dic_word += "";
                         dic_mean += "단어를 찾지못했습니다.";
-                    } else {
+                    } else {//찾는 단어가 있을때
+                        editor.putInt("hsnum",pref.getInt("hsnum",0)+1);//검색 기록 갯수
+                        editor.putString("hs"+pref.getInt("hsnum",0),dic_word);//단어를 넣는다.
+                        editor.apply();
                         dic_mean += cursor.getString(1) + "\r\n";//찾는 단어가 있으면 그 단어 뜻 넣기
                         tts.speak(dic_word, TextToSpeech.QUEUE_ADD, null, "DEFAULT");// 찾은 단어 발음 들려주기
                     }

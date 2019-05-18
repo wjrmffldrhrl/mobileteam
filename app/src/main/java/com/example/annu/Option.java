@@ -21,17 +21,19 @@ public class Option extends AppCompatActivity {
 
         SharedPreferences pref = getSharedPreferences("options", Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
-        editor.putInt("op1",1);
-        editor.putInt("op2", 2);
-        editor.putInt("op3", 3);
-        editor.putInt("op4", 4);
-        editor.commit();
+        editor.putInt("op1",5124125);
+        editor.putInt("op2", 1);
+        editor.putInt("op3", 6);
+        editor.putInt("op4", 9);
+        editor.apply();
 
         t1.setText(""+pref.getInt("op1",0));
         t2.setText(""+pref.getInt("op2",0));
         t3.setText(""+pref.getInt("op3",0));
         t4.setText(""+pref.getInt("op4",0));
         t5.setText(""+pref.getInt("op5",0));
+
+
 
 
 

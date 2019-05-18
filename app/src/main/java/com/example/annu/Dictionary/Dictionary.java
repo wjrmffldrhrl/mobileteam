@@ -46,6 +46,13 @@ public class Dictionary extends AppCompatActivity {
                 startActivity(intent);//액티비티 출력
             }
         });
+        bt_history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Dictionary_history.class);//인텐트 지정
+                startActivity(intent);//액티비티 출력
+            }
+        });
 
     }
 
