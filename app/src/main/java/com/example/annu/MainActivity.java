@@ -80,6 +80,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
+                int rc = ActivityCompat.checkSelfPermission(context, Manifest.permission.CAMERA);//권한설정
+
+                if (rc == PackageManager.PERMISSION_GRANTED) {// 권한 체크
+                    Log.e("permission", "ok");
+                } else {
+                    face.setImageResource(R.drawable.face_off);//on된 스위치를 off함
+                    requestCameraPermission();
+                }
+
                 if (isServiceRunning() == false) {//버튼을 눌렀을때 서비스가 동작중이 아니면
                     face.setImageResource(R.drawable.face_on);
                     startService(intent);//서비스 실행
@@ -91,21 +100,14 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"졸음 방지 OFF",Toast.LENGTH_SHORT).show();
                 }
 
-                int rc = ActivityCompat.checkSelfPermission(context, Manifest.permission.CAMERA);//권한설정
-
-                if (rc == PackageManager.PERMISSION_GRANTED) {// 권한 체크
-                    Log.e("permission", "ok");
-                } else {
-                    stopService(intent); //권한 설정이 안됐을때 실행된 서비스를 종료시킨다.
-                    face.setImageResource(R.drawable.face_off);//on된 스위치를 off함
-                    requestCameraPermission();
-                }
             }
         });
 
         if (isServiceRunning() == true) {//서비스가 실행중이면
             face.setImageResource(R.drawable.face_on);//스위치를 ON 상태로 바꾼다
         }
+        else
+            face.setImageResource(R.drawable.face_off);
     }
 
 
