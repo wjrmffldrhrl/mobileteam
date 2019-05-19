@@ -1,6 +1,7 @@
 package com.example.annu.EyeDetected;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -11,6 +12,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -40,11 +42,16 @@ public class EyeService extends Service {
     private Vibrator vibrator;
     MediaPlayer alarm;//경고음 출력 변수
 
+    int eye_count;//눈 감지 시간
+
     private BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();//이어폰 체크
     private static IntentFilter mIntentFilter;
     private static BroadcastReceiver mBroadcastReciver;
 
     private boolean earphoneON = false;// 블루투스 연결 체크
+
+    SharedPreferences pref;//옵션기능 구현
+    SharedPreferences.Editor editor;
 
 
     AudioManager volume;
@@ -70,7 +77,7 @@ public class EyeService extends Service {
         @Override
         public void run() {
 
-            if (count < 3) {//정해진 시간동안 반복
+            if (count < eye_count) {//정해진 시간동안 반복
                 Log.e("timer count", "count :" + count);
                 // alarm.stop(alarm_id);
 
@@ -80,25 +87,48 @@ public class EyeService extends Service {
                     alarm.stop();//경고음 정지
                 volume.setStreamVolume(AudioManager.STREAM_MUSIC, basic_volume, AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE);//기존 음량으로 변경
 
-                    Log.e("earphone : ", ""+earphoneON);
+                Log.e("earphone : ", "" + earphoneON);
 
             } else {//시간 초과
 
-                if (volume.getRingerMode() == AudioManager.RINGER_MODE_SILENT) {//무음일때
-                    //밝은 화면 제어
-                    Intent intent = new Intent(EyeService.this, Light.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
+                switch (pref.getInt("warning", 0)) {
+                    case 0://auto set
+                    if (volume.getRingerMode() == AudioManager.RINGER_MODE_SILENT) {//무음일때
+                        //밝은 화면 제어
+                        Intent intent = new Intent(EyeService.this, Light.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
 
 
-                } else if (volume.getRingerMode() == AudioManager.RINGER_MODE_VIBRATE) {//진동일때
-                    vibrator.vibrate(1000); // 1초간 진동
-                } else if (volume.getRingerMode() == AudioManager.RINGER_MODE_NORMAL) {//벨소리 On일때
-                    if (!earphoneON)//이어폰을 장착하지 안았다면
-                        volume.setStreamVolume(AudioManager.STREAM_MUSIC,
-                                volume.getStreamMaxVolume(AudioManager.STREAM_MUSIC), AudioManager.FLAG_PLAY_SOUND);//음량을 최대로 변경
-                    alarm.start();//경고음 시작
-                    vibrator.vibrate(1000); // 1초간 진동
+                    } else if (volume.getRingerMode() == AudioManager.RINGER_MODE_VIBRATE) {//진동일때
+                        vibrator.vibrate(1000); // 1초간 진동
+                    } else if (volume.getRingerMode() == AudioManager.RINGER_MODE_NORMAL) {//벨소리 On일때
+                        if (!earphoneON)//이어폰을 장착하지 안았다면
+                            volume.setStreamVolume(AudioManager.STREAM_MUSIC,
+                                    volume.getStreamMaxVolume(AudioManager.STREAM_MUSIC), AudioManager.FLAG_PLAY_SOUND);//음량을 최대로 변경
+                        alarm.start();//경고음 시작
+                        vibrator.vibrate(1000); // 1초간 진동
+                    }
+                    break;
+
+                    case 1://무조건 aram & vibe
+                        if (!earphoneON)//이어폰을 장착하지 안았다면
+                            volume.setStreamVolume(AudioManager.STREAM_MUSIC,
+                                    volume.getStreamMaxVolume(AudioManager.STREAM_MUSIC), AudioManager.FLAG_PLAY_SOUND);//음량을 최대로 변경
+                        alarm.start();//경고음 시작
+                        vibrator.vibrate(1000); // 1초간 진동
+                        break;
+
+                    case 2://only vibe
+                        vibrator.vibrate(1000); // 1초간 진동
+                        break;
+
+                    case 3://only flash
+                        Intent intent = new Intent(EyeService.this, Light.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+
+                        break;
                 }
                 Log.e("time out", "time out");
 
@@ -123,7 +153,7 @@ public class EyeService extends Service {
         alarm.stop();
         alarm.release();
 
-       unregisterReceiver(mBroadcastReciver);//이어폰 확인 레지스터 종료
+        unregisterReceiver(mBroadcastReciver);//이어폰 확인 레지스터 종료
 
         mNotificationManager.cancel(3452);
 
@@ -140,9 +170,10 @@ public class EyeService extends Service {
         super.onCreate();
         Log.e("service onCreate", "Start");
 
-        if(bluetoothAdapter == null){
+        if (bluetoothAdapter == null) {
 
         }
+        pref = getSharedPreferences("options", Activity.MODE_PRIVATE);//설정기능 구현
 
         mIntentFilter = new IntentFilter(Intent.ACTION_HEADSET_PLUG);//이어폰 확인
         mIntentFilter.addAction(BluetoothDevice.ACTION_ACL_CONNECTED);//블루투스 확인 필터
@@ -152,13 +183,13 @@ public class EyeService extends Service {
         mBroadcastReciver = new BroadcastReceiver() {// 이어폰 상태 받아오는 브로드캐스트 리시버
             @Override
             public void onReceive(Context context, Intent intent) {
-                Log.e("onReceive","start");
+                Log.e("onReceive", "start");
                 final String action = intent.getAction();
                 int headsetstate = 0;
 
                 if (action.equals(Intent.ACTION_HEADSET_PLUG))//이어폰이 연결되면
                     headsetstate = intent.getExtras().getInt("state");
-                else if(BluetoothDevice.ACTION_ACL_CONNECTED.equals(action))//블루투스가 연결되면
+                else if (BluetoothDevice.ACTION_ACL_CONNECTED.equals(action))//블루투스가 연결되면
                     headsetstate = 1;
 
                 Log.e("headset state : ", "" + headsetstate);
@@ -180,9 +211,37 @@ public class EyeService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
 
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        alarm = MediaPlayer.create(this, R.raw.beep);
         volume = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        switch (pref.getInt("aram", 0)) {
+            case 0:
+                alarm = MediaPlayer.create(this, R.raw.beep1);
+                break;
+            case 1:
+                alarm = MediaPlayer.create(this, R.raw.cymbal);
+                break;
+            case 2:
+                alarm = MediaPlayer.create(this, R.raw.monclap);
+                break;
+            case 3:
+                alarm = MediaPlayer.create(this, R.raw.doorbell);
+                break;
+            default:
+                alarm = MediaPlayer.create(this, R.raw.beep1);
+        }
 
+        switch (pref.getInt("time", 0)) {
+            case 0:
+                eye_count = 15;
+                break;
+            case 1:
+                eye_count = 7;
+                break;
+            case 2:
+                eye_count = 3;
+                break;
+            default:
+                eye_count = 15;
+        }
 
         basic_volume = volume.getStreamVolume(AudioManager.STREAM_MUSIC);//음량을 최대로 하기 전 기존 음량을 가져온다
 
@@ -190,7 +249,7 @@ public class EyeService extends Service {
 /////////////////////////////상단바////////////////////////
 
         PendingIntent pendingIntent = PendingIntent.getActivity(
-                EyeService.this,0,new Intent(getApplicationContext(),MainActivity.class),
+                EyeService.this, 0, new Intent(getApplicationContext(), MainActivity.class),
                 PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationManager notificationManager
@@ -300,7 +359,6 @@ public class EyeService extends Service {
             e.printStackTrace();
         }
     }
-
 
 
 }

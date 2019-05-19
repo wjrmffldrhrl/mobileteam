@@ -1,39 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#ffffff">
 
     <TextView
-        android:id="@+id/tx1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""/>
+        android:textSize="40dp"
+        android:text="경고음 종류"/>
+    <RadioGroup
+        android:id="@+id/option_radiogroup_set1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:text="부드러운 경고음"
+            android:id="@+id/option_radiobutton_beep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:text="심벌즈 소리"
+            android:id="@+id/option_radiobutton_symbal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:text="박수 소리"
+            android:id="@+id/option_radiobutton_clap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:id="@+id/option_radiobutton_bell"
+            android:text="초인종 소리"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RadioGroup>
 
     <TextView
-        android:id="@+id/tx2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""/>
+        android:textSize="40dp"
+        android:text="경고음 / 진동"/>
+    <RadioGroup
+        android:id="@+id/option_radiogroup_set2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/option_radiobutton_auto"
+            android:text="핸드폰 소리설정에 맞춰서"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:id="@+id/option_radiobutton_bellandvibe"
+
+            android:text="무조건 경고음과 진동"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:id="@+id/option_radiobutton_vibe"
+
+            android:text="무조건 진동만"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:id="@+id/option_radiobutton_flash"
+
+            android:text="무조건 플래시만"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RadioGroup>
 
     <TextView
-        android:id="@+id/tx3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""/>
+        android:textSize="40dp"
+        android:text="졸음 방지 시간"/>
+    <RadioGroup
+        android:id="@+id/option_radiogroup_set3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/option_radiobutton_30"
+            android:text="30초간 눈이 인식이 안되면 경고"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:id="@+id/option_radiobutton_15"
+            android:text="15초간 눈이 인식이 안되면 경고"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:id="@+id/option_radiobutton_5"
+            android:text="5초간 눈이 인식이 안되면 경고"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RadioGroup>
 
-    <TextView
-        android:id="@+id/tx4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""/>
-
-    <TextView
-        android:id="@+id/tx5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""/>
 
 </LinearLayout>
