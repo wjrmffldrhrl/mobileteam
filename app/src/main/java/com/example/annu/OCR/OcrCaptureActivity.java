@@ -28,6 +28,9 @@ import android.widget.Toast;
 
 import com.example.annu.Dictionary.Dictionary_search;
 import com.example.annu.R;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.example.annu.OCR.camera.GraphicOverlay;
@@ -62,11 +65,20 @@ public final class OcrCaptureActivity extends AppCompatActivity {
    // private TextToSpeech tts;
     private Button bt_result;
 
+    private AdView mAdView;//광고
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ocr_capture);
+
+
+
+
+        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");//광고 설정정
+        mAdView = findViewById(R.id.ocr_adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         preview = (CameraSourcePreview) findViewById(R.id.preview);
         graphicOverlay = (GraphicOverlay<OcrGraphic>) findViewById(R.id.graphicOverlay);
