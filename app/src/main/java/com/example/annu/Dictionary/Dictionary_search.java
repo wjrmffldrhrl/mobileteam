@@ -58,16 +58,19 @@ public class Dictionary_search extends AppCompatActivity {
         btn_cls = (Button) findViewById(R.id.btn_cls);
 
         text_word = (TextView) findViewById(R.id.text_word);
-        text_mean= (TextView) findViewById(R.id.text_mean);
+        text_mean = (TextView) findViewById(R.id.text_mean);
 
         Intent ocr_result = getIntent();//OCR에서 넘어왔을때 데이터 받기
         String data_OCR = ocr_result.getStringExtra("OCR");
 
         Intent history_result = getIntent();
-        String  data_history = history_result.getStringExtra("history_to_search");
+        String data_history = history_result.getStringExtra("history_to_search");
 
-        search.setText(data_OCR);//받아온 데이터를 edittext에 넣는다
-        search.setText(data_history);
+        if (data_OCR != null)//ocr에서 데이터를 받아도 history에서 초기화 되기때문에 조건문 설정
+            search.setText(data_OCR);//받아온 데이터를 edittext에 넣는다
+        else if(data_history != null)
+            search.setText(data_history);
+
 /////////////////////////파일 database로 옮겨주기/////////////////////////////////////
 
         File folder = new File("/data/data/com.example.annu/databases");
@@ -79,7 +82,7 @@ public class Dictionary_search extends AppCompatActivity {
             AssetManager assetManager = getResources().getAssets();
             try {
                 InputStream is = assetManager.open("dictionary.db"
-                        ,AssetManager.ACCESS_BUFFER);
+                        , AssetManager.ACCESS_BUFFER);
                 long filesize = is.available();
                 byte[] tempdata = new byte[(int) filesize];
                 is.read(tempdata);
@@ -125,24 +128,23 @@ public class Dictionary_search extends AppCompatActivity {
                 sqlDB = myHelper.getReadableDatabase();
                 Cursor cursor;
 
-                if(search_word.getBytes().length > 0)
-                   fisrt_word = search_word.charAt(0); // 단어의 첫번째 알파벳을 알아낸다
+                if (search_word.getBytes().length > 0)
+                    fisrt_word = search_word.charAt(0); // 단어의 첫번째 알파벳을 알아낸다
                 // 이후 검색할 단어 테이블을 결정해줌
 
-                if(search_word.getBytes().length > 0  && !isLowerCase(fisrt_word))//첫 알파벳이 소문자가 아니면
+                if (search_word.getBytes().length > 0 && !isLowerCase(fisrt_word))//첫 알파벳이 소문자가 아니면
                     fisrt_word = toLowerCase(fisrt_word);//소문자로 바꿔줌
 
 
-
-                if (search_word.getBytes().length <= 0 || fisrt_word < 'a' ||fisrt_word > 'z') {//범위 밖의 단어
+                if (search_word.getBytes().length <= 0 || fisrt_word < 'a' || fisrt_word > 'z') {//범위 밖의 단어
                     Toast.makeText(getApplicationContext(), "영단어만 넣어주세요", Toast.LENGTH_SHORT).show();
                     search.setText("");//edittext 초기화
                 } else {
                     cursor = sqlDB.rawQuery("SELECT * FROM " + fisrt_word + "_word", null);
                     //검색어의 첫번째 문자를 가지고 해당 테이블의 커서를 움직인다.
 
-                    String dic_word ="";
-                    String dic_mean ="\r\n" + "----------------------------------------" + "\r\n";
+                    String dic_word = "";
+                    String dic_mean = "\r\n" + "----------------------------------------" + "\r\n";
 
                     while (cursor.moveToNext()) {//커서를 계속 진행시킨다.
 
@@ -158,8 +160,8 @@ public class Dictionary_search extends AppCompatActivity {
                         dic_word += "";
                         dic_mean += "단어를 찾지못했습니다.";
                     } else {//찾는 단어가 있을때
-                        editor.putInt("hsnum",pref.getInt("hsnum",0)+1);//검색 기록 갯수
-                        editor.putString("hs"+pref.getInt("hsnum",0),dic_word);//단어를 넣는다.
+                        editor.putInt("hsnum", pref.getInt("hsnum", 0) + 1);//검색 기록 갯수
+                        editor.putString("hs" + pref.getInt("hsnum", 0), dic_word);//단어를 넣는다.
                         editor.apply();
                         dic_mean += cursor.getString(1) + "\r\n";//찾는 단어가 있으면 그 단어 뜻 넣기
                         tts.speak(dic_word, TextToSpeech.QUEUE_ADD, null, "DEFAULT");// 찾은 단어 발음 들려주기
