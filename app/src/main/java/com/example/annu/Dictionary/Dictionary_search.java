@@ -21,6 +21,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.annu.R;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -42,12 +45,21 @@ public class Dictionary_search extends AppCompatActivity {
     SQLiteDatabase sqlDB;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
+
+    private AdView mAdView;//광고
+
     char fisrt_word;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dictionary_search_layout);
+
+
+        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");//광고 설정정
+        mAdView = findViewById(R.id.diction_search_adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         pref = getSharedPreferences("history", Activity.MODE_PRIVATE);//검색 기록을 남기기 위한 변수
         editor = pref.edit();

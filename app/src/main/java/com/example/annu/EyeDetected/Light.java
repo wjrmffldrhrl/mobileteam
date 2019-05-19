@@ -20,11 +20,16 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.example.annu.R;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class Light extends AppCompatActivity {
+
+    private AdView mAdView;//광고
 
     private WindowManager.LayoutParams params;
     private float brightness;// 화면 밝기 제어
@@ -94,6 +99,15 @@ public class Light extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.light);
+
+
+
+
+
+        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");//광고 설정정
+        mAdView = findViewById(R.id.light_adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         get_up = (Button) findViewById(R.id.light_bt_getup);
         color = (LinearLayout) findViewById(R.id.light_layout_color);

@@ -11,6 +11,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.annu.R;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -20,6 +23,8 @@ public class Note extends AppCompatActivity {
     EditText mMemoEdit = null, title;
     TextFileManager mTextFileManager = new TextFileManager(this);//TextFileManger 객체 생성
     Button save, load, delete;
+
+    private AdView mAdView;//광고
 
 
 
@@ -35,6 +40,13 @@ public class Note extends AppCompatActivity {
         save = (Button) findViewById(R.id.note_bt_save);
         //load = (Button) findViewById(R.id.note_bt_load);
         delete = (Button) findViewById(R.id.note_bt_delete);
+
+
+
+        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");//광고 설정정
+        mAdView = findViewById(R.id.note_adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         Intent choice_file = getIntent();//NoteList에서 넘어왔을때 데이터 받기
         String name = choice_file.getStringExtra("filename");

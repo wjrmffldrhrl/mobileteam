@@ -45,17 +45,36 @@
             />
 
     </LinearLayout>
-    <TextView
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">    <TextView
         android:id="@+id/text_word"
         android:text="단어"
         android:textSize="50dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/text_mean"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="검색결과"/>
+        <TextView
+            android:id="@+id/text_mean"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="검색결과"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="bottom|center_horizontal">
+
+        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/diction_search_adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/adid_xml"></com.google.android.gms.ads.AdView>
+    </LinearLayout>
 
 
 </LinearLayout>

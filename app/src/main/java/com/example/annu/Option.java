@@ -8,7 +8,13 @@ import android.util.Log;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 public class Option extends AppCompatActivity {
+
+    private AdView mAdView;//광고
 
     SharedPreferences pref;
     SharedPreferences.Editor editor;
@@ -26,6 +32,14 @@ public class Option extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.option);
+
+
+
+
+        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");//광고 설정정
+        mAdView = findViewById(R.id.option_adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         pref = getSharedPreferences("options", Activity.MODE_PRIVATE);
         editor = pref.edit();

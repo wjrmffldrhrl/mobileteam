@@ -13,15 +13,25 @@ import android.widget.Toast;
 import com.example.annu.EyeDetected.EyeService;
 import com.example.annu.OCR.OcrCaptureActivity;
 import com.example.annu.R;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 public class Dictionary extends AppCompatActivity {
 
     ImageButton bt_camera, bt_search, bt_history;
 
+    private AdView mAdView;//광고
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dictionary_layout);
+
+        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");//광고 설정정
+        mAdView = findViewById(R.id.diction_adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         bt_camera = (ImageButton) findViewById(R.id.dictionary_bt1);
         bt_search = (ImageButton) findViewById(R.id.dictionary_bt2);
