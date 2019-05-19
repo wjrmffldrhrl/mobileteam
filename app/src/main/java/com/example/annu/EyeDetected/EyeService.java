@@ -3,6 +3,7 @@ package com.example.annu.EyeDetected;
 import android.Manifest;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -23,6 +24,7 @@ import android.util.Log;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.example.annu.MainActivity;
 import com.example.annu.R;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
@@ -187,6 +189,9 @@ public class EyeService extends Service {
 
 /////////////////////////////상단바////////////////////////
 
+        PendingIntent pendingIntent = PendingIntent.getActivity(
+                EyeService.this,0,new Intent(getApplicationContext(),MainActivity.class),
+                PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationManager notificationManager
                 = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
@@ -200,12 +205,14 @@ public class EyeService extends Service {
                     .setSmallIcon(R.drawable.bee)
                     .setContentTitle("안너큰")
                     .setContentText("졸음 방지 작동중")
+                    .setContentIntent(pendingIntent)//notification click event
                     .setOngoing(true);
         } else {
             mBuilder = new NotificationCompat.Builder(this)
                     .setSmallIcon(R.drawable.bee)
                     .setContentTitle("안너큰")
                     .setContentText("졸음 방지 작동중")
+                    .setContentIntent(pendingIntent)//notification click event
                     .setOngoing(true);
         }
 
