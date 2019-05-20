@@ -14,6 +14,13 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import android.app.Activity;
+import android.os.Bundle;
+import android.os.SystemClock;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Chronometer;
+
 import com.example.annu.Dictionary.Dictionary;
 import com.example.annu.EyeDetected.EyeService;
 import com.example.annu.Note.NoteList;
@@ -48,6 +55,11 @@ public class MainActivity extends AppCompatActivity {
         face = (ImageButton) findViewById(R.id.study_bt_face);
         intent = new Intent(this, EyeService.class);
         setting = (ImageButton) findViewById(R.id.setting);
+
+        final Chronometer study_timer = (Chronometer) findViewById(R.id.study_timer);//타이머 id 선언 (final 지우면 정지,시작,리셋 메서드 실행 안됨)
+        Button study_bt_Start = (Button) findViewById(R.id.study_bt_start);//타이머 시작버튼 선언
+        Button study_bt_Stop = (Button) findViewById(R.id.study_bt_stop);//타이머 정지버튼 선언
+        Button study_bt_Reset = (Button) findViewById(R.id.study_bt_reset);////타이머 리셋버튼 선언
 
         note.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,6 +123,24 @@ public class MainActivity extends AppCompatActivity {
             face.setImageResource(R.drawable.face_on);//스위치를 ON 상태로 바꾼다
         } else
             face.setImageResource(R.drawable.face_off);
+
+        study_bt_Start.setOnClickListener(new Button.OnClickListener() {//타이머 시작함수
+            public void onClick(View v) {
+                study_timer.start();
+            }
+        });
+
+        study_bt_Stop.setOnClickListener(new Button.OnClickListener() {//타이머 정지함수
+            public void onClick(View v) {
+                study_timer.stop();
+            }
+        });
+
+        study_bt_Reset.setOnClickListener(new Button.OnClickListener() {//타이머 리셋 함수
+            public void onClick(View v) {
+                study_timer.setBase(SystemClock.elapsedRealtime());
+            }
+        });
     }
 
 
@@ -144,4 +174,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
+
 }
+
+
