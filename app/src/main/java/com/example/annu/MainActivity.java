@@ -37,6 +37,10 @@ public class MainActivity extends AppCompatActivity {
 
     private AdView mAdView;//광고
 
+    Chronometer timer;//타이머
+    Button reset;
+    long stop_time = 0;//정지한 시간을 계산
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,10 +60,8 @@ public class MainActivity extends AppCompatActivity {
         intent = new Intent(this, EyeService.class);
         setting = (ImageButton) findViewById(R.id.setting);
 
-        final Chronometer study_timer = (Chronometer) findViewById(R.id.study_timer);//타이머 id 선언 (final 지우면 정지,시작,리셋 메서드 실행 안됨)
-        Button study_bt_Start = (Button) findViewById(R.id.study_bt_start);//타이머 시작버튼 선언
-        Button study_bt_Stop = (Button) findViewById(R.id.study_bt_stop);//타이머 정지버튼 선언
-        Button study_bt_Reset = (Button) findViewById(R.id.study_bt_reset);////타이머 리셋버튼 선언
+        timer = (Chronometer) findViewById(R.id.study_timer);//타이머 id 선언 (final 지우면 정지,시작,리셋 메서드 실행 안됨)
+        reset = (Button) findViewById(R.id.study_bt_reset);////타이머 리셋버튼 선언
 
         note.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,20 +103,28 @@ public class MainActivity extends AppCompatActivity {
 
                 if (rc == PackageManager.PERMISSION_GRANTED) {// 권한 체크
                     Log.e("permission", "ok");
+                    if (isServiceRunning() == false) {//버튼을 눌렀을때 서비스가 동작중이 아니면
+                        face.setImageResource(R.drawable.face_on);
+                        startService(intent);//서비스 실행
+                        Toast.makeText(getApplicationContext(), "졸음 방지 ON", Toast.LENGTH_SHORT).show();
+
+                        timer.setBase(SystemClock.elapsedRealtime() + stop_time);//타이머 실행
+                        timer.start();
+                        reset.setClickable(false);//타이머 작동중에는 리셋버튼 누르지 못함
+
+                    } else {//동작중이면
+                        stopService(intent);//서비스 종료
+                        face.setImageResource(R.drawable.face_off);
+                        Toast.makeText(getApplicationContext(), "졸음 방지 OFF", Toast.LENGTH_SHORT).show();
+
+                        stop_time = timer.getBase() - SystemClock.elapsedRealtime();//타이머 정지
+                        timer.stop();
+                        reset.setClickable(true);//타이머가 멈추면 리셋 가능
+                    }
                 } else {
-                    face.setImageResource(R.drawable.face_off);//on된 스위치를 off함
                     requestCameraPermission();
                 }
 
-                if (isServiceRunning() == false) {//버튼을 눌렀을때 서비스가 동작중이 아니면
-                    face.setImageResource(R.drawable.face_on);
-                    startService(intent);//서비스 실행
-                    Toast.makeText(getApplicationContext(), "졸음 방지 ON", Toast.LENGTH_SHORT).show();
-                } else {//동작중이면
-                    stopService(intent);//서비스 종료
-                    face.setImageResource(R.drawable.face_off);
-                    Toast.makeText(getApplicationContext(), "졸음 방지 OFF", Toast.LENGTH_SHORT).show();
-                }
 
             }
         });
@@ -124,21 +134,12 @@ public class MainActivity extends AppCompatActivity {
         } else
             face.setImageResource(R.drawable.face_off);
 
-        study_bt_Start.setOnClickListener(new Button.OnClickListener() {//타이머 시작함수
-            public void onClick(View v) {
-                study_timer.start();
-            }
-        });
 
-        study_bt_Stop.setOnClickListener(new Button.OnClickListener() {//타이머 정지함수
+        reset.setOnClickListener(new Button.OnClickListener() {//타이머 리셋 함수
             public void onClick(View v) {
-                study_timer.stop();
-            }
-        });
-
-        study_bt_Reset.setOnClickListener(new Button.OnClickListener() {//타이머 리셋 함수
-            public void onClick(View v) {
-                study_timer.setBase(SystemClock.elapsedRealtime());
+                timer.setBase(SystemClock.elapsedRealtime());
+                stop_time = 0;
+                timer.stop();
             }
         });
     }
@@ -174,7 +175,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
 
 
 }
