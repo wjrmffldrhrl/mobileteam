@@ -32,19 +32,45 @@
         android:scaleType="fitXY"
         android:src="@drawable/study" />
 
+
     <Chronometer
-        android:id="@+id/chronometer1"
-        android:layout_width="match_parent"
+        android:id="@+id/study_timer"
+        android:textSize="30dp"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="225dp"
-        android:format=" 공부한 시간 %s "
-        android:gravity="center"
-        android:scaleType="fitXY"
-        android:textSize="40dp" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="234dp"
+        android:gravity="center" />
+
+
+    <Button
+        android:id="@+id/study_bt_start"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="312dp"
+        android:text="Start" />
+
+    <Button
+        android:id="@+id/study_bt_stop"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="316dp"
+        android:text="Stop" />
+
+    <Button
+        android:id="@+id/study_bt_reset"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="265dp"
+        android:text="Reset" />
+
 
     <ImageButton
         android:id="@+id/study_bt_face"
