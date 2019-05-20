@@ -35,26 +35,22 @@
 
     <Chronometer
         android:id="@+id/study_timer"
-        android:textSize="30dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="234dp"
-        android:gravity="center" />
-
-
-
+        android:gravity="center"
+        android:textSize="30dp" />
 
 
     <Button
         android:id="@+id/study_bt_reset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="265dp"
+        android:layout_below="@+id/study_timer"
+        android:layout_centerHorizontal="true"
         android:text="Reset" />
 
 
@@ -62,10 +58,8 @@
         android:id="@+id/study_bt_face"
         android:layout_width="65dp"
         android:layout_height="65dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="35dp"
-        android:layout_marginBottom="190dp"
+        android:layout_alignTop="@+id/study_bt_note"
+        android:layout_marginStart="30dp"
         android:background="#ffffff"
         android:scaleType="fitXY"
         android:src="@drawable/face_off" />
@@ -74,13 +68,13 @@
         android:id="@+id/study_bt_note"
         android:layout_width="65dp"
         android:layout_height="65dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="165dp"
-        android:layout_marginBottom="190dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="470dp"
         android:background="#ffffff"
         android:scaleType="fitXY"
-        android:layout_centerHorizontal="true"
+
+
         android:src="@drawable/note" />
 
     <ImageButton
@@ -98,10 +92,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/study_bt_face"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginBottom="150dp"
+        android:layout_below="@+id/study_bt_face"
+        android:layout_marginStart="30dp"
+
         android:text="얼굴인식"
         android:textColor="#000000"
         android:textSize="17dp" />
@@ -110,10 +103,8 @@
         android:id="@+id/note_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="175dp"
-        android:layout_marginBottom="150dp"
+        android:layout_below="@+id/study_bt_note"
+        android:layout_centerHorizontal="true"
         android:text="메모"
         android:textColor="#000000"
         android:textSize="17dp" />
@@ -129,16 +120,14 @@
         android:textColor="#000000"
         android:textSize="17dp" />
 
-    <com.google.android.gms.ads.AdView
-        xmlns:ads="http://schemas.android.com/apk/res-auto"
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/main_adView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         ads:adSize="BANNER"
-        ads:adUnitId="@string/adid_xml">
-    </com.google.android.gms.ads.AdView>
+        ads:adUnitId="@string/adid_xml"></com.google.android.gms.ads.AdView>
 
 
 </RelativeLayout>
