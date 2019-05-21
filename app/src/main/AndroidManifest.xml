@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.annu"
+    package="com.jsh.annu"
     android:installLocation="auto">
 
 
@@ -15,7 +15,7 @@
     <uses-feature android:name="android.hardware.camera.flash"/>
     <uses-feature android:name="android.hardware.camera" />
 
-
+    
     <application
         android:allowBackup="true"
         android:fullBackupContent="false"
@@ -39,7 +39,7 @@
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713"/>
+            android:value="ca-app-pub-8347262987394620~9479435122"/>
 
         <activity android:name=".MainActivity">
             <intent-filter>
