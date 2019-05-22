@@ -12,5 +12,5 @@
     <string name="ocr_success">Text read successfully</string>
     <string name="ocr_failure">No text captured</string>
     <string name="ocr_error">"Error reading text: %1$s"</string>
-    <string name="adid_xml">ca-app-pub-8347262987394620/3540712731</string>
+    <string name="adid_xml">ca-app-pub-8347262987394620/5303584067</string>
 </resources>

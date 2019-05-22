@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.study_select);
 
 
-        MobileAds.initialize(this, "ca-app-pub-8347262987394620~9479435122");//광고 설정정
+        MobileAds.initialize(this, "ca-app-pub-8347262987394620~3286481735");//광고 설정정
         mAdView = findViewById(R.id.main_adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);

@@ -10,8 +10,9 @@
     <uses-permission android:name="android.permission.FLASHLIGHT"/>
     <uses-permission android:name="android.permission.BLUETOOTH"/>
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
-    <uses-feature android:name="android.hardware.camera2.full"/>
+    <!--<uses-feature android:name="android.hardware.camera2.full"/>-->
     <uses-feature android:name="android.hardware.camera.flash"/>
     <uses-feature android:name="android.hardware.camera" />
 
@@ -39,7 +40,7 @@
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-8347262987394620~9479435122"/>
+            android:value="ca-app-pub-8347262987394620~3286481735"/>
 
         <activity android:name=".MainActivity">
             <intent-filter>

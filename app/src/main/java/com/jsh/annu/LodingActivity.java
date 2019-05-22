@@ -12,7 +12,7 @@ public class LodingActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.loading_layout);
 
-        MobileAds.initialize(this, "ca-app-pub-8347262987394620~9479435122");//광고 설정정
+        MobileAds.initialize(this, "ca-app-pub-8347262987394620~3286481735");//광고 설정정
         startLoading();
     }
     private void startLoading() {
