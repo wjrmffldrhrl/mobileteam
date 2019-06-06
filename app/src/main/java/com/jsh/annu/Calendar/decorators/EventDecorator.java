@@ -3,7 +3,7 @@ package com.jsh.annu.Calendar.decorators;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 
-import com.example.calendar2.R;
+import com.jsh.annu.R;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.DayViewDecorator;
 import com.prolificinteractive.materialcalendarview.DayViewFacade;

@@ -53,6 +53,14 @@
         android:layout_centerHorizontal="true"
         android:text="Reset" />
 
+    <Button
+        android:text="calendar test"
+        android:id="@+id/study_bt_calendar"
+        android:layout_below="@+id/study_bt_reset"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 
     <ImageButton
         android:id="@+id/study_bt_face"

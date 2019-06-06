@@ -18,6 +18,7 @@ import android.os.SystemClock;
 import android.widget.Button;
 import android.widget.Chronometer;
 
+import com.jsh.annu.Calendar.Calendar;
 import com.jsh.annu.Dictionary.Dictionary;
 import com.jsh.annu.EyeDetected.EyeService;
 import com.jsh.annu.Note.NoteList;
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private AdView mAdView;//광고
 
     Chronometer timer;//타이머
-    Button reset;
+    Button reset, calendar;
     long stop_time = 0;//정지한 시간을 계산
 
     @Override
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
         timer = (Chronometer) findViewById(R.id.study_timer);//타이머 id 선언 (final 지우면 정지,시작,리셋 메서드 실행 안됨)
         reset = (Button) findViewById(R.id.study_bt_reset);////타이머 리셋버튼 선언
+        calendar = (Button) findViewById(R.id.study_bt_calendar);//켈린더 test
 
         note.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,6 +141,13 @@ public class MainActivity extends AppCompatActivity {
                 timer.stop();
             }
         });
+        calendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Calendar.class);//인텐트 지정
+                startActivity(intent);//액티비티 출력
+            }
+        });
     }
 
 
@@ -174,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onDestroy(){
+    public void onDestroy() {
         super.onDestroy();
 
     }
