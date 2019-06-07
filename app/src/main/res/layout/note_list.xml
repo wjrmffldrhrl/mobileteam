@@ -3,7 +3,9 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:background="#FFEB3B">
+    android:background="#FFEB3B"
+    android:padding="10dp">
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -23,7 +25,8 @@
             android:layout_marginBottom="2dp"
             android:layout_weight="1"
             android:text="새로 만들기"
-            android:background="@drawable/bg_gis_result_items_count"/>
+            android:layout_margin="10dp"
+            android:background="@drawable/button"/>
 
         <Button
             android:id="@+id/note_bt_reset"
@@ -32,11 +35,11 @@
             android:layout_marginTop="2dp"
             android:layout_marginLeft="2dp"
             android:layout_marginRight="2dp"
-
             android:layout_marginBottom="2dp"
             android:layout_weight="1"
+            android:layout_margin="10dp"
             android:text="목록 새로고침"
-            android:background="@drawable/bg_gis_result_items_count"/>
+            android:background="@drawable/button"/>
     </LinearLayout>
 
 
@@ -47,6 +50,7 @@
         android:layout_marginLeft="2dp"
         android:layout_marginRight="2dp"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:background="@drawable/bg_gis_result_items_count"/>
 
 
