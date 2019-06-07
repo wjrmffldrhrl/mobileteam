@@ -2,37 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="#FFEB3B"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="90dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/name3" />
-
-    </LinearLayout>
+        android:orientation="vertical"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/dictionary_img"
-            android:layout_width="170dp"
-            android:layout_height="170dp"
-            android:layout_gravity="center"
-            android:padding="20dp"
-            android:src="@drawable/dictionary_img" />
-
-    </LinearLayout>
+        android:orientation="vertical"/>
 
 
     <LinearLayout
@@ -45,31 +27,31 @@
 
         <ImageButton
             android:id="@+id/dictionary_bt1"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="23dp"
             android:layout_weight="1"
-            android:background="#FFFFFF"
+            android:background="@drawable/bg_gis_result_items_count"
             android:scaleType="fitCenter"
             android:src="@drawable/camera" />
 
         <ImageButton
             android:id="@+id/dictionary_bt2"
-            android:layout_width="0dp"
-            android:layout_height="80dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_margin="30dp"
             android:layout_weight="1"
-            android:background="#FFFFFF"
+            android:background="@drawable/bg_gis_result_items_count"
             android:scaleType="fitCenter"
             android:src="@drawable/magnifier" />
 
         <ImageButton
             android:id="@+id/dictionary_bt3"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:layout_weight="1"
-            android:background="#FFFFFF"
+            android:background="@drawable/bg_gis_result_items_count"
             android:scaleType="fitCenter"
             android:src="@drawable/history" />
     </LinearLayout>
