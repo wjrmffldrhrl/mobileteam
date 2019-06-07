@@ -42,7 +42,8 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-8347262987394620~3286481735"/>
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -51,15 +52,24 @@
         </activity>
         <activity android:name=".LodingActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-        <activity android:name=".Note.NoteList" />
-        <activity android:name=".Note.Note" />
-        <activity android:name=".OCR.OcrCaptureActivity" />
-        <activity android:name=".Dictionary.Dictionary_search" />
-        <activity android:name=".Dictionary.Dictionary" />
-        <activity android:name=".Dictionary.Dictionary_history"/>
-        <activity android:name=".EyeDetected.Light"/>
-        <activity android:name=".Option"/>
-        <activity android:name=".Calendar.Calendar"/>
+        <activity android:name=".Note.NoteList"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Note.Note"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".OCR.OcrCaptureActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Dictionary.Dictionary_search"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Dictionary.Dictionary"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Dictionary.Dictionary_history"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".EyeDetected.Light"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Option"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Calendar.Calendar"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

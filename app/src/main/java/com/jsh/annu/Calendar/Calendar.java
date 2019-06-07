@@ -30,15 +30,17 @@ public class Calendar extends AppCompatActivity {
     MaterialCalendarView materialCalendarView;
     List<String> plan = new ArrayList<>();
     AddPlan up_paln;
-    Button set;
+
+    Button addplan;
     TextView txt;
+    int Year = 0, Month = 0, Day = 0;// 선택한 날자
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.calendar);
         materialCalendarView = (MaterialCalendarView) findViewById(R.id.calendarView);
-        set = (Button) findViewById(R.id.set);
+        addplan = (Button) findViewById(R.id.calendar_bt_plan);
         txt = (TextView) findViewById(R.id.txt);
 
         materialCalendarView.state().edit()
@@ -57,30 +59,31 @@ public class Calendar extends AppCompatActivity {
         materialCalendarView.setOnDateChangedListener(new OnDateSelectedListener() {//날자 누를시 발생 이벤트
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
-                int Year = date.getYear();
-                int Month = date.getMonth() + 1;
-                int Day = date.getDay();
+                Year = date.getYear();
+                Month = date.getMonth() + 1;
+                Day = date.getDay();
 
+
+                materialCalendarView.clearSelection();//선택모션 초기화
+
+                Toast.makeText(getApplicationContext(), Year + "년 " + Month + "월 " + Day + "일", Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
+        addplan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 String shot_Day = Year + "," + Month + "," + Day;
                 plan.add(shot_Day);
                 plan.add(shot_Day);
-                materialCalendarView.clearSelection();//선택모션 초기화
 
-                Toast.makeText(getApplicationContext(), shot_Day, Toast.LENGTH_SHORT).show();
                 new AddPlan(plan).executeOnExecutor(Executors.newSingleThreadExecutor());
 
-
             }
         });
 
-        set.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-
-
-            }
-        });
     }
 
     private class AddPlan extends AsyncTask<Void, Void, List<CalendarDay>> {
@@ -141,16 +144,10 @@ public class Calendar extends AppCompatActivity {
             if (isFinishing()) {
                 return;
             }
-           calendarDays.remove(0);
-
-             set.setText("" + calendarDays.size());
-            String text = "";
-            for (int i = 0; i < calendarDays.size(); i++)
-                text += calendarDays.get(i);
-            txt.setText(text);
+            calendarDays.remove(0);
 
             materialCalendarView.addDecorator(new EventDecorator(Color.RED, calendarDays, Calendar.this));
-            plan.remove(plan.size()-1);
+            plan.remove(plan.size() - 1);//리스트에 두개씩 저장해야 하는 오류때문에 한개 지우기
         }
     }
 }
