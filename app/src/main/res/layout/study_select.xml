@@ -2,13 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#FFEB3B">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/name3" />
+
 
     <ImageButton
         android:id="@+id/setting"
@@ -22,16 +19,6 @@
         android:scaleType="fitXY"
         android:src="@drawable/set_icon" />
 
-    <ImageView
-        android:layout_width="115dp"
-        android:layout_height="115dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
-        android:background="#ffffff"
-        android:scaleType="fitXY"
-        android:src="@drawable/study" />
-
 
     <Chronometer
         android:id="@+id/study_timer"
@@ -40,9 +27,11 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="234dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="35dp"
         android:gravity="center"
-        android:textSize="30dp" />
+        android:textColor="#ffff"
+        android:textSize="90dp" />
 
 
     <Button
@@ -50,29 +39,38 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/study_timer"
-        android:layout_centerHorizontal="true"
-        android:text="Reset" />
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="149dp"
+        android:layout_marginTop="0dp"
+        android:text="Reset"
+        android:visibility="invisible" />
 
     <Button
-        android:text="calendar test"
         android:id="@+id/study_bt_calendar"
-        android:layout_below="@+id/study_bt_reset"
-        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/study_bt_reset"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="157dp"
+        android:layout_marginTop="7dp"
+        android:background="@drawable/button"
+        android:text="calendar test" />
 
 
     <ImageButton
+
         android:id="@+id/study_bt_face"
         android:layout_width="65dp"
         android:layout_height="65dp"
         android:layout_alignTop="@+id/study_bt_note"
         android:layout_marginStart="30dp"
+        android:layout_marginTop="2dp"
         android:background="#ffffff"
         android:scaleType="fitXY"
         android:src="@drawable/face_off" />
 
     <ImageButton
+
         android:id="@+id/study_bt_note"
         android:layout_width="65dp"
         android:layout_height="65dp"
@@ -81,11 +79,10 @@
         android:layout_marginTop="470dp"
         android:background="#ffffff"
         android:scaleType="fitXY"
-
-
         android:src="@drawable/note" />
 
     <ImageButton
+
         android:id="@+id/study_bt_dictionary"
         android:layout_width="65dp"
         android:layout_height="65dp"
@@ -98,16 +95,17 @@
         android:src="@drawable/dictionary_img" />
 
     <TextView
+        android:visibility="invisible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/study_bt_face"
         android:layout_marginStart="30dp"
-
         android:text="얼굴인식"
         android:textColor="#000000"
         android:textSize="17dp" />
 
     <TextView
+        android:visibility="invisible"
         android:id="@+id/note_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -118,6 +116,7 @@
         android:textSize="17dp" />
 
     <TextView
+        android:visibility="invisible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/note_text"
@@ -128,12 +127,49 @@
         android:textColor="#000000"
         android:textSize="17dp" />
 
+    <FrameLayout
+        android:id="@+id/frame_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="?attr/actionBarSize" />
+
+    <TextView
+        android:id="@+id/main_tv"
+        android:layout_width="800dp"
+        android:layout_height="200dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="302dp"
+        android:layout_marginRight="30dp"
+
+        android:text="
+        체크리스트"
+        android:textColor="#000000"
+        android:background="@drawable/bg_gis_result_items_count"
+        android:textSize="20dp" />
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_navigation_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/frame_layout"
+        android:layout_alignParentStart="true"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="-730dp"
+        android:background="?android:attr/windowBackground"
+        app:menu="@menu/main_menu" />
+
     <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/main_adView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="-2dp"
+        android:layout_marginBottom="57dp"
+        android:layout_toStartOf="@+id/setting"
         ads:adSize="BANNER"
         ads:adUnitId="@string/adid_xml"></com.google.android.gms.ads.AdView>
 
