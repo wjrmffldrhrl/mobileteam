@@ -31,7 +31,7 @@
         android:layout_marginTop="35dp"
         android:gravity="center"
         android:textColor="#ffff"
-        android:textSize="90dp" />
+        android:textSize="99dp" />
 
 
     <Button
@@ -51,8 +51,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/study_bt_reset"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="157dp"
-        android:layout_marginTop="7dp"
+        android:layout_marginStart="149dp"
+        android:layout_marginTop="14dp"
         android:background="@drawable/button"
         android:text="calendar test" />
 
@@ -64,7 +64,7 @@
         android:layout_height="65dp"
         android:layout_alignTop="@+id/study_bt_note"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="1dp"
         android:background="#ffffff"
         android:scaleType="fitXY"
         android:src="@drawable/face_off" />
@@ -76,7 +76,7 @@
         android:layout_height="65dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="470dp"
+        android:layout_marginTop="543dp"
         android:background="#ffffff"
         android:scaleType="fitXY"
         android:src="@drawable/note" />
@@ -89,7 +89,7 @@
         android:layout_alignTop="@+id/study_bt_note"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="0dp"
-        android:layout_marginEnd="35dp"
+        android:layout_marginEnd="46dp"
         android:background="#ffffff"
         android:scaleType="fitXY"
         android:src="@drawable/dictionary_img" />
@@ -143,7 +143,6 @@
         android:layout_marginLeft="30dp"
         android:layout_marginTop="302dp"
         android:layout_marginRight="30dp"
-
         android:text="
         체크리스트"
         android:textColor="#000000"

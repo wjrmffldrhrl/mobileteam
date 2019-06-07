@@ -1,0 +1,362 @@
+Index: app/src/main/res/layout/drive_select.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/drive_select.xml	(date 1556447453000)
++++ app/src/main/res/layout/drive_select.xml	(date 1557125830806)
+@@ -3,28 +3,60 @@
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:orientation="vertical"
+-    android:gravity="center">
+-    <ImageView
+-        android:layout_width="110dp"
+-        android:layout_height="110dp"
+-        android:background="#ffffff"
+-        android:src="@drawable/drive" />
++    >
++
++    <LinearLayout
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_weight="1"
++        android:orientation="vertical">
++
++        <ImageView
++            android:layout_width="match_parent"
++            android:layout_height="90dp"
++            android:scaleType="fitXY"
++            android:src="@drawable/name2" />
++
++    </LinearLayout>
++
++    <LinearLayout
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:gravity="center"
++        android:orientation="vertical"
++        android:layout_weight="10">
++
++        <ImageView
++            android:layout_width="110dp"
++            android:layout_height="110dp"
++            android:background="#ffffff"
++            android:src="@drawable/drive"
++            android:layout_margin="10dp"
++            android:gravity="center"/>
+ 
+-    <ImageView
+-        android:layout_width="60dp"
+-        android:layout_height="60dp"
+-        android:background="#ffffff"
+-        android:scaleType="fitXY"
+-        android:src="@drawable/face" />
+-    <TextView
+-        android:layout_width="wrap_content"
+-        android:layout_height="wrap_content"
+-        android:text="얼굴인식"
+-        android:textColor="#000000"
+-        android:textSize="20dp" />
+-    <Switch
+-        android:id="@+id/drive_switch_face"
+-        android:layout_width="50dp"
+-        android:layout_height="50dp"
+-        android:checked="false" />
++        <ImageView
++            android:layout_width="60dp"
++            android:layout_height="60dp"
++            android:background="#ffffff"
++            android:scaleType="fitXY"
++            android:src="@drawable/face"
++            android:gravity="center"/>
++
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:text="얼굴인식"
++            android:textColor="#000000"
++            android:textSize="20dp"
++            android:gravity="center"/>
++
++        <Switch
++            android:id="@+id/drive_switch_face"
++            android:layout_width="50dp"
++            android:layout_height="50dp"
++            android:checked="false"
++            android:gravity="center"/>
++    </LinearLayout>
++
++
+ </LinearLayout>
+\ No newline at end of file
+Index: app/src/main/res/layout/note_list.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/note_list.xml	(date 1556447453000)
++++ app/src/main/res/layout/note_list.xml	(date 1557125830782)
+@@ -3,7 +3,18 @@
+     android:layout_width="fill_parent"
+     android:layout_height="fill_parent"
+     android:orientation="vertical">
+-
++    <LinearLayout
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:orientation="vertical">
++
++        <ImageView
++            android:layout_width="match_parent"
++            android:layout_height="90dp"
++            android:scaleType="fitXY"
++            android:src="@drawable/name2" />
++
++    </LinearLayout>
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+Index: app/src/main/res/layout/dictionary_layout.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/dictionary_layout.xml	(date 1556447453000)
++++ app/src/main/res/layout/dictionary_layout.xml	(date 1557126419035)
+@@ -5,43 +5,64 @@
+     android:layout_height="match_parent"
+     android:orientation="vertical"
+     >
++    <LinearLayout
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:orientation="vertical">
+ 
+-    <ImageView
+-        android:layout_margin="70dp"
+-        android:id="@+id/dictionary_img"
+-        android:layout_width="wrap_content"
+-        android:layout_height="wrap_content"
+-        android:src="@drawable/dictionary_img"
+-        />
++        <ImageView
++            android:layout_width="match_parent"
++            android:layout_height="90dp"
++            android:scaleType="fitXY"
++            android:src="@drawable/name2" />
++
++    </LinearLayout>
++    <LinearLayout
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content">
++
++        <ImageView
++            android:layout_margin="70dp"
++            android:id="@+id/dictionary_img"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:src="@drawable/dictionary_img"
++            />
+ 
++    </LinearLayout>
++
++
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+-
++        android:layout_gravity="center"
+         android:orientation="horizontal">
+ 
+ 
+         <ImageButton
+-            android:layout_margin="10dp"
++            android:layout_margin="23dp"
+             android:id="@+id/dictionary_bt1"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:src="@drawable/camera"
++            android:background="#FFFFFF"
+             />
+ 
+         <ImageButton
+-            android:layout_margin="10dp"
++            android:layout_margin="15dp"
+             android:id="@+id/dictionary_bt2"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+-            android:src="@drawable/memo"
++            android:src="@drawable/magnifier"
++            android:background="#FFFFFF"
+             />
+         <ImageButton
+-            android:layout_margin="10dp"
++            android:layout_margin="15dp"
+             android:id="@+id/dictionary_bt3"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:src="@drawable/history"
++            android:background="#FFFFFF"
+             />
+     </LinearLayout>
+ 
+Index: app/src/main/res/layout/dictionary_history_layout.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/dictionary_history_layout.xml	(date 1556447453000)
++++ app/src/main/res/layout/dictionary_history_layout.xml	(date 1557125830766)
+@@ -4,7 +4,18 @@
+     android:layout_height="match_parent"
+     android:orientation="vertical"
+     >
++    <LinearLayout
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:orientation="vertical">
+ 
++        <ImageView
++            android:layout_width="match_parent"
++            android:layout_height="90dp"
++            android:scaleType="fitXY"
++            android:src="@drawable/name2" />
++
++    </LinearLayout>
+     <TextView
+         android:layout_margin="20dp"
+         android:textSize="30dp"
+Index: app/src/main/res/layout/dictionary_search_layout.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/dictionary_search_layout.xml	(date 1556447453000)
++++ app/src/main/res/layout/dictionary_search_layout.xml	(date 1557126419052)
+@@ -5,7 +5,18 @@
+     android:orientation="vertical"
+     >
+ 
+-
++    <LinearLayout
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:orientation="vertical">
++
++        <ImageView
++            android:layout_width="match_parent"
++            android:layout_height="90dp"
++            android:scaleType="fitXY"
++            android:src="@drawable/name2" />
++
++    </LinearLayout>
+     <LinearLayout
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+@@ -24,12 +35,14 @@
+             android:id="@+id/imgbtn_search"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+-            android:src="@drawable/search" />
++            android:src="@drawable/search"
++            android:background="#FFFFFF"/>
+         <Button
+             android:id="@+id/btn_cls"
+             android:text="cls"
+             android:layout_width="wrap_content"
+-            android:layout_height="wrap_content" />
++            android:layout_height="wrap_content"
++            />
+ 
+     </LinearLayout>
+     <TextView
+Index: app/src/main/res/layout/note.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/note.xml	(date 1556447453000)
++++ app/src/main/res/layout/note.xml	(date 1557125830819)
+@@ -3,7 +3,18 @@
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:orientation="vertical">
+-
++    <LinearLayout
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:orientation="vertical">
++
++        <ImageView
++            android:layout_width="match_parent"
++            android:layout_height="90dp"
++            android:scaleType="fitXY"
++            android:src="@drawable/name2" />
++
++    </LinearLayout>
+     <LinearLayout
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+diff --git app/src/main/res/drawable/magnifier.png app/src/main/res/drawable/magnifier.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..486ee8bd7a15867409f955f7b5abde5225174f8c
+GIT binary patch
+literal 3457
+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
+
