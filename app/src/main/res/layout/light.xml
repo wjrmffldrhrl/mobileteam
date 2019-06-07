@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#FFEB3B">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,14 +18,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="일어나!!"
-            android:textColor="#000000"
+            android:textColor="#FFFFFF"
             android:textSize="100dp" />
 
         <Button
             android:id="@+id/light_bt_getup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="일어났어요" />
+            android:text="일어났어요"
+            android:background="@drawable/bg_gis_result_items_count"/>
     </LinearLayout>
 
     <LinearLayout

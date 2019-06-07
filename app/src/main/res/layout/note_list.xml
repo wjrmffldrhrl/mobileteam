@@ -3,19 +3,11 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:background="#ffffff">
+    android:background="#FFEB3B">
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="90dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/name3" />
-
-    </LinearLayout>
+        android:orientation="vertical"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,22 +17,37 @@
             android:id="@+id/note_bt_new"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginBottom="2dp"
             android:layout_weight="1"
-            android:text="새로 만들기" />
+            android:text="새로 만들기"
+            android:background="@drawable/bg_gis_result_items_count"/>
 
         <Button
             android:id="@+id/note_bt_reset"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+
+            android:layout_marginBottom="2dp"
             android:layout_weight="1"
-            android:text="목록 새로고침" />
+            android:text="목록 새로고침"
+            android:background="@drawable/bg_gis_result_items_count"/>
     </LinearLayout>
 
 
     <ListView
         android:id="@+id/note_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_gis_result_items_count"/>
 
 
 </LinearLayout>
