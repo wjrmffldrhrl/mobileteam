@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -31,17 +32,20 @@ public class Calendar extends AppCompatActivity {
     List<String> plan = new ArrayList<>();
     AddPlan up_paln;
 
-    Button addplan;
-    TextView txt;
+    Button addplan,delplan;
+    TextView txt1,txt2,txt3;
     int Year = 0, Month = 0, Day = 0;// 선택한 날자
-
+    String shot_Day;//선택한 날자
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.calendar);
         materialCalendarView = (MaterialCalendarView) findViewById(R.id.calendarView);
-        addplan = (Button) findViewById(R.id.calendar_bt_plan);
-        txt = (TextView) findViewById(R.id.txt);
+        addplan = (Button) findViewById(R.id.calendar_bt_addplan);
+        delplan= (Button) findViewById(R.id.calendar_bt_delplan);
+        txt1 = (TextView) findViewById(R.id.txt1);
+        txt2 = (TextView) findViewById(R.id.txt2);
+        txt3 = (TextView) findViewById(R.id.txt3);
 
         materialCalendarView.state().edit()
                 .setFirstDayOfWeek(java.util.Calendar.SUNDAY)
@@ -62,27 +66,42 @@ public class Calendar extends AppCompatActivity {
                 Year = date.getYear();
                 Month = date.getMonth() + 1;
                 Day = date.getDay();
+                shot_Day = Year + "," + Month + "," + Day;
 
 
                 materialCalendarView.clearSelection();//선택모션 초기화
-
                 Toast.makeText(getApplicationContext(), Year + "년 " + Month + "월 " + Day + "일", Toast.LENGTH_SHORT).show();
 
 
+                for(int i = 0 ; i < plan.size() ; i++){//선택한 날자에 계획이 있는지 확인
+                    if(plan.get(i).equals(shot_Day)){
+                        txt1.setText("YES Plan");
+                        Log.e("plan","same");
+                        break;
+                    }
+                    else {
+                        txt1.setText("NO Plan");
+                        Log.e("plan","different");
+                    }
+                }
             }
         });
-        addplan.setOnClickListener(new View.OnClickListener() {
+        addplan.setOnClickListener(new View.OnClickListener() {//선택한 날자에 계획 추가
             @Override
             public void onClick(View v) {
-                String shot_Day = Year + "," + Month + "," + Day;
                 plan.add(shot_Day);
-                plan.add(shot_Day);
-
+                plan.add(shot_Day);//오류로 인해서 두개씩 추가
                 new AddPlan(plan).executeOnExecutor(Executors.newSingleThreadExecutor());
 
             }
         });
-
+        delplan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                plan.remove(shot_Day);
+                new AddPlan(plan).executeOnExecutor(Executors.newSingleThreadExecutor());
+            }
+        });
 
     }
 
@@ -120,18 +139,7 @@ public class Calendar extends AppCompatActivity {
                 dates.add(day);
                 calendar.set(year, month - 1, dayy);
             }
-            /*
-            for(int i = 0 ; i < Time_Result.length ; i ++){
-                CalendarDay day = CalendarDay.from(calendar);
-                String[] time = Time_Result[i].split(",");
-                int year = Integer.parseInt(time[0]);
-                int month = Integer.parseInt(time[1]);
-                int dayy = Integer.parseInt(time[2]);
 
-                dates.add(day);
-                calendar.set(year,month-1,dayy);
-            }
-            */
 
 
             return dates;
