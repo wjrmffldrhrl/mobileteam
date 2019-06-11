@@ -1,6 +1,10 @@
 package com.jsh.annu.Calendar;
 
+import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,27 +30,49 @@ import java.util.concurrent.Executors;
 
 public class Calendar extends AppCompatActivity {
 
+    DBHelper helper;
+    SQLiteDatabase db;//일정을 넣기위한 데이터베이스
+
     String time, kcal, menu;
     //private final OneDayDecorator oneDayDecorator = new OneDayDecorator();
-    Cursor cursor;
+
     MaterialCalendarView materialCalendarView;
     List<String> plan = new ArrayList<>();
     AddPlan up_paln;
 
-    Button addplan,delplan;
-    TextView txt1,txt2,txt3;
+    Button addplan, delplan;
+    EditText doo;
+    TextView txt1, txt2, txt3;
     int Year = 0, Month = 0, Day = 0;// 선택한 날자
     String shot_Day;//선택한 날자
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.calendar);
         materialCalendarView = (MaterialCalendarView) findViewById(R.id.calendarView);
         addplan = (Button) findViewById(R.id.calendar_bt_addplan);
-        delplan= (Button) findViewById(R.id.calendar_bt_delplan);
+        delplan = (Button) findViewById(R.id.calendar_bt_delplan);
         txt1 = (TextView) findViewById(R.id.txt1);
         txt2 = (TextView) findViewById(R.id.txt2);
         txt3 = (TextView) findViewById(R.id.txt3);
+        doo = (EditText) findViewById(R.id.calendar_edt_do);
+
+        doo.setVisibility(View.INVISIBLE);//계획 안보이게
+
+        helper = new DBHelper(this);//데이터 베이스
+        try {
+            db = helper.getWritableDatabase();
+        } catch (SQLiteException ex) {
+            db = helper.getReadableDatabase();
+        }
+
+        Cursor cursor;
+        cursor = db.rawQuery("SELECT day, do FROM schedule", null); //데이터 베이스 내부에 있는 일정 가져오기기
+        while (cursor.moveToNext()) {
+            plan.add(cursor.getString(0));
+            plan.add(cursor.getString(0));
+        }
 
         materialCalendarView.state().edit()
                 .setFirstDayOfWeek(java.util.Calendar.SUNDAY)
@@ -60,28 +87,46 @@ public class Calendar extends AppCompatActivity {
                 //oneDayDecorator
                 new OneDayDecorator()
         );
+
+        //plan.add(shot_Day);
+        new AddPlan(plan).executeOnExecutor(Executors.newSingleThreadExecutor());
+
         materialCalendarView.setOnDateChangedListener(new OnDateSelectedListener() {//날자 누를시 발생 이벤트
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
                 Year = date.getYear();
                 Month = date.getMonth() + 1;
                 Day = date.getDay();
-                shot_Day = Year + "," + Month + "," + Day;
+                shot_Day = Year + "," + Month + "," + Day;//클릭한 날자
 
 
                 materialCalendarView.clearSelection();//선택모션 초기화
                 Toast.makeText(getApplicationContext(), Year + "년 " + Month + "월 " + Day + "일", Toast.LENGTH_SHORT).show();
 
 
-                for(int i = 0 ; i < plan.size() ; i++){//선택한 날자에 계획이 있는지 확인
-                    if(plan.get(i).equals(shot_Day)){
+                for (int i = 0; i < plan.size(); i++) {//선택한 날자에 계획이 있는지 확인
+                    if (plan.get(i).equals(shot_Day)) {
+
+                        Cursor cursor;
+                        cursor = db.rawQuery("SELECT day, do FROM schedule WHERE day= '"+shot_Day+"'; ", null);
+
+
                         txt1.setText("YES Plan");
-                        Log.e("plan","same");
+
+                        cursor.moveToNext();
+                        txt2.setText(cursor.getString(1));
+
+                        Log.e("plan", "same");
+                        doo.setText("");
+                        doo.setVisibility(View.INVISIBLE);
+
                         break;
-                    }
-                    else {
+                    } else {
                         txt1.setText("NO Plan");
-                        Log.e("plan","different");
+                        txt2.setText("");
+                        Log.e("plan", "different");
+                        doo.setVisibility(View.VISIBLE);
+
                     }
                 }
             }
@@ -89,17 +134,17 @@ public class Calendar extends AppCompatActivity {
         addplan.setOnClickListener(new View.OnClickListener() {//선택한 날자에 계획 추가
             @Override
             public void onClick(View v) {
-                plan.add(shot_Day);
-                plan.add(shot_Day);//오류로 인해서 두개씩 추가
-                new AddPlan(plan).executeOnExecutor(Executors.newSingleThreadExecutor());
-
+                String schedule_plan = doo.getText().toString();
+                db.execSQL("INSERT INTO schedule VALUES (null, '" + shot_Day + "', '" + schedule_plan + "');");
+                doo.setText("");
             }
         });
-        delplan.setOnClickListener(new View.OnClickListener() {
+        delplan.setOnClickListener(new View.OnClickListener() {//선택한 날자 계획 제거
             @Override
             public void onClick(View v) {
-                plan.remove(shot_Day);
-                new AddPlan(plan).executeOnExecutor(Executors.newSingleThreadExecutor());
+
+                db.execSQL("DELETE FROM schedule WHERE day='" + shot_Day + "';");
+
             }
         });
 
@@ -141,7 +186,6 @@ public class Calendar extends AppCompatActivity {
             }
 
 
-
             return dates;
         }
 
@@ -155,7 +199,36 @@ public class Calendar extends AppCompatActivity {
             calendarDays.remove(0);
 
             materialCalendarView.addDecorator(new EventDecorator(Color.RED, calendarDays, Calendar.this));
-            plan.remove(plan.size() - 1);//리스트에 두개씩 저장해야 하는 오류때문에 한개 지우기
+
         }
     }
+
+
+    public class DBHelper extends SQLiteOpenHelper {
+        private static final String DATABASE_NAME = "calender.db";
+        private static final int DATABASE_VERSION = 2;
+
+        public DBHelper(Context context) {
+            super(context, DATABASE_NAME, null, DATABASE_VERSION);
+
+        }
+
+        @Override
+        public void onCreate(SQLiteDatabase db) {
+            db.execSQL("CREATE TABLE schedule( _id INTEGER PRIMARY KEY AUTOINCREMENT, day TEXT, do TEXT);");
+            db.execSQL("INSERT INTO schedule VALUES (null, '2019,6,1', 'first data');");
+            /**
+             * 초기 데이터가 없을때 오늘날자에 표시하는것을
+             * 방지하기위해 리스트를 하나 지우는것에서
+             * 에러가 나므로 초기 데이터 하나 삽입
+             **/
+        }
+
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            db.execSQL("DROP TABLE IF EXISTS schedule");
+            onCreate(db);
+        }
+
+    }
+
 }
