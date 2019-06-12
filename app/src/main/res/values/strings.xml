@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Annu</string>
+    <string name="app_name">안너큰</string>
     <string name="ok">OK</string>
     <string name="permission_camera_rationale">Access to the camera is needed for detection</string>
     <string name="no_camera_permission">This application cannot run because it does not have the camera permission.  The application will now exit.</string>
@@ -12,4 +12,5 @@
     <string name="ocr_success">Text read successfully</string>
     <string name="ocr_failure">No text captured</string>
     <string name="ocr_error">"Error reading text: %1$s"</string>
+    <string name="adid_xml">ca-app-pub-8347262987394620/5303584067</string>
 </resources>

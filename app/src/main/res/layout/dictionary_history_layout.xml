@@ -2,43 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-<<<<<<< Updated upstream
-    android:orientation="vertical"
-    >
-=======
     android:background="#FFEB3B"
     android:orientation="vertical"
     android:padding="10dp">
 
->>>>>>> Stashed changes
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="90dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/name2" />
-
-    </LinearLayout>
-    <TextView
-<<<<<<< Updated upstream
-        android:layout_margin="20dp"
-        android:textSize="30dp"
-        android:id="@+id/history_tv1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="검색기록"/>
+        android:orientation="horizontal">
 
     <TextView
-        android:textSize="20dp"
-        android:id="@+id/history_tv2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="book"/>
-=======
         android:layout_gravity="center"
         android:id="@+id/history_tv_hsnum"
         android:layout_width="150dp"
@@ -65,17 +38,11 @@
         android:text="검색 초기화" />
 
     </LinearLayout>
->>>>>>> Stashed changes
 
-    <TextView
-        android:textSize="20dp"
-        android:id="@+id/history_tv3"
+    <ListView
+        android:id="@+id/history_list_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-<<<<<<< Updated upstream
-        android:text="bee"/>
-    
-=======
         android:layout_marginTop="2dp"
         android:layout_marginLeft="2dp"
         android:layout_marginRight="2dp"
@@ -83,5 +50,4 @@
         android:layout_margin="10dp"
         android:background="@drawable/bg_gis_result_items_count">
     </ListView>
->>>>>>> Stashed changes
 </LinearLayout>
