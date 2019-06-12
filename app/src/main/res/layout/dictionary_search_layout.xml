@@ -51,13 +51,14 @@
             android:id="@+id/imgbtn_search"
             android:layout_width="50dp"
             android:layout_height="50dp"
-
+            android:scaleType="fitCenter"
+            android:padding="10dp"
             android:layout_marginLeft="2dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="2dp"
             android:layout_marginBottom="0dp"
             android:background="@drawable/bg_gis_result_items_count"
-            android:scaleType="fitXY"
+
             android:src="@drawable/search" />
 
 
@@ -65,13 +66,14 @@
             android:id="@+id/imgbtn_camera"
             android:layout_width="50dp"
             android:layout_height="50dp"
-
+            android:scaleType="fitCenter"
+            android:padding="10dp"
             android:layout_marginLeft="2dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="2dp"
             android:layout_marginBottom="0dp"
             android:background="@drawable/bg_gis_result_items_count"
-            android:scaleType="fitXY"
+
             android:src="@drawable/camera" />
 
 
@@ -81,7 +83,8 @@
             android:layout_marginLeft="2dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/bg_gis_result_items_count"
-            android:scaleType="fitXY"
+            android:scaleType="fitCenter"
+            android:padding="10dp"
             android:src="@drawable/history" />
     </LinearLayout>
 

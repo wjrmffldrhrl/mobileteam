@@ -95,10 +95,10 @@ public class MainActivity extends AppCompatActivity {
         reset = (Button) findViewById(R.id.study_bt_reset);////타이머 리셋버튼 선언
         calendar = (Button) findViewById(R.id.study_bt_calendar);//켈린더 test
 
-        if (cursor != null && cursor.getCount() != 0)
-            schedule_view.setText(cursor.getString(1));
+        if (cursor != null && cursor.getCount() != 0)//오늘 일정이 있는지 없는지 확인
+            schedule_view.setText(cursor.getString(1));//스케쥴이 있다면 가져오기
         else
-            schedule_view.setText("no schedule");
+            schedule_view.setText("no schedule");//스케쥴이 없을때
 
         note.setOnClickListener(new View.OnClickListener() {
             @Override
