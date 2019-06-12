@@ -76,7 +76,7 @@ public class Calendar extends AppCompatActivity {
 
         materialCalendarView.state().edit()
                 .setFirstDayOfWeek(java.util.Calendar.SUNDAY)
-                .setMinimumDate(CalendarDay.from(2017, 0, 1)) // 달력의 시작
+                .setMinimumDate(CalendarDay.from(2017, 1, 1)) // 달력의 시작
                 .setMaximumDate(CalendarDay.from(2030, 11, 31)) // 달력의 끝
                 .setCalendarDisplayMode(CalendarMode.MONTHS)//달력 보기 방식
                 .commit();
@@ -216,7 +216,7 @@ public class Calendar extends AppCompatActivity {
         @Override
         public void onCreate(SQLiteDatabase db) {
             db.execSQL("CREATE TABLE schedule( _id INTEGER PRIMARY KEY AUTOINCREMENT, day TEXT, do TEXT);");
-            db.execSQL("INSERT INTO schedule VALUES (null, '2019,6,1', 'first data');");
+            db.execSQL("INSERT INTO schedule VALUES (null, '2017,3,2', '조승현 생일');");
             /**
              * 초기 데이터가 없을때 오늘날자에 표시하는것을
              * 방지하기위해 리스트를 하나 지우는것에서

@@ -6,12 +6,17 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import android.os.SystemClock;
@@ -26,6 +31,9 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final int RC_HANDLE_CAMERA_PERM = 2;
@@ -33,11 +41,24 @@ public class MainActivity extends AppCompatActivity {
     ImageButton note, dictionary, setting, face;
     Intent intent;//서비스 인텐트
 
+    DBHelper helper;
+    SQLiteDatabase db;//일정을 넣기위한 데이터베이스
+
     private AdView mAdView;//광고
 
     Chronometer timer;//타이머
     Button reset, calendar;
+    TextView schedule_view;
     long stop_time = 0;//정지한 시간을 계산
+    long now = System.currentTimeMillis();
+
+
+
+
+    Date date = new Date(now);
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy,M,d");//오늘 날자 가져오기
+    String getTime = sdf.format(date);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +66,17 @@ public class MainActivity extends AppCompatActivity {
         Intent loding_intent = new Intent(this, LodingActivity.class);
         startActivity(loding_intent);
         setContentView(R.layout.study_select);
+
+
+        helper = new DBHelper(this);//데이터 베이스
+        try {
+            db = helper.getWritableDatabase();
+        } catch (SQLiteException ex) {
+            db = helper.getReadableDatabase();
+        }
+        Cursor cursor;
+        cursor = db.rawQuery("SELECT day, do FROM schedule WHERE day= '"+getTime+"'; ", null);
+        cursor.moveToNext();
 
 
         MobileAds.initialize(this, "ca-app-pub-8347262987394620~3286481735");//광고 설정정
@@ -57,10 +89,16 @@ public class MainActivity extends AppCompatActivity {
         face = (ImageButton) findViewById(R.id.study_bt_face);
         intent = new Intent(this, EyeService.class);
         setting = (ImageButton) findViewById(R.id.setting);
+        schedule_view = (TextView)findViewById(R.id.study_txt_schedule);
 
         timer = (Chronometer) findViewById(R.id.study_timer);//타이머 id 선언 (final 지우면 정지,시작,리셋 메서드 실행 안됨)
         reset = (Button) findViewById(R.id.study_bt_reset);////타이머 리셋버튼 선언
         calendar = (Button) findViewById(R.id.study_bt_calendar);//켈린더 test
+
+        if (cursor != null && cursor.getCount() != 0)
+            schedule_view.setText(cursor.getString(1));
+        else
+            schedule_view.setText("no schedule");
 
         note.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -188,6 +226,32 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public class DBHelper extends SQLiteOpenHelper {
+        private static final String DATABASE_NAME = "calender.db";
+        private static final int DATABASE_VERSION = 2;
+
+        public DBHelper(Context context) {
+            super(context, DATABASE_NAME, null, DATABASE_VERSION);
+
+        }
+
+        @Override
+        public void onCreate(SQLiteDatabase db) {
+            db.execSQL("CREATE TABLE schedule( _id INTEGER PRIMARY KEY AUTOINCREMENT, day TEXT, do TEXT);");
+            db.execSQL("INSERT INTO schedule VALUES (null, '2017,3,2', '조승현 생일');");
+            /**
+             * 초기 데이터가 없을때 오늘날자에 표시하는것을
+             * 방지하기위해 리스트를 하나 지우는것에서
+             * 에러가 나므로 초기 데이터 하나 삽입
+             **/
+        }
+
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            db.execSQL("DROP TABLE IF EXISTS schedule");
+            onCreate(db);
+        }
+
+    }
 
 }
 

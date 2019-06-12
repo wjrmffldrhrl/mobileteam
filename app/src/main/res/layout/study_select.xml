@@ -135,7 +135,7 @@
         android:layout_marginBottom="?attr/actionBarSize" />
 
     <TextView
-        android:id="@+id/main_tv"
+        android:id="@+id/study_txt_schedule"
         android:layout_width="800dp"
         android:layout_height="200dp"
         android:layout_alignParentTop="true"
@@ -155,7 +155,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="-2dp"
-        android:layout_marginBottom="57dp"
         android:layout_toStartOf="@+id/setting"
         ads:adSize="BANNER"
         ads:adUnitId="@string/adid_xml"></com.google.android.gms.ads.AdView>
