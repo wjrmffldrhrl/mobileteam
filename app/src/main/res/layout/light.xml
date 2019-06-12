@@ -17,15 +17,16 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="일어나!!"
+            android:text="일어나"
             android:textColor="#FFFFFF"
             android:textSize="100dp" />
 
         <Button
             android:id="@+id/light_bt_getup"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:text="일어났어요"
+            android:textSize="40dp"
             android:background="@drawable/bg_gis_result_items_count"/>
     </LinearLayout>
 
