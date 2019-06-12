@@ -2,7 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+<<<<<<< Updated upstream
     android:orientation="vertical">
+=======
+    android:orientation="vertical"
+    android:background="#FFEB3B"
+    android:padding="10dp">
+
+>>>>>>> Stashed changes
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -25,21 +32,47 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+<<<<<<< Updated upstream
             android:text="새로 만들기" />
+=======
+            android:text="새로 만들기"
+            android:layout_margin="10dp"
+            android:background="@drawable/button"/>
+>>>>>>> Stashed changes
 
         <Button
             android:id="@+id/note_bt_reset"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+<<<<<<< Updated upstream
             android:layout_weight="1"
             android:text="목록 새로고침" />
+=======
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginBottom="2dp"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:text="목록 새로고침"
+            android:background="@drawable/button"/>
+>>>>>>> Stashed changes
     </LinearLayout>
 
 
     <ListView
         android:id="@+id/note_list"
         android:layout_width="match_parent"
+<<<<<<< Updated upstream
         android:layout_height="wrap_content" />
+=======
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/bg_gis_result_items_count"/>
+>>>>>>> Stashed changes
 
 
 </LinearLayout>

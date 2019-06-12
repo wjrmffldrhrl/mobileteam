@@ -3,11 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+<<<<<<< Updated upstream
     >
+=======
+    android:background="#FFEB3B"
+    android:padding="10dp">
+>>>>>>> Stashed changes
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+<<<<<<< Updated upstream
         android:orientation="vertical">
 
         <ImageView
@@ -17,10 +23,15 @@
             android:src="@drawable/name2" />
 
     </LinearLayout>
+=======
+        android:orientation="vertical"/>
+
+>>>>>>> Stashed changes
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+<<<<<<< Updated upstream
         <EditText
             android:id="@+id/edt_search"
             android:layout_margin="10dp"
@@ -56,6 +67,129 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="검색결과"/>
+=======
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edt_search"
+                android:layout_width="180dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="0dp"
+                android:background="@drawable/bg_gis_result_items_count"
+                android:hint="   입력해주세요"
+                android:textColor="#635F5F" />
+
+            <ImageButton
+                android:id="@+id/btn_cls"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_alignRight="@+id/edt_search"
+                android:layout_alignBottom="@+id/edt_search"
+                android:layout_alignTop="@+id/edt_search"
+                android:layout_margin="8dp"
+                android:background="#ffffff"
+                android:scaleType="fitXY"
+                android:src="@drawable/x" />
+
+        </RelativeLayout>
+
+
+        <ImageButton
+            android:id="@+id/imgbtn_search"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="fitCenter"
+            android:padding="10dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginBottom="0dp"
+            android:background="@drawable/bg_gis_result_items_count"
+
+            android:src="@drawable/search" />
+
+
+        <ImageButton
+            android:id="@+id/imgbtn_camera"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="fitCenter"
+            android:padding="10dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginBottom="0dp"
+            android:background="@drawable/bg_gis_result_items_count"
+
+            android:src="@drawable/camera" />
+
+
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_gis_result_items_count"
+            android:scaleType="fitCenter"
+            android:padding="10dp"
+            android:src="@drawable/history" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+
+        <TextView
+        android:id="@+id/text_word"
+        android:text="  단어"
+        android:textSize="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="0dp"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/bg_gis_result_items_count"
+            />
+
+        <TextView
+            android:id="@+id/text_mean"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="0dp"
+            android:layout_marginLeft="5dp"
+            android:text="    검색결과"
+            android:textSize="20dp"
+            android:background="@drawable/bg_gis_result_items_count"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="bottom|center_horizontal">
+
+        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/diction_search_adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/adid_xml"></com.google.android.gms.ads.AdView>
+    </LinearLayout>
+>>>>>>> Stashed changes
 
 
 </LinearLayout>

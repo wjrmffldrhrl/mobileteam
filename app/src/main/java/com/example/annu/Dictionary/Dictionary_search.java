@@ -34,7 +34,7 @@ public class Dictionary_search extends AppCompatActivity {
     private TextToSpeech tts;
     myDBHelper myHelper;
     EditText search;
-    Button btn_cls;
+    ImageButton btn_cls;
     ImageButton imgbtn_search;
     TextView text_word, text_mean;
     SQLiteDatabase sqlDB;
@@ -51,7 +51,7 @@ public class Dictionary_search extends AppCompatActivity {
         search = (EditText) findViewById(R.id.edt_search);
 
         imgbtn_search = (ImageButton) findViewById(R.id.imgbtn_search);
-        btn_cls = (Button) findViewById(R.id.btn_cls);
+        btn_cls = (ImageButton) findViewById(R.id.btn_cls);
 
         text_word = (TextView) findViewById(R.id.text_word);
         text_mean= (TextView) findViewById(R.id.text_mean);
