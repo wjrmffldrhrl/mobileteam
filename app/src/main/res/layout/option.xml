@@ -3,19 +3,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#ffffff">
+    android:background="#FFEB3B"
+    >
+<LinearLayout
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/name3" />
+    android:layout_marginLeft="30dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="20dp"
+    android:layout_marginRight="30dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_gis_result_items_count">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_width="210dp"
         android:layout_height="wrap_content"
         android:textSize="40dp"
-        android:text="경고음 종류"/>
+        android:text="경고음 종류"
+       />
     <RadioGroup
         android:id="@+id/option_radiogroup_set1"
         android:layout_width="wrap_content"
@@ -44,10 +52,14 @@
     </RadioGroup>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_width="230dp"
         android:layout_height="wrap_content"
         android:textSize="40dp"
-        android:text="경고음 / 진동"/>
+        android:text="경고음 / 진동"
+
+        />
     <RadioGroup
         android:id="@+id/option_radiogroup_set2"
         android:layout_width="wrap_content"
@@ -78,10 +90,13 @@
     </RadioGroup>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:textSize="40dp"
-        android:text="졸음 방지 시간"/>
+        android:text="졸음 방지 시간"
+        />
     <RadioGroup
         android:id="@+id/option_radiogroup_set3"
         android:layout_width="wrap_content"
@@ -102,6 +117,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RadioGroup>
+</LinearLayout>
+
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"

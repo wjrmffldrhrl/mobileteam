@@ -155,7 +155,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="-2dp"
-        android:layout_marginBottom="57dp"
         android:layout_toStartOf="@+id/setting"
         ads:adSize="BANNER"
         ads:adUnitId="@string/adid_xml"></com.google.android.gms.ads.AdView>
