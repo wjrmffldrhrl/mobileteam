@@ -55,7 +55,8 @@
             android:layout_marginRight="2dp"
             android:layout_marginBottom="0dp"
             android:background="@drawable/bg_gis_result_items_count"
-            android:scaleType="fitXY"
+            android:scaleType="fitCenter"
+            android:padding="10dp"
             android:src="@drawable/search" />
 
         <ImageButton
@@ -67,7 +68,8 @@
             android:layout_marginRight="2dp"
             android:layout_marginBottom="0dp"
             android:background="@drawable/bg_gis_result_items_count"
-            android:scaleType="fitXY"
+            android:scaleType="fitCenter"
+            android:padding="10dp"
             android:src="@drawable/camera" />
 
         <ImageButton
@@ -76,7 +78,8 @@
             android:layout_marginLeft="2dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/bg_gis_result_items_count"
-            android:scaleType="fitXY"
+            android:scaleType="fitCenter"
+            android:padding="10dp"
             android:src="@drawable/history" />
     </LinearLayout>
 
