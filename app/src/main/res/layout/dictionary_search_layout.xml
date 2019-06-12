@@ -10,60 +10,79 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"/>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/edt_search"
-            android:layout_width="180dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginBottom="0dp"
-            android:layout_marginLeft="5dp"
-            android:hint="   입력해주세요"
-            android:background="@drawable/bg_gis_result_items_count"
-            android:textColor="#635F5F"
-            />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/btn_cls"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="3dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="3dp"
-            android:layout_marginBottom="0dp"
-            android:background="@drawable/bg_gis_result_items_count"
-            android:text="cls" />
+            <EditText
+                android:id="@+id/edt_search"
+                android:layout_width="180dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="0dp"
+                android:background="@drawable/bg_gis_result_items_count"
+                android:hint="   입력해주세요"
+                android:textColor="#635F5F" />
+
+            <ImageButton
+                android:id="@+id/btn_cls"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_alignRight="@+id/edt_search"
+                android:layout_alignBottom="@+id/edt_search"
+                android:layout_alignTop="@+id/edt_search"
+                android:layout_margin="8dp"
+                android:background="#ffffff"
+                android:scaleType="fitXY"
+                android:src="@drawable/x" />
+
+        </RelativeLayout>
+
 
         <ImageButton
             android:id="@+id/imgbtn_search"
             android:layout_width="50dp"
             android:layout_height="50dp"
+
+            android:layout_marginLeft="2dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="2dp"
             android:layout_marginBottom="0dp"
-            android:layout_marginLeft="2dp"
+            android:background="@drawable/bg_gis_result_items_count"
             android:scaleType="fitXY"
-            android:src="@drawable/search"
-            android:background="@drawable/bg_gis_result_items_count" />
+            android:src="@drawable/search" />
+
 
         <ImageButton
             android:id="@+id/imgbtn_camera"
             android:layout_width="50dp"
             android:layout_height="50dp"
+
+            android:layout_marginLeft="2dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="2dp"
             android:layout_marginBottom="0dp"
-            android:layout_marginLeft="2dp"
-            android:src="@drawable/camera"
+            android:background="@drawable/bg_gis_result_items_count"
             android:scaleType="fitXY"
-            android:background="@drawable/bg_gis_result_items_count" />
+            android:src="@drawable/camera" />
 
+
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_gis_result_items_count"
+            android:scaleType="fitXY"
+            android:src="@drawable/history" />
     </LinearLayout>
 
     <LinearLayout
