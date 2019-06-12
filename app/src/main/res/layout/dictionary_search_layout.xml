@@ -4,12 +4,16 @@
     android:layout_height="match_parent"
     android:background="#FFEB3B"
     android:orientation="vertical"
+
+
     android:padding="10dp">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:orientation="vertical" />
+
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -33,12 +37,14 @@
                 android:textColor="#635F5F" />
 
             <ImageButton
+
                 android:id="@+id/diction_imgbtn_cls"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_alignTop="@+id/edt_search"
                 android:layout_alignRight="@+id/edt_search"
                 android:layout_alignBottom="@+id/edt_search"
+
                 android:layout_margin="8dp"
                 android:background="#ffffff"
                 android:scaleType="fitXY"
@@ -51,39 +57,49 @@
             android:id="@+id/imgbtn_search"
             android:layout_width="50dp"
             android:layout_height="50dp"
+
+
             android:layout_marginLeft="2dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="2dp"
             android:layout_marginBottom="0dp"
             android:background="@drawable/bg_gis_result_items_count"
+
             android:padding="10dp"
             android:scaleType="fitCenter"
+
 
             android:src="@drawable/search" />
 
 
         <ImageButton
+
             android:id="@+id/diction_imgbtn_camera"
             android:layout_width="50dp"
             android:layout_height="50dp"
+
             android:layout_marginLeft="2dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="2dp"
             android:layout_marginBottom="0dp"
             android:background="@drawable/bg_gis_result_items_count"
+
             android:padding="10dp"
             android:scaleType="fitCenter"
+
 
             android:src="@drawable/camera" />
 
 
         <ImageButton
+
             android:id="@+id/diction_imgbtn_history"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginLeft="2dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/bg_gis_result_items_count"
+
             android:padding="10dp"
             android:scaleType="fitCenter"
             android:src="@drawable/history" />
@@ -135,6 +151,7 @@
             ads:adSize="BANNER"
             ads:adUnitId="@string/adid_xml"></com.google.android.gms.ads.AdView>
     </LinearLayout>
+
 
 
 </LinearLayout>

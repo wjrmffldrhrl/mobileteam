@@ -3,9 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#FFEB3B">
 
-
+    android:background="@color/background">
 
     <ImageButton
         android:id="@+id/setting"
@@ -20,6 +19,7 @@
         android:src="@drawable/set_icon" />
 
 
+
     <Chronometer
         android:id="@+id/study_timer"
         android:layout_width="fill_parent"
@@ -28,6 +28,7 @@
         android:layout_alignParentTop="true"
         android:layout_gravity="center_horizontal"
         android:layout_marginStart="0dp"
+
         android:layout_marginTop="35dp"
         android:gravity="center"
         android:textColor="#ffff"
@@ -147,6 +148,7 @@
         android:textColor="#000000"
         android:background="@drawable/bg_gis_result_items_count"
         android:textSize="20dp" />
+
 
 
     <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
