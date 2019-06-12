@@ -32,7 +32,7 @@
         android:layout_height="250dp"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="354dp"
+        android:layout_marginTop="350dp"
         android:layout_marginRight="30dp"
         android:background="@drawable/bg_gis_result_items_count"
         android:text="
