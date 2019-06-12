@@ -46,10 +46,12 @@
 
         </RelativeLayout>
 
+
         <ImageButton
             android:id="@+id/imgbtn_search"
             android:layout_width="50dp"
             android:layout_height="50dp"
+
             android:layout_marginLeft="2dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="2dp"
@@ -58,10 +60,12 @@
             android:scaleType="fitXY"
             android:src="@drawable/search" />
 
+
         <ImageButton
             android:id="@+id/imgbtn_camera"
             android:layout_width="50dp"
             android:layout_height="50dp"
+
             android:layout_marginLeft="2dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="2dp"
@@ -69,6 +73,7 @@
             android:background="@drawable/bg_gis_result_items_count"
             android:scaleType="fitXY"
             android:src="@drawable/camera" />
+
 
         <ImageButton
             android:layout_width="50dp"
