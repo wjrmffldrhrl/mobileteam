@@ -59,8 +59,6 @@
             android:layout_marginBottom="0dp"
             android:background="@drawable/bg_gis_result_items_count"
 
-            android:scaleType="fitCenter"
-            android:padding="10dp"
 
             android:src="@drawable/search" />
 
@@ -76,9 +74,6 @@
             android:layout_marginRight="2dp"
             android:layout_marginBottom="0dp"
             android:background="@drawable/bg_gis_result_items_count"
-
-            android:scaleType="fitCenter"
-            android:padding="10dp"
 
             android:src="@drawable/camera" />
 
