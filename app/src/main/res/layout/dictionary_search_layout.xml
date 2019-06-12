@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#FFEB3B"
+    android:orientation="vertical"
     android:padding="10dp">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"/>
+        android:orientation="vertical" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -33,12 +33,12 @@
                 android:textColor="#635F5F" />
 
             <ImageButton
-                android:id="@+id/btn_cls"
+                android:id="@+id/diction_imgbtn_cls"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
+                android:layout_alignTop="@+id/edt_search"
                 android:layout_alignRight="@+id/edt_search"
                 android:layout_alignBottom="@+id/edt_search"
-                android:layout_alignTop="@+id/edt_search"
                 android:layout_margin="8dp"
                 android:background="#ffffff"
                 android:scaleType="fitXY"
@@ -51,87 +51,80 @@
             android:id="@+id/imgbtn_search"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:scaleType="fitCenter"
-            android:padding="10dp"
             android:layout_marginLeft="2dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="2dp"
             android:layout_marginBottom="0dp"
             android:background="@drawable/bg_gis_result_items_count"
-
-            android:scaleType="fitCenter"
             android:padding="10dp"
+            android:scaleType="fitCenter"
 
             android:src="@drawable/search" />
 
 
         <ImageButton
-            android:id="@+id/imgbtn_camera"
+            android:id="@+id/diction_imgbtn_camera"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:scaleType="fitCenter"
-            android:padding="10dp"
             android:layout_marginLeft="2dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="2dp"
             android:layout_marginBottom="0dp"
             android:background="@drawable/bg_gis_result_items_count"
-
-            android:scaleType="fitCenter"
             android:padding="10dp"
+            android:scaleType="fitCenter"
 
             android:src="@drawable/camera" />
 
 
         <ImageButton
+            android:id="@+id/diction_imgbtn_history"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginLeft="2dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/bg_gis_result_items_count"
-            android:scaleType="fitCenter"
             android:padding="10dp"
+            android:scaleType="fitCenter"
             android:src="@drawable/history" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="10dp">
+        android:layout_margin="10dp"
+        android:orientation="vertical">
 
         <TextView
-        android:id="@+id/text_word"
-        android:text="  단어"
-        android:textSize="50dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+            android:id="@+id/text_word"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="0dp"
-            android:layout_marginLeft="5dp"
             android:background="@drawable/bg_gis_result_items_count"
-            />
+            android:text="  단어"
+            android:textSize="50dp" />
 
         <TextView
             android:id="@+id/text_mean"
             android:layout_width="match_parent"
             android:layout_height="300dp"
+            android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="0dp"
-            android:layout_marginLeft="5dp"
-            android:text="    검색결과"
-            android:textSize="20dp"
             android:background="@drawable/bg_gis_result_items_count"
-            />
+            android:text="    검색결과"
+            android:textSize="20dp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="bottom|center_horizontal">
+        android:gravity="bottom|center_horizontal"
+        android:orientation="vertical">
 
         <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
             android:id="@+id/diction_search_adView"

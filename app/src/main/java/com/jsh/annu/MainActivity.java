@@ -24,7 +24,7 @@ import android.widget.Button;
 import android.widget.Chronometer;
 
 import com.jsh.annu.Calendar.Calendar;
-import com.jsh.annu.Dictionary.Dictionary;
+import com.jsh.annu.Dictionary.Dictionary_search;
 import com.jsh.annu.EyeDetected.EyeService;
 import com.jsh.annu.Note.NoteList;
 import com.google.android.gms.ads.AdRequest;
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
         dictionary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Dictionary.class);//인텐트 지정
+                Intent intent = new Intent(getApplicationContext(), Dictionary_search.class);//인텐트 지정
                 startActivity(intent);//액티비티 출력
             }
         });

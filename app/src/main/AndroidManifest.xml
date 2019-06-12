@@ -60,8 +60,6 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".Dictionary.Dictionary_search"
             android:screenOrientation="portrait"/>
-        <activity android:name=".Dictionary.Dictionary"
-            android:screenOrientation="portrait"/>
         <activity android:name=".Dictionary.Dictionary_history"
             android:screenOrientation="portrait"/>
         <activity android:name=".EyeDetected.Light"
