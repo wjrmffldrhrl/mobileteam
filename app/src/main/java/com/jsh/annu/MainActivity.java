@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int RC_HANDLE_CAMERA_PERM = 2;
 
-    ImageButton note, dictionary, setting, face;
+    ImageButton note, dictionary, setting, face,calendar;
     Intent intent;//서비스 인텐트
 
     DBHelper helper;
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private AdView mAdView;//광고
 
     Chronometer timer;//타이머
-    Button reset, calendar;
+    Button reset;
     TextView schedule_view;
     long stop_time = 0;//정지한 시간을 계산
     long now = System.currentTimeMillis();
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
         timer = (Chronometer) findViewById(R.id.study_timer);//타이머 id 선언 (final 지우면 정지,시작,리셋 메서드 실행 안됨)
         reset = (Button) findViewById(R.id.study_bt_reset);////타이머 리셋버튼 선언
-        calendar = (Button) findViewById(R.id.study_bt_calendar);//켈린더 test
+        calendar = (ImageButton) findViewById(R.id.study_bt_calendar);//켈린더 test
 
         if (cursor != null && cursor.getCount() != 0)//오늘 일정이 있는지 없는지 확인
             schedule_view.setText(cursor.getString(1));//스케쥴이 있다면 가져오기
