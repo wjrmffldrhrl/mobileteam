@@ -22,7 +22,7 @@
         android:layout_marginBottom="2dp"
         android:text="    검색 기록 수 : "
         android:textSize="15dp"
-        android:background="@drawable/bg_gis_result_items_count"/>
+        android:background="@drawable/shadow"/>
 
     <Button
         android:id="@+id/history_bt_cls"
@@ -32,7 +32,7 @@
         android:layout_marginTop="2dp"
         android:layout_marginRight="2dp"
         android:layout_marginBottom="2dp"
-        android:background="@drawable/bg_gis_result_items_count"
+        android:background="@drawable/shadow"
         android:textSize="15dp"
         android:layout_gravity="right"
         android:text="검색 초기화" />
@@ -48,6 +48,6 @@
         android:layout_marginRight="2dp"
         android:layout_marginBottom="2dp"
         android:layout_margin="10dp"
-        android:background="@drawable/bg_gis_result_items_count">
+        android:background="@drawable/shadow">
     </ListView>
 </LinearLayout>

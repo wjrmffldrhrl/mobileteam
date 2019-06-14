@@ -1,17 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!-- Drop Shadow Stack -->
 
     <item>
-        <layer-list>
-            <!-- shadow (밑으로) : 그림자 -->
-            <item android:top="5dp">
-                <shape>
-                    <corners android:radius="10dp" />
-                    <solid android:color="#FFFFFF" />
-                </shape>
-            </item>
+        <shape>
+            <padding
+                android:bottom="2dp"
+                android:left="2dp"
+                android:right="2dp"
+                android:top="2dp" />
 
-        </layer-list>
+            <solid android:color="#2D525252" />
 
+            <corners android:radius="10dp" />
+        </shape>
     </item>
-</selector>
+
+    <!-- Background -->
+    <item>
+        <shape>
+            <solid android:color="@android:color/white" />
+
+            <corners android:radius="10dp" />
+        </shape>
+    </item>
+
+</layer-list>

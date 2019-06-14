@@ -26,7 +26,7 @@
             android:layout_weight="1"
             android:text="새로 만들기"
             android:layout_margin="10dp"
-            android:background="@drawable/bg_gis_result_items_count"/>
+            android:background="@drawable/shadow"/>
 
         <Button
             android:id="@+id/note_bt_reset"
@@ -39,7 +39,7 @@
             android:layout_weight="1"
             android:layout_margin="10dp"
             android:text="목록 새로고침"
-            android:background="@drawable/bg_gis_result_items_count"/>
+            android:background="@drawable/shadow"/>
     </LinearLayout>
 
 
@@ -51,7 +51,7 @@
         android:layout_marginRight="2dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="@drawable/bg_gis_result_items_count"/>
+        android:background="@drawable/shadow"/>
 
 
 </LinearLayout>
