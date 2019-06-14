@@ -30,7 +30,7 @@
         android:layout_below="@+id/preview"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:background="@drawable/bg_gis_result_items_count"
+        android:background="@drawable/shadow"
         android:text="인식된 글자를 누르고 버튼을 누르세요"
         />
     <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"

@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@drawable/bg_gis_result_items_count">
+        android:background="@drawable/shadow">
 
         <TextView
             android:layout_marginTop="5dp"
