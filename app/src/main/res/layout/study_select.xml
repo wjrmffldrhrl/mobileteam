@@ -3,7 +3,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/background">
+    android:background="@drawable/button">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginBottom="130dp"
+        android:gravity="center"
+        android:text="YY:MM:DD"
+        android:textColor="#FFFFFF"
+        android:textSize="30dp" />
 
     <Chronometer
         android:id="@+id/study_timer"
@@ -32,7 +45,7 @@
         android:layout_height="250dp"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="350dp"
+        android:layout_marginTop="340dp"
         android:layout_marginRight="30dp"
         android:background="@drawable/bg_gis_result_items_count"
         android:text="체크리스트"
@@ -44,20 +57,20 @@
         android:layout_height="70dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="250dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginTop="230dp"
         android:orientation="horizontal"
         android:background="@drawable/bg_gis_result_items_count">
 
         <ImageButton
 
             android:id="@+id/study_bt_face"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="13dp"
             android:layout_alignTop="@+id/study_bt_note"
-            android:layout_marginStart="25dp"
+            android:layout_marginStart="30dp"
             android:background="#00FFFFFF"
             android:scaleType="fitXY"
             android:src="@drawable/face_off" />
@@ -65,11 +78,11 @@
         <ImageButton
 
             android:id="@+id/study_bt_calendar"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_alignTop="@+id/study_bt_note"
-            android:layout_marginLeft="22dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="13dp"
             android:background="#00FFFFFF"
             android:scaleType="fitXY"
             android:src="@drawable/calendar" />
@@ -78,12 +91,12 @@
         <ImageButton
 
             android:id="@+id/study_bt_note"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="22dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginLeft="25dp"
             android:background="#00FFFFFF"
             android:scaleType="fitXY"
 
@@ -92,25 +105,25 @@
         <ImageButton
 
             android:id="@+id/study_bt_dictionary"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_alignTop="@+id/study_bt_note"
             android:layout_alignParentEnd="true"
-            android:layout_marginLeft="22dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="13dp"
             android:background="#ffffffff"
             android:scaleType="fitXY"
             android:src="@drawable/dictionary_img" />
 
         <ImageButton
             android:id="@+id/setting"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_alignTop="@+id/study_bt_note"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginLeft="22dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="13dp"
             android:background="#00FFFFFF"
             android:scaleType="fitXY"
             android:src="@drawable/setting" />
