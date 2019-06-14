@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
     Chronometer timer;//타이머
     Button reset;
-    TextView schedule_view;
+    TextView schedule_view,todayview;
     long stop_time = 0;//정지한 시간을 계산
     long now = System.currentTimeMillis();
 
@@ -59,8 +59,9 @@ public class MainActivity extends AppCompatActivity {
 
     Date date = new Date(now);
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy,M,d");//오늘 날자 가져오기
+    SimpleDateFormat fds = new SimpleDateFormat("yyyy년 M월 d일");
     String getTime = sdf.format(date);
-
+    String today = fds.format(date);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,10 +93,13 @@ public class MainActivity extends AppCompatActivity {
         intent = new Intent(this, EyeService.class);
         setting = (ImageButton) findViewById(R.id.setting);
         schedule_view = (TextView)findViewById(R.id.study_txt_schedule);
+        todayview = (TextView)findViewById(R.id.study_txt_today);
 
         timer = (Chronometer) findViewById(R.id.study_timer);//타이머 id 선언 (final 지우면 정지,시작,리셋 메서드 실행 안됨)
         reset = (Button) findViewById(R.id.study_bt_reset);////타이머 리셋버튼 선언
         calendar = (ImageButton) findViewById(R.id.study_bt_calendar);//켈린더 test
+
+        todayview.setText(today);
 
         if (cursor != null && cursor.getCount() != 0)//오늘 일정이 있는지 없는지 확인
             schedule_view.setText(cursor.getString(1));//스케쥴이 있다면 가져오기
