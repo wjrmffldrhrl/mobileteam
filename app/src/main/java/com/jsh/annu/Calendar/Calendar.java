@@ -39,6 +39,7 @@ public class Calendar extends AppCompatActivity {
 
     MaterialCalendarView materialCalendarView;
     List<String> plan = new ArrayList<>();
+    List<String> study_time_list = new ArrayList<>();
     AddPlan up_paln;
 
     ImageButton addplan, delplan;
@@ -77,7 +78,12 @@ public class Calendar extends AppCompatActivity {
             plan.add(cursor.getString(0));
         }
 
-        materialCalendarView.state().edit()
+        cursor = db.rawQuery("SELECT day, time FROM study_time", null);// 공부한 시간 가져오기
+        while (cursor.moveToNext()){
+            study_time_list.add(cursor.getString(0));
+        }
+
+            materialCalendarView.state().edit()
                 .setFirstDayOfWeek(java.util.Calendar.SUNDAY)
                 .setMinimumDate(CalendarDay.from(2017, 1, 1)) // 달력의 시작
                 .setMaximumDate(CalendarDay.from(2030, 11, 31)) // 달력의 끝
@@ -114,7 +120,7 @@ public class Calendar extends AppCompatActivity {
                         cursor = db.rawQuery("SELECT day, do FROM schedule WHERE day= '"+shot_Day+"'; ", null);
 
 
-                        txt1.setText("YES Plan");
+                       // txt1.setText("YES Plan");
 
                         cursor.moveToNext();
                         txt2.setText(cursor.getString(1));
@@ -128,8 +134,8 @@ public class Calendar extends AppCompatActivity {
                         break;
                     } else {//계획이 없다면
 
-                        txt1.setText("NO Plan");
-                        txt2.setText("");
+                       // txt1.setText("NO Plan");
+                        txt2.setText("no plan");
                         Log.e("plan", "different");
                         doo.setVisibility(View.VISIBLE);
                         addplan.setVisibility(View.VISIBLE);
@@ -137,8 +143,22 @@ public class Calendar extends AppCompatActivity {
 
                     }
                 }
+                for(int i = 0 ; i < study_time_list.size(); i++){
+                    if(study_time_list.get(i).equals(shot_Day)){//그날 공부한 시간이 있다면.
+                        Cursor cursor;
+                        cursor = db.rawQuery("SELECT day, time FROM study_time WHERE day = '"+shot_Day+"';",null);
+                        cursor.moveToNext();
+                        txt1.setText(cursor.getString(1));
+                    }
+                    else {//공부한 시간이 없다면
+                        txt1.setText("you don't study ");
+                    }
+                }
+
             }
         });
+
+
         addplan.setOnClickListener(new View.OnClickListener() {//선택한 날자에 계획 추가
             @Override
             public void onClick(View v) {
@@ -226,7 +246,9 @@ public class Calendar extends AppCompatActivity {
         @Override
         public void onCreate(SQLiteDatabase db) {
             db.execSQL("CREATE TABLE schedule( _id INTEGER PRIMARY KEY AUTOINCREMENT, day TEXT, do TEXT);");
-            db.execSQL("INSERT INTO schedule VALUES (null, '2017,3,2', '조승현 생일',61);");
+            db.execSQL("CREATE TABLE study_time( _id INTEGER PRIMARY KEY AUTOINCREMENT, day TEXT, time TEXT);");
+            db.execSQL("INSERT INTO schedule VALUES (null, '2019,3,2', '조승현 생일');");
+            db.execSQL("INSERT INTO study_time VALUES (null, '2019,6,15','97 분 24 초 ');");
             /**
              * 초기 데이터가 없을때 오늘날자에 표시하는것을
              * 방지하기위해 리스트를 하나 지우는것에서

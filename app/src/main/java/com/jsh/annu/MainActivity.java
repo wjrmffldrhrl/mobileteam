@@ -44,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences pref;
     SharedPreferences.Editor editor;
 
-    ImageButton note, dictionary, setting, face,calendar;
+
+    ImageButton note, dictionary, setting, face, calendar;
     Intent intent;//서비스 인텐트
 
     DBHelper helper;
@@ -53,11 +54,9 @@ public class MainActivity extends AppCompatActivity {
     private AdView mAdView;//광고
 
     Chronometer timer;//타이머
-    TextView schedule_view,todayview;
+    TextView schedule_view, todayview;
     long stop_time = 0;//정지한 시간을 계산
     long now = System.currentTimeMillis();
-
-
 
 
     Date date = new Date(now);
@@ -76,8 +75,31 @@ public class MainActivity extends AppCompatActivity {
         pref = getSharedPreferences("times", Activity.MODE_PRIVATE);
         editor = pref.edit();
 
-        stop_time = pref.getLong("stop_time",0);//멈췄던 시간 돌려받기
-        Log.e("get stop_time",": "+pref.getLong("stop_time",0));
+        stop_time = pref.getLong("stop_time", 0);//멈췄던 시간 돌려받기
+        Log.e("get stop_time", ": " + pref.getLong("stop_time", 0));
+
+        if (pref.getString("today", getTime) != getTime) {//저장된 날짜가 오늘 날짜와 다르다면
+            String day = pref.getString("today", getTime);//공부를 한 날짜
+            long stop_time_1000 = -1*stop_time/1000;
+            long min=0,sec=0;
+
+            min = stop_time_1000/60;
+            sec = stop_time_1000%60;
+
+            String time = ""+min+" 분 "+ sec +" 초 ";//지금까지 공부한 시간
+
+            db.execSQL("INSERT INTO study_time VALUES(null,'"+day+"','"+time+"');");//공부한 날자에 공부한 시간 넣기
+
+            editor.remove("stop_time");//공부한 시간 초기화
+            stop_time = 0;
+
+            editor.putString("today", getTime);//날짜 오늘날자로 초기화화
+            editor.apply();
+
+            Toast.makeText(getApplicationContext(), "공부 시간 초기화!", Toast.LENGTH_LONG).show();
+
+
+        }
 
 
         helper = new DBHelper(this);//데이터 베이스
@@ -87,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
             db = helper.getReadableDatabase();
         }
         Cursor cursor;
-        cursor = db.rawQuery("SELECT day, do FROM schedule WHERE day= '"+getTime+"'; ", null);
+        cursor = db.rawQuery("SELECT day, do FROM schedule WHERE day= '" + getTime + "'; ", null);
         cursor.moveToNext();
 
 
@@ -101,8 +123,8 @@ public class MainActivity extends AppCompatActivity {
         face = (ImageButton) findViewById(R.id.study_bt_face);
         intent = new Intent(this, EyeService.class);
         setting = (ImageButton) findViewById(R.id.setting);
-        schedule_view = (TextView)findViewById(R.id.study_txt_schedule);
-        todayview = (TextView)findViewById(R.id.study_txt_today);
+        schedule_view = (TextView) findViewById(R.id.study_txt_schedule);
+        todayview = (TextView) findViewById(R.id.study_txt_today);
 
         timer = (Chronometer) findViewById(R.id.study_timer);//타이머 id 선언 (final 지우면 정지,시작,리셋 메서드 실행 안됨)
         calendar = (ImageButton) findViewById(R.id.study_bt_calendar);//켈린더 test
@@ -238,9 +260,9 @@ public class MainActivity extends AppCompatActivity {
     public void onDestroy() {
         super.onDestroy();
 
-        editor.putLong("stop_time",stop_time);
+        editor.putLong("stop_time", stop_time);
         editor.apply();
-        Log.e("save stop_time",": "+pref.getLong("stop_time",0));
+        Log.e("save stop_time", ": " + pref.getLong("stop_time", 0));
     }
 
     public class DBHelper extends SQLiteOpenHelper {
@@ -255,7 +277,9 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onCreate(SQLiteDatabase db) {
             db.execSQL("CREATE TABLE schedule( _id INTEGER PRIMARY KEY AUTOINCREMENT, day TEXT, do TEXT);");
-            db.execSQL("INSERT INTO schedule VALUES (null, '2017,3,2', '조승현 생일');");
+            db.execSQL("CREATE TABLE study_time( _id INTEGER PRIMARY KEY AUTOINCREMENT, day TEXT, time TEXT);");
+            db.execSQL("INSERT INTO schedule VALUES (null, '2019,3,2', '조승현 생일');");
+            db.execSQL("INSERT INTO study_time VALUES (null, '2019,6,15','97 분 24 초 ');");
             /**
              * 초기 데이터가 없을때 오늘날자에 표시하는것을
              * 방지하기위해 리스트를 하나 지우는것에서
