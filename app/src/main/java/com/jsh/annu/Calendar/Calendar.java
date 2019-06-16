@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,7 +41,7 @@ public class Calendar extends AppCompatActivity {
     List<String> plan = new ArrayList<>();
     AddPlan up_paln;
 
-    Button addplan, delplan;
+    ImageButton addplan, delplan;
     EditText doo;
     TextView txt1, txt2, txt3;
     int Year = 0, Month = 0, Day = 0;// 선택한 날자
@@ -51,14 +52,16 @@ public class Calendar extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.calendar);
         materialCalendarView = (MaterialCalendarView) findViewById(R.id.calendarView);
-        addplan = (Button) findViewById(R.id.calendar_bt_addplan);
-        delplan = (Button) findViewById(R.id.calendar_bt_delplan);
+        addplan = (ImageButton) findViewById(R.id.calendar_imgbt_addplan);
+        delplan = (ImageButton) findViewById(R.id.calendar_imgbt_delplan);
         txt1 = (TextView) findViewById(R.id.txt1);
         txt2 = (TextView) findViewById(R.id.txt2);
         txt3 = (TextView) findViewById(R.id.txt3);
         doo = (EditText) findViewById(R.id.calendar_edt_do);
 
         doo.setVisibility(View.INVISIBLE);//계획 안보이게
+        addplan.setVisibility(View.INVISIBLE);
+        delplan.setVisibility(View.INVISIBLE);
 
         helper = new DBHelper(this);//데이터 베이스
         try {
@@ -105,7 +108,7 @@ public class Calendar extends AppCompatActivity {
 
 
                 for (int i = 0; i < plan.size(); i++) {//선택한 날자에 계획이 있는지 확인
-                    if (plan.get(i).equals(shot_Day)) {
+                    if (plan.get(i).equals(shot_Day)) {//계획이 있다면
 
                         Cursor cursor;
                         cursor = db.rawQuery("SELECT day, do FROM schedule WHERE day= '"+shot_Day+"'; ", null);
@@ -119,13 +122,18 @@ public class Calendar extends AppCompatActivity {
                         Log.e("plan", "same");
                         doo.setText("");
                         doo.setVisibility(View.INVISIBLE);
+                        addplan.setVisibility(View.INVISIBLE);
+                        delplan.setVisibility(View.VISIBLE);
 
                         break;
-                    } else {
+                    } else {//계획이 없다면
+
                         txt1.setText("NO Plan");
                         txt2.setText("");
                         Log.e("plan", "different");
                         doo.setVisibility(View.VISIBLE);
+                        addplan.setVisibility(View.VISIBLE);
+                        delplan.setVisibility(View.INVISIBLE);
 
                     }
                 }
@@ -137,6 +145,7 @@ public class Calendar extends AppCompatActivity {
                 String schedule_plan = doo.getText().toString();
                 db.execSQL("INSERT INTO schedule VALUES (null, '" + shot_Day + "', '" + schedule_plan + "');");
                 doo.setText("");
+                Toast.makeText(getApplicationContext(), "계획 추가 완료!", Toast.LENGTH_SHORT).show();
             }
         });
         delplan.setOnClickListener(new View.OnClickListener() {//선택한 날자 계획 제거
@@ -144,6 +153,7 @@ public class Calendar extends AppCompatActivity {
             public void onClick(View v) {
 
                 db.execSQL("DELETE FROM schedule WHERE day='" + shot_Day + "';");
+                Toast.makeText(getApplicationContext(), "계획 삭제 완료!", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -216,7 +226,7 @@ public class Calendar extends AppCompatActivity {
         @Override
         public void onCreate(SQLiteDatabase db) {
             db.execSQL("CREATE TABLE schedule( _id INTEGER PRIMARY KEY AUTOINCREMENT, day TEXT, do TEXT);");
-            db.execSQL("INSERT INTO schedule VALUES (null, '2017,3,2', '조승현 생일');");
+            db.execSQL("INSERT INTO schedule VALUES (null, '2017,3,2', '조승현 생일',61);");
             /**
              * 초기 데이터가 없을때 오늘날자에 표시하는것을
              * 방지하기위해 리스트를 하나 지우는것에서

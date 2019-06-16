@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -40,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int RC_HANDLE_CAMERA_PERM = 2;
 
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
+
     ImageButton note, dictionary, setting, face,calendar;
     Intent intent;//서비스 인텐트
 
@@ -49,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
     private AdView mAdView;//광고
 
     Chronometer timer;//타이머
-    Button reset;
     TextView schedule_view,todayview;
     long stop_time = 0;//정지한 시간을 계산
     long now = System.currentTimeMillis();
@@ -69,6 +72,12 @@ public class MainActivity extends AppCompatActivity {
         Intent loding_intent = new Intent(this, LodingActivity.class);
         startActivity(loding_intent);
         setContentView(R.layout.study_select);
+
+        pref = getSharedPreferences("times", Activity.MODE_PRIVATE);
+        editor = pref.edit();
+
+        stop_time = pref.getLong("stop_time",0);//멈췄던 시간 돌려받기
+        Log.e("get stop_time",": "+pref.getLong("stop_time",0));
 
 
         helper = new DBHelper(this);//데이터 베이스
@@ -96,8 +105,9 @@ public class MainActivity extends AppCompatActivity {
         todayview = (TextView)findViewById(R.id.study_txt_today);
 
         timer = (Chronometer) findViewById(R.id.study_timer);//타이머 id 선언 (final 지우면 정지,시작,리셋 메서드 실행 안됨)
-        reset = (Button) findViewById(R.id.study_bt_reset);////타이머 리셋버튼 선언
         calendar = (ImageButton) findViewById(R.id.study_bt_calendar);//켈린더 test
+        timer.setBase(SystemClock.elapsedRealtime() + stop_time);
+
 
         todayview.setText(today);
 
@@ -142,8 +152,6 @@ public class MainActivity extends AppCompatActivity {
         face.setOnClickListener(new View.OnClickListener() {//서비스 시작 버튼
             @Override
             public void onClick(View v) {
-
-
                 int rc = ActivityCompat.checkSelfPermission(context, Manifest.permission.CAMERA);//권한설정
 
                 if (rc == PackageManager.PERMISSION_GRANTED) {// 권한 체크
@@ -155,7 +163,6 @@ public class MainActivity extends AppCompatActivity {
 
                         timer.setBase(SystemClock.elapsedRealtime() + stop_time);//타이머 실행
                         timer.start();
-                        reset.setClickable(false);//타이머 작동중에는 리셋버튼 누르지 못함
 
                     } else {//동작중이면
                         stopService(intent);//서비스 종료
@@ -164,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
 
                         stop_time = timer.getBase() - SystemClock.elapsedRealtime();//타이머 정지
                         timer.stop();
-                        reset.setClickable(true);//타이머가 멈추면 리셋 가능
+
                     }
                 } else {
                     requestCameraPermission();
@@ -176,17 +183,16 @@ public class MainActivity extends AppCompatActivity {
 
         if (isServiceRunning() == true) {//서비스가 실행중이면
             face.setImageResource(R.drawable.face_on);//스위치를 ON 상태로 바꾼다
-        } else
+
+            timer.setBase(SystemClock.elapsedRealtime() + stop_time);//타이머 실행
+            timer.start();
+
+        } else {
             face.setImageResource(R.drawable.face_off);
 
+        }
 
-        reset.setOnClickListener(new Button.OnClickListener() {//타이머 리셋 함수
-            public void onClick(View v) {
-                timer.setBase(SystemClock.elapsedRealtime());
-                stop_time = 0;
-                timer.stop();
-            }
-        });
+
         calendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -232,6 +238,9 @@ public class MainActivity extends AppCompatActivity {
     public void onDestroy() {
         super.onDestroy();
 
+        editor.putLong("stop_time",stop_time);
+        editor.apply();
+        Log.e("save stop_time",": "+pref.getLong("stop_time",0));
     }
 
     public class DBHelper extends SQLiteOpenHelper {

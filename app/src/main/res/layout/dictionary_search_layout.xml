@@ -112,7 +112,7 @@
                 android:textSize="40dp" />
 
             <ImageButton
-                android:id="@+id/imgbtn_sound"
+                android:id="@+id/diction_imgbtn_sound"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_alignRight="@+id/text_word"

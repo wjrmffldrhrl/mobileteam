@@ -35,13 +35,7 @@
         android:shadowDx="5.0"
         android:shadowDy="5.0"
         android:shadowColor="#000000" />
-    <Button
-        android:id="@+id/study_bt_reset"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="165dp"
-        android:text="Reset" />
+
 
 
     <TextView

@@ -47,7 +47,7 @@ public class Dictionary_search extends AppCompatActivity {
     ImageButton btn_cls;
 
 
-    ImageButton imgbtn_camera,imgbtn_history,imgbtn_search;
+    ImageButton imgbtn_camera,imgbtn_history,imgbtn_search,sound;
 
     TextView text_word, text_mean;
     SQLiteDatabase sqlDB;
@@ -78,7 +78,7 @@ public class Dictionary_search extends AppCompatActivity {
         btn_cls = (ImageButton) findViewById(R.id.diction_imgbtn_cls);
         imgbtn_camera = (ImageButton) findViewById(R.id.diction_imgbtn_camera) ;
         imgbtn_history= (ImageButton) findViewById(R.id.diction_imgbtn_history);
-
+        sound = (ImageButton)findViewById(R.id.diction_imgbtn_sound);
 
         text_word = (TextView) findViewById(R.id.text_word);
         text_mean = (TextView) findViewById(R.id.text_mean);
@@ -187,7 +187,7 @@ public class Dictionary_search extends AppCompatActivity {
                         editor.putString("hs" + pref.getInt("hsnum", 0), dic_word);//단어를 넣는다.
                         editor.apply();
                         dic_mean += cursor.getString(1) + "\r\n";//찾는 단어가 있으면 그 단어 뜻 넣기
-                        tts.speak(dic_word, TextToSpeech.QUEUE_ADD, null, "DEFAULT");// 찾은 단어 발음 들려주기
+
                     }
 
                     text_word.setText(dic_word);//찾은 단어로 입력
@@ -227,7 +227,12 @@ public class Dictionary_search extends AppCompatActivity {
                 search.setText("");
             }
         });
-
+        sound.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tts.speak(text_word.getText(), TextToSpeech.QUEUE_ADD, null, "DEFAULT");// 찾은 단어 발음 들려주기
+            }
+        });
 
     }
 

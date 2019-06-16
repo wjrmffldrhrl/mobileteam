@@ -23,16 +23,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <Button
-            android:id="@+id/calendar_bt_addplan"
-            android:text="할일 추가"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <Button
-            android:id="@+id/calendar_bt_delplan"
-            android:text="삭제"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+
+        <ImageButton
+            android:id="@+id/calendar_imgbt_addplan"
+            android:layout_width="47dp"
+            android:layout_height="74dp"
+            android:src="@drawable/pencil"
+            />
+
+        <ImageButton
+            android:id="@+id/calendar_imgbt_delplan"
+            android:layout_width="61dp"
+            android:layout_height="69dp"
+            android:src="@drawable/x"
+            />
         <EditText
             android:id="@+id/calendar_edt_do"
             android:layout_width="match_parent"
