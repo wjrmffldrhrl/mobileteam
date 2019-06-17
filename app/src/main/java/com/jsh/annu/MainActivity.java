@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {//어제와 내일 날짜 가져오기
             tomorrow = Calendar.getInstance();
             tomorrow.add(Calendar.DAY_OF_WEEK,1);
             tomorrow_date =tomorrow.getTime();
