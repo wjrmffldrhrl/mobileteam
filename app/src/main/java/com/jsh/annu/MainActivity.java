@@ -76,8 +76,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        pref = getSharedPreferences("times", Activity.MODE_PRIVATE);
+        editor = pref.edit();
+
         Intent loding_intent = new Intent(this, LodingActivity.class);
+        Intent explain_intent = new Intent(this,ExplainActivity.class);
         startActivity(loding_intent);
+        if(pref.getBoolean("noshow",true))
+            startActivity(explain_intent);
         setContentView(R.layout.study_select);
 
 
@@ -95,9 +102,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        pref = getSharedPreferences("times", Activity.MODE_PRIVATE);
-        editor = pref.edit();
-        
+
+
         helper = new DBHelper(this);//데이터 베이스
         try {
             db = helper.getWritableDatabase();

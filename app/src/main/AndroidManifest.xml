@@ -68,6 +68,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".Calendar.Calendar_annu"
             android:screenOrientation="portrait"/>
+        <activity android:name=".ExplainActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
