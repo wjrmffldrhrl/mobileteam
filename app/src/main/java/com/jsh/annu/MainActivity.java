@@ -97,11 +97,20 @@ public class MainActivity extends AppCompatActivity {
 
         pref = getSharedPreferences("times", Activity.MODE_PRIVATE);
         editor = pref.edit();
+        
+        helper = new DBHelper(this);//데이터 베이스
+        try {
+            db = helper.getWritableDatabase();
+        } catch (SQLiteException ex) {
+            db = helper.getReadableDatabase();
+        }
 
         stop_time = pref.getLong("stop_time", 0);//멈췄던 시간 돌려받기
         Log.e("get stop_time", ": " + pref.getLong("stop_time", 0));
+        Log.e("today",getTime);
+        Log.e("day data",pref.getString("today", getTime));
 
-        if (pref.getString("today", getTime) != getTime) {//저장된 날짜가 오늘 날짜와 다르다면
+        if (!getTime.equals(pref.getString("today", getTime))) {//저장된 날짜가 오늘 날짜와 다르다면
             String day = pref.getString("today", getTime);//공부를 한 날짜
             long stop_time_1000 = -1 * stop_time / 1000;
             long min = 0, sec = 0;
@@ -116,21 +125,14 @@ public class MainActivity extends AppCompatActivity {
             editor.remove("stop_time");//공부한 시간 초기화
             stop_time = 0;
 
-            editor.putString("today", getTime);//날짜 오늘날자로 초기화화
+            editor.putString("today", getTime);//날짜 오늘날자로 초기화
             editor.apply();
 
             Toast.makeText(getApplicationContext(), "공부 시간 초기화!", Toast.LENGTH_LONG).show();
 
-
         }
 
 
-        helper = new DBHelper(this);//데이터 베이스
-        try {
-            db = helper.getWritableDatabase();
-        } catch (SQLiteException ex) {
-            db = helper.getReadableDatabase();
-        }
 
 
         MobileAds.initialize(this, "ca-app-pub-8347262987394620~3286481735");//광고 설정정
@@ -362,7 +364,8 @@ public class MainActivity extends AppCompatActivity {
     public void onDestroy() {
         super.onDestroy();
 
-        editor.putLong("stop_time", stop_time);
+        editor.putLong("stop_time", stop_time);//공부 시간 저장
+        editor.putString("today", getTime);//오늘 날짜 저장
         editor.apply();
         Log.e("save stop_time", ": " + pref.getLong("stop_time", 0));
     }
