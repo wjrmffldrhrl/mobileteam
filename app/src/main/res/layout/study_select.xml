@@ -12,7 +12,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="35dp"
         android:layout_marginBottom="130dp"
         android:gravity="center"
         android:text="YY:MM:DD"
@@ -27,7 +27,7 @@
         android:layout_alignParentTop="true"
         android:layout_gravity="center_horizontal"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="60dp"
         android:gravity="center"
         android:textColor="#ffff"
         android:textSize="90dp"
@@ -36,31 +36,77 @@
         android:shadowDy="5.0"
         android:shadowColor="#000000" />
 
-
-
-    <TextView
-        android:id="@+id/study_txt_schedule"
-        android:layout_width="800dp"
-        android:layout_height="250dp"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="340dp"
-        android:layout_marginRight="30dp"
-        android:background="@drawable/shadow"
-        android:text="체크리스트"
-        android:textColor="#000000"
-        android:textSize="20dp" />
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_yesterday"
+            android:layout_width="112dp"
+            android:layout_height="40dp"
+            android:layout_alignLeft="@+id/study_txt_schedule"
+            android:layout_alignTop="@+id/study_txt_schedule"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/btn"
+            android:text="어제"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/btn_today"
+            android:layout_width="112dp"
+            android:layout_height="40dp"
+            android:layout_alignLeft="@+id/btn_yesterday"
+            android:layout_alignTop="@+id/btn_yesterday"
+            android:layout_marginLeft="112dp"
+            android:background="@drawable/btn1"
+            android:text="오늘"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/btn_tomorrow"
+            android:layout_width="111dp"
+            android:layout_height="40dp"
+            android:layout_alignTop="@+id/btn_yesterday"
+            android:layout_alignEnd="@+id/study_txt_schedule"
+            android:layout_alignRight="@+id/btn_yesterday"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/btn"
+            android:text="내일"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/study_txt_schedule"
+            android:layout_width="800dp"
+            android:layout_height="250dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="340dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/shadow"
+            android:text="체크리스트"
+            android:padding="25dp"
+            android:gravity="center_vertical"
+            android:textColor="#000000"
+            android:textSize="20dp" />
+
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="70dp"
+        android:layout_height="75dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"
-        android:layout_marginTop="230dp"
+        android:layout_marginTop="205dp"
         android:orientation="horizontal"
-        android:background="@drawable/d">
+        android:background="@drawable/shadow">
 
         <ImageButton
 
