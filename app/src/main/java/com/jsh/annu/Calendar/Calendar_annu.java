@@ -12,7 +12,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -29,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 
-public class Calendar extends AppCompatActivity {
+public class Calendar_annu extends AppCompatActivity {
 
     DBHelper helper;
     SQLiteDatabase db;//일정을 넣기위한 데이터베이스
@@ -228,7 +227,7 @@ public class Calendar extends AppCompatActivity {
             }
             calendarDays.remove(0);
 
-            materialCalendarView.addDecorator(new EventDecorator(Color.RED, calendarDays, Calendar.this));
+            materialCalendarView.addDecorator(new EventDecorator(Color.RED, calendarDays, Calendar_annu.this));
 
         }
     }

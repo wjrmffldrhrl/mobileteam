@@ -11,12 +11,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,8 +26,8 @@ import android.os.SystemClock;
 import android.widget.Button;
 import android.widget.Chronometer;
 
-import com.jsh.annu.Calendar.Calendar;
 
+import com.jsh.annu.Calendar.Calendar_annu;
 import com.jsh.annu.Dictionary.Dictionary_search;
 
 import com.jsh.annu.EyeDetected.EyeService;
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     ImageButton note, dictionary, setting, face, calendar;
+    ImageView schedule_bee;
     Button btn_yesterday, btn_today, btn_tomorrow;
     Intent intent;//서비스 인텐트
 
@@ -59,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
     long stop_time = 0;//정지한 시간을 계산
     long now = System.currentTimeMillis();
 
+    Calendar tomorrow ,yesterday ;
+    Date tomorrow_date,yesterday_date;
+    String tomorrow_str ="",yesterday_str="";
 
     Date date = new Date(now);
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy,M,d");//오늘 날자 가져오기
@@ -72,6 +78,21 @@ public class MainActivity extends AppCompatActivity {
         Intent loding_intent = new Intent(this, LodingActivity.class);
         startActivity(loding_intent);
         setContentView(R.layout.study_select);
+
+
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            tomorrow = Calendar.getInstance();
+            tomorrow.add(Calendar.DAY_OF_WEEK,1);
+            tomorrow_date =tomorrow.getTime();
+            tomorrow_str = sdf.format(tomorrow_date);
+
+            yesterday = Calendar.getInstance();
+            yesterday.add(Calendar.DAY_OF_WEEK,-1);
+            yesterday_date = yesterday.getTime();
+            yesterday_str = sdf.format(yesterday_date);
+        }
+
 
         pref = getSharedPreferences("times", Activity.MODE_PRIVATE);
         editor = pref.edit();
@@ -109,9 +130,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (SQLiteException ex) {
             db = helper.getReadableDatabase();
         }
-        Cursor cursor;
-        cursor = db.rawQuery("SELECT day, do FROM schedule WHERE day= '" + getTime + "'; ", null);
-        cursor.moveToNext();
 
 
         MobileAds.initialize(this, "ca-app-pub-8347262987394620~3286481735");//광고 설정정
@@ -127,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
         btn_today = (Button) findViewById(R.id.study_btn_today);
         btn_tomorrow = (Button) findViewById(R.id.study_btn_tomorrow);
         btn_yesterday = (Button) findViewById(R.id.study_btn_yesterday);
+        schedule_bee = (ImageView)findViewById(R.id.study_img_bee);
         schedule_view = (TextView) findViewById(R.id.study_txt_schedule);
         todayview = (TextView) findViewById(R.id.study_txt_today);
 
@@ -137,17 +156,39 @@ public class MainActivity extends AppCompatActivity {
 
         todayview.setText(today);
 
-        if (cursor != null && cursor.getCount() != 0)//오늘 일정이 있는지 없는지 확인
-            schedule_view.setText(cursor.getString(1));//스케쥴이 있다면 가져오기
-        else
-            schedule_view.setText("no schedule");//스케쥴이 없을때
+        Cursor cursor; // 오늘 일정 가져오기
+        cursor = db.rawQuery("SELECT day, do FROM schedule WHERE day= '" + getTime + "'; ", null);
+        cursor.moveToNext();
 
+        if (cursor != null && cursor.getCount() != 0) {//오늘 일정이 있는지 없는지 확인
+            schedule_view.setText(cursor.getString(1));//스케쥴이 있다면 가져오기
+            schedule_bee.setVisibility(View.INVISIBLE);
+        }
+        else {
+            schedule_view.setText("");//스케쥴이 없을때
+            schedule_bee.setVisibility(View.VISIBLE);
+        }
         btn_yesterday.setOnClickListener(new View.OnClickListener() {//어제 일정
             @Override
             public void onClick(View v) {
                 btn_yesterday.setBackgroundResource(R.drawable.btn1);
                 btn_today.setBackgroundResource(R.drawable.btn_s1);
                 btn_tomorrow.setBackgroundResource(R.drawable.btn);
+
+                Cursor cursor;
+                cursor = db.rawQuery("SELECT day, do FROM schedule WHERE day= '" + yesterday_str + "'; ", null);
+                cursor.moveToNext();
+
+                if (cursor != null && cursor.getCount() != 0) {//오늘 일정이 있는지 없는지 확인
+                    schedule_view.setText(cursor.getString(1));//스케쥴이 있다면 가져오기
+                    schedule_bee.setVisibility(View.INVISIBLE);
+                }
+                else {
+                    schedule_view.setText("");//스케쥴이 없을때
+                    schedule_bee.setVisibility(View.VISIBLE);
+                }
+
+
             }
         });
         btn_today.setOnClickListener(new View.OnClickListener() {//오늘 일정
@@ -156,14 +197,41 @@ public class MainActivity extends AppCompatActivity {
                 btn_yesterday.setBackgroundResource(R.drawable.btn);
                 btn_today.setBackgroundResource(R.drawable.btn_s2);
                 btn_tomorrow.setBackgroundResource(R.drawable.btn);
+
+                Cursor cursor;
+                cursor = db.rawQuery("SELECT day, do FROM schedule WHERE day= '" + getTime + "'; ", null);
+                cursor.moveToNext();
+
+                if (cursor != null && cursor.getCount() != 0) {//오늘 일정이 있는지 없는지 확인
+                    schedule_view.setText(cursor.getString(1));//스케쥴이 있다면 가져오기
+                    schedule_bee.setVisibility(View.INVISIBLE);
+                }
+                else {
+                    schedule_view.setText("");//스케쥴이 없을때
+                    schedule_bee.setVisibility(View.VISIBLE);
+                }
             }
         });
         btn_tomorrow.setOnClickListener(new View.OnClickListener() {//내일 일정
             @Override
             public void onClick(View v) {
+                schedule_view.setText(tomorrow_str);
                 btn_yesterday.setBackgroundResource(R.drawable.btn);
                 btn_today.setBackgroundResource(R.drawable.btn_s1);
                 btn_tomorrow.setBackgroundResource(R.drawable.btn1);
+
+                Cursor cursor;
+                cursor = db.rawQuery("SELECT day, do FROM schedule WHERE day= '" + tomorrow_str + "'; ", null);
+                cursor.moveToNext();
+
+                if (cursor != null && cursor.getCount() != 0) {//오늘 일정이 있는지 없는지 확인
+                    schedule_view.setText(cursor.getString(1));//스케쥴이 있다면 가져오기
+                    schedule_bee.setVisibility(View.INVISIBLE);
+                }
+                else {
+                    schedule_view.setText("");//스케쥴이 없을때
+                    schedule_bee.setVisibility(View.VISIBLE);
+                }
             }
         });
 
@@ -183,6 +251,8 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), Dictionary_search.class);//인텐트 지정
 
                 startActivity(intent);//액티비티 출력
+
+
             }
         });
 
@@ -248,7 +318,7 @@ public class MainActivity extends AppCompatActivity {
         calendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Calendar.class);//인텐트 지정
+                Intent intent = new Intent(getApplicationContext(), Calendar_annu.class);//인텐트 지정
                 startActivity(intent);//액티비티 출력
             }
         });
