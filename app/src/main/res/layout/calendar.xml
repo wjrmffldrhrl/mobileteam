@@ -49,6 +49,17 @@
             android:background="#00FFFFFF"
             android:src="@drawable/plus" />
 
+        <TextView
+            android:id="@+id/txt1"
+            android:layout_width="280dp"
+            android:layout_height="50dp"
+            android:background="#ffffff"
+            android:layout_alignLeft="@+id/calendar_imgbt_addplan"
+            android:layout_marginLeft="50dp"
+            android:layout_gravity="center"
+            android:text="time"
+            android:textSize="30dp" />
+
         <ImageButton
             android:id="@+id/calendar_imgbt_delplan"
             android:layout_width="25dp"
@@ -71,23 +82,12 @@
         android:hint="                                    일정 없음" />
 </LinearLayout>
 
-
-
-
-        <TextView
-            android:id="@+id/calendar_txt_studytime"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:background="@drawable/shadow"
-            android:layout_gravity="center"
-            android:text="time"
-            android:textSize="30dp" />
-
         <TextView
             android:id="@+id/calendar_txt_schedule"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:background="@drawable/shadow"/>
 
 
     </LinearLayout>
