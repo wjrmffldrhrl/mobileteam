@@ -43,7 +43,7 @@ public class Calendar_annu extends AppCompatActivity {
 
     ImageButton addplan, delplan;
     EditText doo;
-    TextView txt1, txt2, txt3;
+    TextView studytime_txt, calendar_txt_schedule;
     int Year = 0, Month = 0, Day = 0;// 선택한 날자
     String shot_Day;//선택한 날자
 
@@ -54,9 +54,9 @@ public class Calendar_annu extends AppCompatActivity {
         materialCalendarView = (MaterialCalendarView) findViewById(R.id.calendarView);
         addplan = (ImageButton) findViewById(R.id.calendar_imgbt_addplan);
         delplan = (ImageButton) findViewById(R.id.calendar_imgbt_delplan);
-        txt1 = (TextView) findViewById(R.id.txt1);
-        txt2 = (TextView) findViewById(R.id.txt2);
-        txt3 = (TextView) findViewById(R.id.txt3);
+        studytime_txt = (TextView) findViewById(R.id.calendar_txt_studytime);
+        calendar_txt_schedule = (TextView) findViewById(R.id.calendar_txt_schedule);
+
         doo = (EditText) findViewById(R.id.calendar_edt_do);
 
         doo.setVisibility(View.INVISIBLE);//계획 안보이게
@@ -119,10 +119,10 @@ public class Calendar_annu extends AppCompatActivity {
                         cursor = db.rawQuery("SELECT day, do FROM schedule WHERE day= '"+shot_Day+"'; ", null);
 
 
-                       // txt1.setText("YES Plan");
+                       // studytime_txt.setText("YES Plan");
 
                         cursor.moveToNext();
-                        txt2.setText(cursor.getString(1));
+                        calendar_txt_schedule.setText(cursor.getString(1));
 
                         Log.e("plan", "same");
                         doo.setText("");
@@ -133,8 +133,8 @@ public class Calendar_annu extends AppCompatActivity {
                         break;
                     } else {//계획이 없다면
 
-                       // txt1.setText("NO Plan");
-                        txt2.setText("no plan");
+                       // studytime_txt.setText("NO Plan");
+                        calendar_txt_schedule.setText("no plan");
                         Log.e("plan", "different");
                         doo.setVisibility(View.VISIBLE);
                         addplan.setVisibility(View.VISIBLE);
@@ -147,10 +147,10 @@ public class Calendar_annu extends AppCompatActivity {
                         Cursor cursor;
                         cursor = db.rawQuery("SELECT day, time FROM study_time WHERE day = '"+shot_Day+"';",null);
                         cursor.moveToNext();
-                        txt1.setText(cursor.getString(1));
+                        studytime_txt.setText(cursor.getString(1));
                     }
                     else {//공부한 시간이 없다면
-                        txt1.setText("you don't study ");
+                        studytime_txt.setText("you don't study ");
                     }
                 }
 

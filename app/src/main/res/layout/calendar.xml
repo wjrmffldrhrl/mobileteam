@@ -63,19 +63,19 @@
             android:background="#00FFFFFF"
             android:src="@drawable/subtract" />
     </RelativeLayout>
+
     <EditText
         android:id="@+id/calendar_edt_do"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:hint="                                    일정 없음"
-        />
+        android:hint="                                    일정 없음" />
 </LinearLayout>
 
 
 
 
         <TextView
-            android:id="@+id/txt1"
+            android:id="@+id/calendar_txt_studytime"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:background="@drawable/shadow"
@@ -84,16 +84,12 @@
             android:textSize="30dp" />
 
         <TextView
-            android:id="@+id/txt2"
+            android:id="@+id/calendar_txt_schedule"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"/>
 
-        <TextView
-            android:id="@+id/txt3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
+
     </LinearLayout>
 
 </LinearLayout>
