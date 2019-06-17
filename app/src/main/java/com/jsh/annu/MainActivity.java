@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     ImageButton note, dictionary, setting, face, calendar;
+    Button btn_yesterday, btn_today, btn_tomorrow;
     Intent intent;//서비스 인텐트
 
     DBHelper helper;
@@ -80,15 +81,15 @@ public class MainActivity extends AppCompatActivity {
 
         if (pref.getString("today", getTime) != getTime) {//저장된 날짜가 오늘 날짜와 다르다면
             String day = pref.getString("today", getTime);//공부를 한 날짜
-            long stop_time_1000 = -1*stop_time/1000;
-            long min=0,sec=0;
+            long stop_time_1000 = -1 * stop_time / 1000;
+            long min = 0, sec = 0;
 
-            min = stop_time_1000/60;
-            sec = stop_time_1000%60;
+            min = stop_time_1000 / 60;
+            sec = stop_time_1000 % 60;
 
-            String time = ""+min+" 분 "+ sec +" 초 ";//지금까지 공부한 시간
+            String time = "" + min + " 분 " + sec + " 초 ";//지금까지 공부한 시간
 
-            db.execSQL("INSERT INTO study_time VALUES(null,'"+day+"','"+time+"');");//공부한 날자에 공부한 시간 넣기
+            db.execSQL("INSERT INTO study_time VALUES(null,'" + day + "','" + time + "');");//공부한 날자에 공부한 시간 넣기
 
             editor.remove("stop_time");//공부한 시간 초기화
             stop_time = 0;
@@ -123,6 +124,9 @@ public class MainActivity extends AppCompatActivity {
         face = (ImageButton) findViewById(R.id.study_bt_face);
         intent = new Intent(this, EyeService.class);
         setting = (ImageButton) findViewById(R.id.setting);
+        btn_today = (Button) findViewById(R.id.study_btn_today);
+        btn_tomorrow = (Button) findViewById(R.id.study_btn_tomorrow);
+        btn_yesterday = (Button) findViewById(R.id.study_btn_yesterday);
         schedule_view = (TextView) findViewById(R.id.study_txt_schedule);
         todayview = (TextView) findViewById(R.id.study_txt_today);
 
@@ -137,6 +141,32 @@ public class MainActivity extends AppCompatActivity {
             schedule_view.setText(cursor.getString(1));//스케쥴이 있다면 가져오기
         else
             schedule_view.setText("no schedule");//스케쥴이 없을때
+
+        btn_yesterday.setOnClickListener(new View.OnClickListener() {//어제 일정
+            @Override
+            public void onClick(View v) {
+                btn_yesterday.setBackgroundResource(R.drawable.btn1);
+                btn_today.setBackgroundResource(R.drawable.btn);
+                btn_tomorrow.setBackgroundResource(R.drawable.btn);
+            }
+        });
+        btn_today.setOnClickListener(new View.OnClickListener() {//오늘 일정
+            @Override
+            public void onClick(View v) {
+                btn_yesterday.setBackgroundResource(R.drawable.btn);
+                btn_today.setBackgroundResource(R.drawable.btn1);
+                btn_tomorrow.setBackgroundResource(R.drawable.btn);
+            }
+        });
+        btn_tomorrow.setOnClickListener(new View.OnClickListener() {//내일 일정
+            @Override
+            public void onClick(View v) {
+                btn_yesterday.setBackgroundResource(R.drawable.btn);
+                btn_today.setBackgroundResource(R.drawable.btn);
+                btn_tomorrow.setBackgroundResource(R.drawable.btn1);
+            }
+        });
+
 
         note.setOnClickListener(new View.OnClickListener() {
             @Override

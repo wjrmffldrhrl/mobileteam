@@ -44,7 +44,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btn_yesterday"
+            android:id="@+id/study_btn_yesterday"
             android:layout_width="112dp"
             android:layout_height="40dp"
             android:layout_alignLeft="@+id/study_txt_schedule"
@@ -57,23 +57,23 @@
             android:textSize="20dp" />
 
         <Button
-            android:id="@+id/btn_today"
+            android:id="@+id/study_btn_today"
             android:layout_width="112dp"
             android:layout_height="40dp"
-            android:layout_alignLeft="@+id/btn_yesterday"
-            android:layout_alignTop="@+id/btn_yesterday"
+            android:layout_alignLeft="@+id/study_btn_yesterday"
+            android:layout_alignTop="@+id/study_btn_yesterday"
             android:layout_marginLeft="112dp"
             android:background="@drawable/btn1"
             android:text="오늘"
             android:textSize="20dp" />
 
         <Button
-            android:id="@+id/btn_tomorrow"
+            android:id="@+id/study_btn_tomorrow"
             android:layout_width="111dp"
             android:layout_height="40dp"
-            android:layout_alignTop="@+id/btn_yesterday"
+            android:layout_alignTop="@+id/study_btn_yesterday"
             android:layout_alignEnd="@+id/study_txt_schedule"
-            android:layout_alignRight="@+id/btn_yesterday"
+            android:layout_alignRight="@+id/study_btn_yesterday"
             android:layout_marginTop="0dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/btn"
