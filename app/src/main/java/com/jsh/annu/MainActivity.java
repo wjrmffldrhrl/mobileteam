@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 btn_yesterday.setBackgroundResource(R.drawable.btn1);
-                btn_today.setBackgroundResource(R.drawable.btn);
+                btn_today.setBackgroundResource(R.drawable.btn_s1);
                 btn_tomorrow.setBackgroundResource(R.drawable.btn);
             }
         });
@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 btn_yesterday.setBackgroundResource(R.drawable.btn);
-                btn_today.setBackgroundResource(R.drawable.btn1);
+                btn_today.setBackgroundResource(R.drawable.btn_s2);
                 btn_tomorrow.setBackgroundResource(R.drawable.btn);
             }
         });
@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 btn_yesterday.setBackgroundResource(R.drawable.btn);
-                btn_today.setBackgroundResource(R.drawable.btn);
+                btn_today.setBackgroundResource(R.drawable.btn_s1);
                 btn_tomorrow.setBackgroundResource(R.drawable.btn1);
             }
         });
