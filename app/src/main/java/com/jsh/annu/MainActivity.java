@@ -15,6 +15,7 @@ import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -147,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
         btn_yesterday = (Button) findViewById(R.id.study_btn_yesterday);
         schedule_bee = (ImageView)findViewById(R.id.study_img_bee);
         schedule_view = (TextView) findViewById(R.id.study_txt_schedule);
+        schedule_view.setMovementMethod(new ScrollingMovementMethod());
         todayview = (TextView) findViewById(R.id.study_txt_today);
 
         timer = (Chronometer) findViewById(R.id.study_timer);//타이머 id 선언 (final 지우면 정지,시작,리셋 메서드 실행 안됨)

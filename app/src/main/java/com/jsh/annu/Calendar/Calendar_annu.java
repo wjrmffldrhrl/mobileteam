@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -56,7 +57,7 @@ public class Calendar_annu extends AppCompatActivity {
         delplan = (ImageButton) findViewById(R.id.calendar_imgbt_delplan);
         studytime_txt = (TextView) findViewById(R.id.calendar_txt_studytime);
         calendar_txt_schedule = (TextView) findViewById(R.id.calendar_txt_schedule);
-
+        calendar_txt_schedule.setMovementMethod(new ScrollingMovementMethod());
         doo = (EditText) findViewById(R.id.calendar_edt_do);
 
         doo.setVisibility(View.INVISIBLE);//계획 안보이게
@@ -150,7 +151,7 @@ public class Calendar_annu extends AppCompatActivity {
                         studytime_txt.setText(cursor.getString(1));
                     }
                     else {//공부한 시간이 없다면
-                        studytime_txt.setText("you don't study ");
+                        studytime_txt.setText("이날은 공부를 안했어요");
                     }
                 }
 

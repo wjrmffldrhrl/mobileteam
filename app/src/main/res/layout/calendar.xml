@@ -4,90 +4,90 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/background">
+    android:background="@color/background"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/background"
-        >
+        android:background="@color/background">
 
         <com.prolificinteractive.materialcalendarview.MaterialCalendarView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/calendarView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@drawable/shadow"
             app:mcv_selectionColor="#a9dbf0cb"
-            app:mcv_showOtherDates="defaults"
-            android:background="@drawable/shadow"/>
+            app:mcv_showOtherDates="defaults" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:background="@drawable/shadow">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shadow"
+            android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <ImageButton
-            android:id="@+id/calendar_imgbt_addplan"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginBottom="5dp"
-            android:background="#00FFFFFF"
-            android:src="@drawable/plus" />
+                <ImageButton
+                    android:id="@+id/calendar_imgbt_addplan"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="#00FFFFFF"
+                    android:src="@drawable/plus" />
 
-        <TextView
-            android:id="@+id/txt1"
-            android:layout_width="280dp"
-            android:layout_height="50dp"
-            android:background="#ffffff"
-            android:layout_alignLeft="@+id/calendar_imgbt_addplan"
-            android:layout_marginLeft="50dp"
-            android:layout_gravity="center"
-            android:text="time"
-            android:textSize="30dp" />
+                <TextView
+                    android:id="@+id/calendar_txt_studytime"
+                    android:layout_width="280dp"
+                    android:layout_height="50dp"
+                    android:layout_alignLeft="@+id/calendar_imgbt_addplan"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="50dp"
+                    android:background="#ffffff"
+                    android:text="공부한 시간"
+                    android:textSize="23dp" />
 
-        <ImageButton
-            android:id="@+id/calendar_imgbt_delplan"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="355dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="5dp"
-            android:background="#00FFFFFF"
-            android:src="@drawable/subtract" />
-    </RelativeLayout>
+                <ImageButton
+                    android:id="@+id/calendar_imgbt_delplan"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="355dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="#00FFFFFF"
+                    android:src="@drawable/subtract" />
+            </RelativeLayout>
 
-    <EditText
-        android:id="@+id/calendar_edt_do"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:hint="                                    일정 없음" />
-</LinearLayout>
+            <EditText
+                android:id="@+id/calendar_edt_do"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:hint="                                    일정 없음" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/calendar_txt_schedule"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:background="@drawable/shadow"/>
+            android:scrollbars="vertical"
+            android:background="@drawable/shadow" />
 
 
     </LinearLayout>
