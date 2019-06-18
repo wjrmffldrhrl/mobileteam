@@ -9,11 +9,16 @@ import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 public class ExplainActivity extends AppCompatActivity {
 
     SharedPreferences pref;
     SharedPreferences.Editor editor;
 
+    private AdView mAdView;//광고
 
     ImageView explain_img;
     ImageButton imgbtn1, imgbtn2, imgbtn3, out;
@@ -30,6 +35,11 @@ public class ExplainActivity extends AppCompatActivity {
         imgbtn3 = (ImageButton) findViewById(R.id.explain_btn3);
         out = (ImageButton) findViewById(R.id.explain_btn_out);
         noshow = (CheckBox) findViewById(R.id.explain_check_noshow);
+
+        MobileAds.initialize(this, "ca-app-pub-8347262987394620~3286481735");//광고 설정정
+        mAdView = findViewById(R.id.explain_adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         pref = getSharedPreferences("times", Activity.MODE_PRIVATE);
         editor = pref.edit();
