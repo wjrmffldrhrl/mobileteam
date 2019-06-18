@@ -12,7 +12,7 @@
         <ImageView
             android:id="@+id/explain_img_explain"
             android:layout_width="match_parent"
-            android:layout_height="600dp"
+            android:layout_height="630dp"
             android:scaleType="fitXY"
             android:src="@drawable/explain1" />
     </LinearLayout>
@@ -23,30 +23,36 @@
 
         <ImageButton
             android:id="@+id/explain_btn1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/subtract"/>
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/info_bt1"/>
 
         <ImageButton
             android:id="@+id/explain_btn2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/plus" />
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/info_bt2"
+            android:layout_marginTop="3dp"/>
         <ImageButton
             android:id="@+id/explain_btn3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/plus" />
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/info_bt3" />
 
         <ImageButton
             android:id="@+id/explain_btn_out"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginLeft="120dp"
             android:src="@drawable/x"/>
 
         <CheckBox
             android:id="@+id/explain_check_noshow"
             android:text="다시보지 않겠습니다."
+            android:layout_marginLeft="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
