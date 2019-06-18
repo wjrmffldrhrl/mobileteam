@@ -16,6 +16,12 @@
         android:orientation="vertical"
         android:background="@drawable/shadow">
 
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginStart="300dp"
+            android:background="@drawable/info" />
         <TextView
             android:layout_marginTop="5dp"
             android:layout_marginLeft="5dp"
@@ -100,7 +106,8 @@
         <RadioGroup
             android:id="@+id/option_radiogroup_set3"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp">
             <RadioButton
                 android:id="@+id/option_radiobutton_30"
                 android:text="30초간 눈이 인식이 안되면 경고"
