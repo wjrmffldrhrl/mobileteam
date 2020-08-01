@@ -14,6 +14,11 @@
 
 
 # 구성도
+![block](https://github.com/wjrmffldrhrl/mobileteam/blob/master/%EB%B8%94%EB%A1%9D%EB%8F%84.JPG)
+![flow](https://github.com/wjrmffldrhrl/mobileteam/blob/master/%EC%88%9C%EC%84%9C%EB%8F%84.JPG)
 
 # UI
-
+![UI1](https://github.com/wjrmffldrhrl/mobileteam/blob/master/explain1.png)  
+![UI2](https://github.com/wjrmffldrhrl/mobileteam/blob/master/explain2.png)  
+![UI3](https://github.com/wjrmffldrhrl/mobileteam/blob/master/explain3.png)  
+ 
